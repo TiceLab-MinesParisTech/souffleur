@@ -1,0 +1,4 @@
+# Comment the following line to enable
+#SOUFFLEUR_ENABLED="no"
+
+SOUFFLEUR_OPTS="-P80 -Upi -Gpi -F/home/pi/files"

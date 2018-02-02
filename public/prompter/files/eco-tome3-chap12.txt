@@ -1,0 +1,25 @@
+//id: eco-tome3-chap12
+//title: Chapitre 12
+
+Dans les systèmes monétaires contemporains, la forme principale de la monnaie sont les comptes courants bancaires, sur lesquels on peut tirer à vue, librement et instantanément par des chèques, des cartes de crédit ou des virements. L’autre forme de la monnaie est constituée des billets émis par la banque centrale, librement convertibles avec les premières.
+
+Le système monétaire est composé de banques commerciales qui créent de la monnaie en faisant crédit aux acteurs économiques. Elles inscrivent la créance à leur actif et créditent le compte courant de leur client, à leur passif, du montant prêté.
+
+##Schéma animé
+
+La banque centrale quant à elle créée de la monnaie en faisant des prêts aux banques commerciale. Elle leur ouvre des comptes, rémunérés, contre prise en pension des titres que possèdent ces banques, des titres généralement d’excellente qualité. Les banques se servent de ces comptes pour les règlements  entre elles.
+
+Le client de la banque commerciale se sert de la monnaie crée pour régler par exemple un achat à un autre acteur économique qui porte le chèque à la banque. Même si c’est une autre banque, elle acceptera immédiatement de créditer son compte chez elle du même montant, les monnaies bancaires sont convertibles entre elles à taux fixe et immuable. Un chèque de 100 euros sur LCL, monnaie de LCL déposé au CA se traduit par un ajout de 100 euros sur le compte du dépositaire, monnaie de CA.
+
+En revanche, CA présentera en fin de journée le chèque à la banque émettrice LCL et lui demandera de le régler soit en monnaie centrale, c’est-à-dire de créditer son compte à la banque centrale, car ces comptes portent intérêt, soit de lui céder en échange un titre très liquide portant intérêt. Une banque n’a aucun intérêt en effet à conserver la monnaie d’une autre banque, c’est-à-dire des comptes courants non rémunérés dans une autre banque.
+
+Dans ce cas, quand le client de la première a payé le client d’une autre banque, il y a eu fuite de la sphère monétaire de la première banque.
+
+La première banque a certes consenti à son client à un prêt à 3 % en créant de la monnaie sans autre cout que celui de l’instruction du dossier de prêt,  mais elle a dû se refinancer auprès d’une autre banque ou de la banque centrale à un taux de, par exemple 1 %. La marge bancaire sur cette opération est de 2 % seulement, et c’est cette marge qui constitue la source de revenu des banques.
+
+Le « marché monétaire » est un marché où n’interviennent que les banques et les très grandes entreprises ou institutions financières non bancaires comme les fonds, ainsi que la banque centrale. C’est sur lui que les banques commerciales se refinancent et qu’elles gèrent leur trésorerie, comme les grandes entreprises et les fonds. On y échange au jour le jour de la monnaie contre des titres extrêmement liquides. Cela fixe le prix donc le taux d’intérêt de ces titres.
+
+La banque centrale, en intervenant sur ce marché monétaire, c’est-à-dire en lui apportant plus ou moins de monnaie centrale contre des titres pris en pension, fixe le taux d’intérêt sur le marché monétaire et donc le cout de refinancement des banques.
+
+C’est en faisant varier ce taux d’intérêt sur le marché monétaire que la banque centrale agit sur le cout et donc sur l’offre de crédit des banques commerciales.  C’est ce qui constitue la politique monétaire que nous examinons au chapitre suivant.
+

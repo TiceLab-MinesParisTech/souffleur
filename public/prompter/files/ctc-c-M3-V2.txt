@@ -1,0 +1,24 @@
+//id: CTC-C-M3-V2
+
+Voici un exemple d’installation de cogénération utilisant un moteur à gaz modèle E 2842 LE, fabriqué par MAN Dezentrale Energiesysteme.
+
+Le modèle Thermoptim reprend celui que nous avions présenté lors de l’étude des moteurs alternatifs à combustion interne, en le complétant par les deux échangeurs de cogénération. Vous l’étudierez en exploration dirigée.
+
+Le couplage à la chambre de combustion est effectué en utilisant une fonctionnalité de Thermoptim que nous n’avons pas encore introduite, celle de thermocoupleur.
+
+Un thermocoupleur complète les échangeurs de chaleur en permettant à des composants autres que des transfos "échange" de se connecter à une ou plusieurs transfos “échange” pour représenter des couplages thermiques. 
+
+Pour une chambre de combustion, le calcul est effectué afin d’équilibrer la puissance thermique cédée au fluide de refroidissement, elle-même définie par le rendement de combustion choisi.
+
+Dans cet exemple, il vaut 0,79, ce qui signifie que 21 % de la puissance libérée par la combustion est transférée via le thermocoupleur.
+
+
+L’écran du thermocoupleur est analogue à celui d’un échangeur, la transfo échange apparaissant à gauche de l’écran sous le nom de « thermal fluid », et la chambre de combustion à droite, sous le nom de « process ».
+
+Dans ce cas, l’utilisateur n’a le choix qu’entre deux modes de calcul : soit calculer la température de sortie de la transfo échange à débit donné, soit calculer le débit, cette température étant connue
+
+Dans cet exemple, nous avons choisi de déterminer la température de sortie, le débit de fluide de refroidissement étant connu.
+
+La puissance thermique communiquée à l’eau est de 239 kW. 
+
+Le deuxième échangeur sur les gaz d’échappement est tout à fait classique. En choisissant une efficacité égale à 0,7, une puissance complémentaire de 222 kW est récupérée.

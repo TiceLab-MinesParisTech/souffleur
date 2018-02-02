@@ -1,0 +1,58 @@
+//id: eco-tome2-chap9
+//title: Chapitre 9
+
+Une entreprise, nous l’avons vu avec Zaccaria, doit en permanence évaluer le rendement espéré et le risque de divers projets d’investissement qui s’offrent à elle.
+
+C’est une manière assez technique et nous renvoyons donc pour les détails au chapitre du livre. Nous voudrions ici simplement donner le principe de cette évaluation.
+
+Soulignons que ce qui est évalué ici, c’est le rendement « espéré ». En effet, tout investissement ne fait que « promettre » des revenus futurs. Qu’il s’agisse d’un investissement industriel dans une nouvelle usine, dans un nouveau produit ou qu’il s’agisse d’un investissement financier tel que l’achat d’une  obligation, d’une créance,  d’une action. Tout investissement comprend une part de risque. On attend un certain rendement mais ce rendement, on  le sait, ne sera pas exactement ce qu’on attend. Il est affecté d’un certain risque, qu’on représente par une distribution de probabilité.
+
+Un investisseur doit évaluer deux choses :
+ le rendement moyen espéré 
+et puis la façon dont se disperse la distribution de probabilité de rendement autour et qui va être le risque. 
+L’intérêt de cette opération est de pouvoir comparer les investissements entre eux. Vous avez une somme de monnaie à investir, soit dans un projet industriel, soit dans un autre projet industriel, soit dans un projet de négoce, soit sur un marché financier en achetant une obligation ou une action. Vous voulez comparer le rendement espéré et vous voulez aussi comparez le risque.
+
+Mais commençons par le rendement espéré.
+
+##Schéma à animer
+
+Partons de ce schéma.
+Un investissement c’est une dépense I à l’instant 0 elle est vers le bas puisque c’est une dépense, en rouge. 
+Vous avez là, trois types d’investissement, un investissement industriel en bleu. Cet investissement dans des machines, dans des logiciels, dans du travail va procurer un revenu qui va croitre se stabiliser puis décroître quand les machines seront entièrement épuisées. Vous pouvez aussi consacrer cette même somme I à l’achat d’une obligation qui va par exemple vous être remboursée à la fin, en n avec des intérêts. Vous pouvez enfin placer la somme dans une obligation qui va vous être remboursée avec les intérêts sous forme d’annuité constante.
+
+Voilà trois types d’investissement. Il faut pouvoir comparer leur rendement espéré. 
+
+Pour faire cela, il faut ramener tous les flux futurs attendus de l’investissement à leur « valeur actuelle ». C’est-à-dire qu’il faut les ramener à leur valeur en temps 0. Et cette valeur actuelle de tous les flux à recevoir dans le futur, il faut la comparer avec l’investissement initial  I fait au temps 0. 
+
+On utilise la technique de l’actualisation dont vous verrez le détail dans le chapitre.
+
+ Elle est  fondée sur un comportement supposé rationnel pour un acteur économique : un « tiens » vaut mieux que deux « tu l’auras ». C’est-à-dire, que si vous recevez une somme de 100 aujourd’hui, il faudra vous donner au moins 130 dans trois ans pour que cela vous soit équivalent. Le « taux d’actualisation » implicite est ici de 10 % par an.  
+
+De cette manière, on calcule, vous verrez comment, le « taux de rentabilité interne » espéré d’un investissement. Il permet de comparer des investissements. 
+
+Il vous permet aussi de comparer la rentabilité d’un l’investissement à ce que cela vous coûterait, en intérêt par exemple de le financer par une dette, ou à ce que cela vous coûterait en résultat net attendu par vos actionnaires, de le financer par une augmentation des fonds propres. Ce calcul permet de comparer le rendement attendu d’un investissement au cout attendu de son financement.
+
+##Schéma fixe
+
+Ensuite, il faut évaluer le risque d’un investissement. C’est simple, le risque est mesuré par l’écart type de la distribution de probabilité du rendement de l’investissement. Vous voyez sur ce  graphique, deux investissements dont l’espérance de rendement et la même mais dont l’écart type est différent. L’un, le rouge est moins risqué que le bleu, car la probabilité que le rentabilité réelle soit dans la fourchette de + ou – 10% de la moyenne est plus forte, la surface sous la courbe rouge étant plus grande . En revanche la probabilité de rentabilité exeptionnelle est plus forte avec le bleu.
+
+Reste ensuite à se demander quelle est l’attitude à l’égard du risque d’un investisseur. Certains investisseurs sont adverses au risque, d’autres aiment le risque et d’autres encore sont neutres au risque.
+
+##Schéma animé
+
+Nous allons faire un petit test.
+
+Je vous projette là trois types d’investissement, vous investissez  100 en t = 0. Le premier investissement vous rapporte 111 avec une probabilité de 1/2, 109 avec une probabilité 1/2. Le deuxième et le troisième, ce que vous lisez là.
+
+Spontanément, lequel vous choisissez-vous ?
+
+C’est une expérience économique. Je teste votre comportement devant le risque. Le prix Nobel d’économie 2017 a été donné à quelqu’un qui a développé ce genre d’expérience. Mais naturellement celle là est très élémentaire. Elle montre que vous avez des attitudes différentes devant le risque. Dans beaucoup de public d’étudiants, le groupe se divise en trois, 1/3 a choisi le premier, 1/3 le second, 1/3 le troisième.
+
+Or ces investissements ont la même espérance de rendement qui est 110, mais évidemment des écarts types très différents. Le premier est beaucoup moins risqué que le dernier.
+
+Certains aiment le risque, ils sont prêts à perdre dans 97 % des cas à condition qu’ils gagnent le gros lot dans 3 % des cas. Il y a même des gens qui jouent avec des espérances négatives : ceux qui jouent à la loterie quand l’organisateur de la loterie prend une partie des mises, l’espérance de gain est inferieure aux mises, mais vous risquez de tirer de gros lot. Il y a des gens qui aiment ça. Il y a des gens qui sont neutres au risque en particulier ceux qui peuvent couvrir le risque. Il y a des gens qui sont adverses au risque, c’est-à-dire, que pour eux, si le risque d’un actif est plus grand que celui d’un autre, son rendement doit être supérieur. 
+
+On constate sur les marchés financiers, en classant tous les investissements possibles selon leur risque passé croissant, c’est-à-dire selon  la volatilité passée de leur rendement, et en  pointant en ordonnée leur rendement passé moyen, que, dans la réalité des marchés, les investisseurs sont en moyenne adverses au risque.
+
+Pour qu’un actif soit acheté s’il est plus risqué qu’un autre, il faut que son rendement espéré soit supérieur. Cependant n’oublions jamais qu’en la matière il s’agit d’anticiper l’avenir, non de constater le passé qui n’est qu’un guide peu sûr de ce qui peut se passer.
+

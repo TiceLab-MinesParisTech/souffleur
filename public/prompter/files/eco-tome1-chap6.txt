@@ -1,0 +1,25 @@
+//id: eco-tome1-chap6
+//title: Chapitre 6
+
+#CHAPITRE 6 — LA SCIENTIFICITÉ DE L’ÉCONOMIE.
+
+Un vif débat a divisé le milieu des économistes français à la publication en automne 2016 d’un violent pamphlet de Cahuc et Zylberberg intitulé : «Le négationnisme économique et comment s’en débarrasser».
+
+En-dehors de ses aspects polémiques, qui visent la prétendue hégémonie médiatique qu’aurait conquise en France le groupe des « économistes atterrés », qualifiés d’hétérodoxes et de politisés, la thèse de Cahuc et Zylberberg  est que, ces dernières années, grâce à l’explosion des données disponibles et le développement de véritables expériences, comme celles théorisées et mises en pratique par Duflo et Banerjee au MIT, l’économie serait devenue une véritable « science expérimentale ». Contester les vérités « prouvées » par ces expériences serait donc du « négationisme ».
+
+Cette thèse  est une thèse épistémologique sur la nature de l’économie, elle est fort contestable. Il s’agit en effet de savoir ce que sont les « expériences » en économie et ce qu’elles « prouvent ».  Ont-elles, par exemple, le statut de l’expérience en physique ? Or la réponse est non. Il n’y a pas, en économie, d’expérimentation au sens où l’expérimentation fonctionne en physique pour tester les théories existantes et éliminer ou plutôt dépasser définitivement (comme Newton l’a été par Einstein) celles qui ne passent pas un test expérimental. Tant qu’une théorie en physique n’est pas, alors qu’elle est « contestable », contestée par une observation directe ou une observation construite dans une expérience, alors elle est provisoirement tenue pour vraie.
+ 
+Ce qu’on appelle expériences en économie, selon Cahuc et Zylberberg, c’est d’une part les analyses économétriques des effets de certaines politiques économiques, ayant eu lieu à une certaine époque dans un certain nombre de pays. Et d’autre part, ce sont des expériences à la Banerjee-Duflo, où on sélectionne un groupe objet d’une politique et un groupe témoin, les groupes étant les plus semblables possible selon certains critères à définir. Si on s’intéresse aux politiques de développement, par exemple, on sélectionne plusieurs villages africains, semblables par le climat, la langue, la géographie, l’environnement, la population. Dans l’un, on applique la politique de fournir gratuitement des moustiquaires imprégnés d’insecticide pour protéger les enfants de la malaria. Dans l’autre, on applique un programme rémunérant les mères pour qu’elles envoient leurs filles à l’école. Dans la troisième, le village témoin, on ne fait rien. Au bout d’un certain temps, on mesure les effets des dollars investis dans les politiques alternatives.
+
+Dans les deux cas, cela suppose, évidemment, qu’il n’existe pas de variables cachées, non prises en compte dans le modèle et non mesurées, qui feraient que la même politique, généralisée et appliquée dans d’autres pays et à d’autres époques, ne donneraient pas du tout le même résultat. Autrement dit, on transforme en « loi » permettant des projections dans tous les cas de figure ce qui n’est au mieux qu’une régularité statistique observée dans plusieurs contextes différents.
+
+Par ces méthodes, l’économie se rapproche donc plutôt de l’épistémologie de la pharmacologie, qui en effet essaie d’évaluer les effets des médicaments selon cette démarche : groupe traité en double aveugle et groupe témoin. La grande différence est qu’on dispose en économie de bien moins de cas que d’individus dans les groupes de test de la pharmacologie.  De plus, les populations concernées sont bien plus hétérogènes qu’en pharmacologie où l’on suppose que les différences qui comptent entre individus sont purement génétiques et faibles. 
+
+En économie, des affirmations comme : « la réduction de la durée du travail ne réduit pas le chomage » ou « l’immigration pèse très peu sur le salaire des autochtones », constatations qui ont été faites dans quelques cas, souvent assez différents, ne peuvent être généralisées sans la plus grande prudence et ne sont certainement pas des vérités au sens de la physique et même de la pharmacologie.
+
+Si bien  que pour traiter d’une question, il y aura toujours, contrairement à ce que prétendent Cahuc et Zylberberg, plusieurs modèles différents qui seront tous plus ou moins bien « correctement » calibrés sur des données différentes, voire sur les mêmes données et qui pourtant ne donneront pas les mêmes projections, donc ne conduiront pas aux mêmes recommandations.
+
+L’économie s’apparente ainsi beaucoup plus non pas à la pharmacologie, mais à la médecine elle même. La médecine, certes, use de la pharmacologie, mais elle reste un « art » en ceci qu’elle doit en permanence réfléchir au modèle qui s’applique le mieux à chaque patient particulier.
+
+D’ailleurs, ne demande-t-on pas à l’économiste, comme au médecin, de faire des « diagnostics », de proposer des « pronostics » et de rédiger des « ordonnances » ?
+

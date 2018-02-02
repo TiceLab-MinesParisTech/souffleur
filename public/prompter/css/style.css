@@ -1,0 +1,519 @@
+html {
+	font-family: Times, "Times New Roman", Georgia, serif;
+	background-color: #888;
+	padding: 0;
+}
+
+button, select {
+	cursor: pointer;
+	font-size: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+	margin: 0;
+}
+
+h1 {
+	font-size: 140%;
+}
+
+h2 {
+	font-size: 120%;
+}  
+
+h3, h4, h5 {
+	font-size: 100%;
+}
+
+nav {
+	line-height: normal;
+}
+
+.terminal.flip .scroller {
+	transform: scaleY(-1);
+}
+
+.notifier {
+	color: black;
+	position: fixed;
+	padding: 5px 25px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	transition: font-size 0.1s ease-in-out, opacity 0.1s ease-in-out;
+	display: inline-block;
+	font-weight: bold;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 15px;
+	z-index: 2;
+}
+
+.terminal.flip .notifier {
+	top: auto;
+	bottom: 0;
+	transform: scaleY(-1);
+}
+
+.notifier.active {
+	font-size: 60px;
+	opacity: 1;
+}
+
+.sliderPager {
+	position: fixed;
+	font-size: 14px;
+	padding: 5px;
+	bottom: 0;
+	border: 1px solid gray;
+	background-color: lightgray;
+	left: 0;
+	margin: 20px;
+	transition: opacity 0.1s ease-in-out;
+} 
+
+.toolbar {
+	line-height: 0;
+	font-family: vernada, verdana, arial;
+	top: 0;
+	left: 0;
+	margin: 20px;
+	font-size: 14px;
+	position: absolute; 
+	border: 1px solid gray;
+	z-index: 1;
+	padding: 5px;
+	background-color: lightgray;
+}
+
+.toolbarTools > button {
+}
+
+.toolbar.minified {
+	opacity: 0.3;
+	transition: opacity 0.1s ease-in-out;
+	padding: 5px;
+}
+
+.toolbar.minified:hover {
+	opacity: 1;
+}
+
+.toolbarTools {
+	display: inline-block;
+}
+
+.toolbarTools > div {
+	display: inline-block;
+	margin: 5px;
+}
+
+.toolbarTools > button {
+	margin: 5px;
+}
+
+.toolbarTools > .separator:after {
+	content: " ";
+}
+
+.toolbarTools > .separator {
+	display: inline-block;
+	border-left: 1px solid white;
+	margin: 5px 10px;
+	width: 10px;
+}
+
+.toolbarPopup .popup {
+	border: 1px solid black;
+	padding: 10px;
+	position: absolute;
+	background-color: white;
+}
+
+.icon {
+	background-position: center;
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+}
+
+.icon.menu {
+	background-image: url(../img/menu_16px.png);
+}
+
+.icon.play {
+	background-image: url(../img/play_16px.png);
+}
+
+.icon.stop {
+	background-image: url(../img/stop_16px.png);
+}
+
+.icon.recordStop {
+	background-image: url(../img/recordStop_16px.png);
+}
+
+.icon.recordStart {
+	background-image: url(../img/recordStart_16px.png);
+}
+
+.toolRecorder > button {
+	color: darkred;
+}
+
+.recorders {
+	display: inline-block;
+}
+
+.toolRecorder .recorder {
+	width: 7px;
+	height: 4px;
+	padding: 0;
+	margin: 1px;
+	background-color: black;
+}
+
+.toolRecorder .recorder.recording {
+	background-color: red;
+}
+
+.tally:after {
+	content: " ";
+}
+
+.tally {
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: red;
+	position: fixed;
+	right: 0;
+	top: 0;
+	margin: 20px 30px;
+}
+
+.terminal.flip .tally {
+	top: auto;
+	bottom: 0;
+}
+
+.toolTerminals > nav {
+	min-width: 200px;
+	border: 1px solid black;
+	overflow: auto;
+	position: absolute;
+	z-index: 1;
+	background-color: #eee;
+	border-radius: 8px;
+	overflow: auto;
+	max-height: 800px;
+}
+
+.toolFile > nav {
+	border: 1px solid black;
+	overflow: auto;
+	position: absolute;
+	z-index: 1;
+	background-color: #eee;
+	border-radius: 8px;
+}
+
+.toolTabs > ul {
+	margin: 0;
+	padding: 4px;
+}
+
+.toolTabs > ul li {
+	display: inline-block;
+	padding: 5px 8px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.toolTabs > ul li.current {
+	font-weight: bold;
+}
+
+.toolFileEdit {
+	padding: 10px;
+}
+
+.toolFileEdit > textarea {
+	display: block;
+	width: 600px;
+	height: 300px;
+	padding: 5px;
+}
+
+.toolFileList > ul {
+	width: 300px;
+	min-height: 10px;
+	padding: 5px;
+	border: 1px solid gray;
+	margin: 0px 10px 10px 10px;
+	max-height: 400px;
+	overflow: auto;
+	background-color: white;
+}
+
+.toolFileList > ul li:hover {
+	background-color: #eee;
+}
+
+.toolFileList > ul li {
+	padding: 5px 8px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.settingToolString input {
+	max-width: 100px;
+}
+
+.settingToolString {
+	min-width: 200px;
+}
+
+.toolSpeed > .label {
+	display: inline-block;
+	text-align: center;
+	width: 3em;
+}
+
+.settingsEditor td {
+	padding: 4px;
+}
+
+.settingsEditor th {
+	text-align: right;
+	padding-right: 5px;
+	font-size: 80%;
+	text-transform: capitalize;
+}
+
+.settingsEditor th:after {
+	content: " :";
+}
+
+.terminalOutput {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: white;
+	color: black;
+	font-size: 100px;
+	overflow: hidden;
+}
+
+.terminalOutput > .content {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.Mask {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+.Mask > div {
+	position: absolute;
+	box-shadow: 0px 0px 10px 10px #000000;
+	background-color: black;
+	opacity: 0.5;
+	left: 0;
+	right: 0;
+}
+
+.Mask > .bottom {
+	bottom: 0;
+}
+
+.Mask > .top {
+	top: 0;
+}
+
+.viewScroll div.scroller {
+	position: absolute;
+	top: 0;
+	right: 0px;
+	left: 0px;
+	bottom: 0;
+	overflow: auto;
+}
+
+.viewScroll div.parts li {
+	list-style-position: inside;
+}
+
+.viewScroll div.parts div.pbreak {
+	height: 0.7em;
+}
+
+.viewScroll div.parts div.slide {
+	font-size: 30%;
+	margin: 0 auto;
+	width: 40%;  
+	background-color: #eee;
+	border: 2px solid #ccc;
+}
+
+.viewScroll div.parts {
+	margin: 1000px 0;
+	text-align: center;
+}
+
+.viewScroll div.parts > div {
+	margin: 0;
+	padding: 5px;
+	border: none;
+}
+
+.viewScroll div.parts p {
+	margin: 5px 0;
+}
+
+.viewScroll div.target {
+	position: absolute;
+	top: 50%;
+	margin-top: -0.5em;
+	margin-bottom: 0.5em;
+	height: 1em;
+	left: 0;
+	right: 0;
+}
+
+.viewScroll div.target:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	margin-top: -1.5em;
+	margin-bottom: 1.5em;
+	height: 3em;
+	left: 0;
+	right: 0;
+	background-color: #ffe4b5;
+	opacity: 0.5;
+}
+
+.viewSlider div.output {
+	overflow: auto;
+	position: absolute;
+	padding: 40px; 
+	border: 3px solid lightgray;
+}
+
+.terminal.flip div.viewSlider > div.output > div.content {
+	transform: scaleY(-1);
+}
+
+.viewEmpty {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	text-align: center;
+	transform: translateY(-50%);
+}
+
+.terminal.flip .viewEmpty {
+	transform: translateY(-50%) scaleY(-1);
+}
+
+.toolTerminalsItem {
+	position: relative;
+	padding: 15px;
+	border-radius: 8px;
+	margin: 5px;
+	background-color: white;
+}
+
+.toolTerminalsItem nav > div {
+	display: inline-block;
+	padding: 3px;
+}
+
+.toolTerminalsItem div.resolution {
+	font-size: 80%;
+}
+
+.toolTerminalsItem nav > div {
+	cursor: pointer;
+}
+
+.toolTerminalsItem div.id:before {
+	content: "🔍";
+}
+
+.toolTerminalsItem nav > div:hover {
+	font-weight: bold;
+}
+
+.toolTerminalsItem nav {
+	text-align: right;
+}
+
+.toolTerminalsItem.local {
+	border:inherit;
+	background-color: lightgray;
+}
+
+@media (max-width: 480px) {
+	.toolbar {
+		margin: 0;
+		right: 0;
+	}
+
+	.toolTerminals > nav {
+		right: 0;
+		left: 0;
+		overflow: normal;
+		max-height: none;
+	}
+
+	.toolbar {
+		font-size: 18px;
+	}
+
+	button, select {
+		padding: 6px;
+		min-width: 50px;
+	}
+
+	.terminalOutput {
+		font-size: 30px;
+	}
+	
+	.toolbar.minified {
+		right: auto;
+	}
+
+	.toolbar.minified .icon.menu {
+		padding: 15px;
+	}
+	
+	.toolFile > nav {
+		right: 0;
+		left: 0;
+		width: auto;
+	}
+
+	.notifier {
+		margin: 4px;
+		top: auto;
+		bottom: 0;
+	}
+	
+	.notifier.active {
+		font-size: 40px;
+	}
+
+	.viewScroll div.parts div.slide {
+		font-size: 75%;
+	}
+}

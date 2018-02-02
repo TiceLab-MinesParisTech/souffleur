@@ -1,0 +1,11 @@
+{
+  "name": "hyperdeck-nico",
+  "version": "1.0.0",
+  "description": "Test de client pour le BlackMagic HyperDeck",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,35 @@
+//id: eco-tome3-chap14
+//title: Chapitre 14
+
+Les marchés financiers sont les marchés où des titres s’échangent contre de la monnaie. On peut distinguer trois grands compartiments des marchés : les marchés de titres de dette, d’actions et d’instruments dérivés. Tous remplissent la double fonction de la finance : drainer de la monnaie des épargants vers les investisseurs et permettre l’échange de risques.
+
+Nous avons déjà beaucoup parlé des marchés d’action et de titres de dette. Rappelons simplement  la distinction entre marché primaire et secondaire, puis l’objet de la réglementation des ces marchés. Le marché primaire est celui où les titres  nouvellement émis sont vendus pour la première fois par les émetteurs à des investisseurs. Ce sont les banques qui réalisent ces émissions primaires et vendent les nouveaux titres pour le compte des émetteurs.  Sur les marchés secondaires les titres s’échangent ensuite jusqu’à leur échéance et leur prix y varie tous les jours.
+
+Les réglementations des marchés d’action et de titres de dette portent essentiellement d’une part sur la réduction des asymétries d’informations, en obligeant les émetteurs à une communication légale d’informations sur leur situation  et sur leurs projets et d’autre part sur les règles de marché. Elles visent à assurer que le marché fonctionne de manière concurrentielle et qu’aucun acteur ne peut y exercer un pouvoir de marché.
+
+Le troisième compartiment des marchés financiers est celui des instruments dérivés, dont nous n’avons pas encore parlé. C’est l’objet de nombreux fantasmes. Miracle de l’inventivité de la finance pour les uns, temple de la spéculation pour les autres, ils sont controversés. Il s’agit avant tout de comprendre ici le rôle de la spéculation
+
+Les instruments dérivés sont des titres financiers qui permettent de se couvrir contre un risque. Les risques qui sont ainsi couverts, en vérité « assurés », sont d’abord les risques de variation de prix. Tout acteur en effet qui achète un objet économique dont le prix varie sans pour autant l’avoir déjà revendu prend le risque que le prix de cet objet baisse. C’était le risque pris par Zaccaria sur le prix de l’alun à Bruges. 
+
+Les instruments dérivés servent avant tout à se couvrir contre les risques de fluctuation des prix : des matières premières, des monnaies, des actions, des obligations et par conséquent des taux d’intérêt, mais ils permettent aussi de se couvrir contre certains autres risques physiques comme par exemple les risques météorologiques.
+On distingue trois grandes catégories d’intruments dérivés
+
+Les contrats à terme, « futures » en anglais. Ils garantissent à celui qui se couvre un prix fixé aujourd’hui pour une transaction future. Les options, qui donnent le droit mais pas l’obligation d’acheter ou de vendre à une date à venir à un prix d’exercice de l’option fixé aujourd’hui. Les swap qui sont des accords sur une certaine durée ou l’assuré paie un prix fixe  à la banque qui lui a vendu le swap et se voit donner par elle de quoi acheter au prix fluctuant du marché.
+
+Les instruments dérivés permettent à ceux qui encourent un risque de le vendre à d’autres qui acceptent de le porter, bien sur l’espoir d’un rendement d’autant plus élevé que le risque l’est. Prendre délibérément un risque de prix, acheter sans avoir vendu ou vendre avec livraison différée sans avoir acheter, c’est la définition même de la « spéculation ».
+
+La présence de spéculateurs purs, c’est-à-dire d’acteurs qui prennent délibérément un risque de prix, achetant sans avoir vendu ou ayant vendu sans avoir acheté est absolument indispensable pour l’équilibre des marchés dérivés.
+
+Les marchés ne peuvent en effet pas s’équilibrer si ne se font face que ceux qui veulent se couvrir par exemple contre un risque de baisse et ceux qui veulent se couvrir contre un risque de hausse. Ils n’ont aucune raison d’être aussi nombreux les uns que les autres, puisqu’il existe une opinion dominante, un « consensus », sur l’évolution future la plus probable des prix. Il est par conséquent nécessaire que des spéculateurs qui acceptent une pure prise de risques soit présents sur les marchés dérivés pour qu’ils s’équilibrent sans effondrement de prix.
+
+Pour cette raison même, la nécessité de sa présence, les marchés dérivés sont organisés de façon telle que la spéculation y soit extrêmement facile. Un acteur peut acheter un risque sans le payer maintenant, mais seulement au moment où la réalisation de ce risque l’obligera à compenser celui qui a voulu s’en débarrasser, ou sa non réalisation lui permettra d’empocher son gain.
+
+Le seul cout monétaire direct d’une opération spéculative sur les marchés à terme consiste dans un dépôt de garantie que demandent les bourses qui les organisent, afin  de garantir tous les intervenants contre le risque de contrepartie, c’est-à-dire le risque que quelqu’un qui s’est engagé à vendre ou à prendre livraison disparaisse et ne le fasse pas.
+
+Une question importante est donc de savoir si la pure spéculation sur les marchés dérivés amplifie ou pas les fluctuations des prix contre lesquelles elle permet de se couvrir. Les analyses sont contrastées sur cette question.
+
+Pour certains, en permettant à n’importe quel acteur économique d’exprimer, par des prises de risque, ses anticipations sur l’évolution future des prix, les marchés dérivés ont plutôt un rôle stabilisateur. Il permet aux prix de refléter les anticipations médianes d’un grand nombre d’acteurs.
+
+Pour d’autres l’augmentation du nombre d’intervenants favorise au contraire le mimétisme des comportements, source d’instabilité. La spéculation peut enclencher un mouvement de hausse puis l’entretenir par mimétisme avant de se terminer dans un krach.
+
+Nous reviendrons sur ces analyses contrastées au chapitre suivant.

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.studio.souffleur</string>
+	
+	<key>WorkingDirectory</key>
+	<string>/Users/nicolas/Project/svn/studio/prompterNG/</string>
+
+	<key>Program</key>
+	<string>app.js</string>
+        
+	<key>ProgramArguments</key>
+	<array>
+	</array>
+
+	<key>RunAtLoad</key>
+	<true/>
+
+<key>StandardOutPath</key>
+<string>/Users/nicolas/output.log</string>
+
+<key>StandardErrorPath</key>
+<string>/Users/nicolas/errors.log</string>
+
+</dict>
+</plist>
+

@@ -1,0 +1,33 @@
+//id: eco-tome3-intro
+//title: Tome 3 - Introduction
+
+Pour introduire ce tome consacré à la monnaie et à la finance, je vais tout d’abord bien souligner la différence entre une monnaie et un titre financier. Puis je montrerai comment toute économie est nécessairement une économie monétaire et financière. Que donc l’organisation étatique de la création monétaire et du fonctionnement des marchés financiers sont des enjeux politiques de première importance.
+
+La monnaie est un pur signe. Il y a fort longtemps que les monnaies sont dématérialisées. Ce signe permet instantanément d’acheter tout ce qui est à vendre, car il est accepté en paiement part tous les vendeurs. C’est en monnaie que sont consentis les prêts et c’est en monnaie qu’on peut se libérer de toute dette. La monnaie est l’équivalent général, conserver de la monnaie c’est conserver une créance sur tout ce qui a été produit et qui est à vendre. 
+
+Un titre financier, c’est une simple promesse de revenus futurs en monnaie. Celui qui a émis le titre et l’a vendu à un autre, qui l’a acheté et payé en monnaie, lui promet de lui rendre cette monnaie augmentée dans l’avenir.
+
+Un point crucial ici est que ce n’est qu’une promesse, indépendamment même de la volonté des deux acteurs de l’honorer. Il se peut que celui qui a vendu le titre ne soit pas en mesure d’honorer sa promesse indépandement de sa volonté. C’est pourquoi tout titre financier peut se caractériser, on l’a vu, par son rendement espéré et son risque.
+
+Un titre n’est donc pas équivalent à de la monnaie.
+
+Un acteur qui a acquis un titre avec de la monnaie, peut toujours le revendre sur un marché secondaire à un autre acteur contre-monnaie. Cependant, à la différence de la monnaie elle-même qui conserve sa valeur du moins tant que le niveau général des prix ne varie pas, un titre dont le marché est à l’équilibre n’a pas le même prix à l’achat et à la vente. Voyons le à partir du carnet d’ordres d’achat et de vente compilés par une bourse.
+
+Premier graphique :
+
+Dans cette situation, on voit immédiatement qu’une série de transactions sont possibles et  vont avoir lieu. Cette quantité de titres  va être échangée.
+
+Mais au moment où le marché s’équilibre, voici quelle est la configuration des carnets d’ordres. Entre le prix maximum auquel un acheteur est prêt à acheter et le prix minimum auquel un vendeur est prêt à vendre, existe une différence que l’on appelle le bid-ask spread.
+
+La raison profonde de cette différence est qu’un titre n’étant qu’une promesse de revenus futurs présente toujours un risque. Or, celui qui détient le titre est censé avoir de meilleures informations sur le risque du titre que celui qui l’achète. Raison pour laquelle, indépendamment même de toute anticipation sur l’évolution future du titre, la valorisation de celui qui est prêt à acheter est inférieure, en effet pour lui le risque anticipé est plus grand. Le bid ask spread est d’autant plus important que l’information sur le couple rendement risque du titre est privé, comme dans le cas d’une créance bancaire.
+
+Pour qu’une nouvelle transaction ait lieu, il faut soit qu’un acheteur accepte de payer le bid-ask spread, soit qu’un vendeur accepte de faire ce rabais pour trouver un acheteur. La conséquence de cela est que si par exemple un acteur économique voulait tous les soirs transformer sa monnaie en titre, parce que les titres rapportent un intérêt, puis le lendemain matin, retransformer ces titres en monnaie, il percevrait certes un intérêt pour la nuit mais y perdrait en raison de bid-ask spread.
+Cela montre à un contrario l’intérêt qu’il y a à conserver de la monnaie ; La monnaie est liquide en ce qu’elle permet de se libérer immédiatement d’une dette ou d’acheter de tout ce qui est à vendre. Un titre n’est jamais totalement liquide : son bid-ask spread mesure son degré d’illiquidité.
+
+Deux remarques pour terminer, il n’y a pas d’échanges véritablement développés entre acteurs nombreux sans monnaie, le troc est une fable d’économiste qui n’a existé qu’aux marges des des sociétés primitives.
+
+Deuxièmement à partir du moment où il y a monnaie, il y a titre financier et finance. La finance est indispensable à tout système économique, puisque l’essence même de l’activité des entrepreneurs et de faire des paris sur l’avenir et par conséquent de prendre des risques.
+
+La finance leur permet de prendre ces risques avec l’argent des épargnants et elle organise un vaste marché des risques. Ce sont ces deux fonctions fondamentales.
+
+En revanche, il existe des systèmes monétaires et des systèmes financiers régulés différemment par les Etats et qui, tout en remplissant leurs deux fonctions générales, le font avec des résultats d’ensemble différents et possiblement plus favorables selon certains critères. Par exemple, ces systèmes sont plus ou moins instables.

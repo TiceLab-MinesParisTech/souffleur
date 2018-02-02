@@ -1,0 +1,17 @@
+//id: CTC-C-M2-V5
+
+Voici un exemple de modélisation d’un tel cycle pour un moteur à gaz industriel.
+
+Vous analyserez ce cycle en détail à l’occasion d’une exploration dirigée. Voici pour le moment quelques indications sur son paramétrage.
+
+Le paramétrage de la compression est le suivant : système fermé, avec un rapport de compression imposé et un rendement isentropique égal à 0,95.
+
+Le paramétrage de la chambre de combustion est différent de celui que nous avons considéré pour la turbine à gaz. La combustion a lieu en système fermé, le débit de combustible est imposé et le volume massique aval est imposé par le point amont
+
+Compte tenu du fort refroidissement du moteur, nécessaire pour des raisons technologiques, le rendement de la chambre de combustion vaut 0,79, ce qui signifie que 21 % de la puissance thermique est perdue.
+
+La détente est modélisée par deux transfos détente, la première, en système fermé, correspond à la phase de détente dans le cylindre, les soupapes étant fermées. 
+
+Comme pour la compression, le rapport de détente est imposé, et un rendement isentropique de 0,95 est pris en compte.
+
+En fin de cette détente, les soupapes d’échappement sont ouvertes, et la détente se poursuit selon la même loi adiabatique, jusqu’à la pression atmosphérique. Elle se déroule cette fois en système ouvert, et sans production de travail, ce qui justifie que le type d’énergie choisi soit « autre ».

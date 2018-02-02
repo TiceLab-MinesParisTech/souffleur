@@ -1,0 +1,62 @@
+//id: eco-tome2-chap10
+//title: Chapitre 10
+
+Ce chapitre analyse comment l’entreprise finance ses projets d’investissement.
+
+Nous allons traiter trois questions. 
+
+Tout d’abord, quelle est la différence entre les deux types de fonds que peut se procurer l’entreprise, comme nous l’avons vu dans l’analyse de son bilan : les fonds propres et la dette. Quelle est la différence entre ces deux types de fonds ? Du point de vue d’une part, des obligations que cela entraine pour l’entreprise et d’autre part, de l’intérêt et du risque que prennent ceux qui ont apporté ces fonds. C’est le premier point.
+
+Ensuite, nous nous placerons du point de vue de l’entreprise et nous demanderons, puisqu’elle a accès à deux types de fonds, quel est le « bon » ratio entre la dette et les fonds propres, le bon « ratio d’endettement » « gearing » en anglais.
+
+Et que veut dire le bon ? Eh bien pour une entreprise le bon ratio, c’est celui qui minimise le Coût Moyen Pondéré de son Capital( CMPC en français WACC en anglais), compte tenu du risque que porte son portefeuille de projets.
+
+Enfin, nous nous placerons du côté des apporteurs de fonds, et nous demanderons ce qu’ils attendent de l’entreprise pour lui confier ces fonds. Ce qui nous permettra de revenir sur les ratios caractérisant l’activité, la rentabilité et la solvabilité de l’entreprise qu’observent les investisseurs. Et de dire par qui ils se font aider pour analyser ces ratios, les fameux « analystes » et « agences de notation ».
+
+Tout d’abord revenons sur les différences entre des fonds apportés sous forme de dette et les fonds apportés sous forme de fonds propres.
+
+Un contrat de dette où l’emprunteur vend une créance ou une obligation au prêteur dette, c’est un contrat : l’emprunteur reconnait avoir emprunté 100 et s’engage à rembourser ce montant de 100 plus un intérêt à telle échéance et de telle façon et il donne telle ou telle garantie. Soit le taux d’intérêt est fixé à l’avance, soit il est intérêt indexé sur un taux du marché que tout le monde peut constater plus une prime, un spread en anglais qui correspond au risque que prend le prêteur. L’emprunteur qu’est l’entreprise est contrainte de payer. Si elle ne paye pas, le créancier va devant les tribunaux et peut la forcer à payer s’il y a de quoi. Sinon l’entreprise sera déclarée en faillite, liquidée et, une fois qu’auront été payés les arriérés aux salariés ou sous-traitants et la dette fiscale, s’il reste de l’argent, il ira à ceux qui ont prêtés. Tant pis pour les actionnaires, ils n’auront rien.
+
+Bien évidemment une entreprise n’a pas intérêt à ne pas payer sa dette, elle a intérêt, si elle n’y parvient pas une année à la renégocier avec ses créanciers. Et je répète encore une fois et nous y reviendront en parlant de la finance : les prêteurs sont de deux types, soit des banques qui font des crédits aux entreprises soient des investisseurs institutionnels, qui regroupent l’épargne d’un grand nombre d’investisseurs individuels et qui achètent des obligations émises par les entreprises. 
+
+Les investisseurs qui ont apporté de la dette sont assurés d’un rendement nominal prévu à l’avance ou indexé. Sauf si l’entreprise fait faillite, c’est ça leur risque.
+
+Les fonds propres, eux sont apportés par des actionnaires. Un actionnaire acquiert quoi ? Il apporte de l’argent d’entreprise contre quoi ? D’abord et avant tout, contre un droit de vote, normalement une action donne droit à un droit de vote. Vote où? Au parlement de l’entreprise réuni en assemblée générale. Elle se réunit une fois par an au moins, plus si nécessaire.
+
+L’assemblée générale juge les dirigeants sur les  comptes qu’ils présentent, d’où l’importance de la comptabilité et les projets qu’ils affichent. Puis l’assemblée générale élit le gouvernement de l’entreprise, son Conseil d’Administration, lequel élit le président de l’entreprise qui nomme ses dirigeants.
+
+Si ces dirigeants ne « délivrent » pas la rentabilité qu’il attend, tout actionnaire peut voter pour en changer ou alors décider de vendre vos actions et voter ainsi « avec vos pieds ».
+
+Quelle est l’obligation de l’entreprise à l’égard des actionnaires? Aucunement l’obligation de racheter les actions ou de leur assurer un rendement garanti. D’aucune façon. L’actionnaire prend les risques résiduels) de l’entreprise car ils sont rémunérés en dernier et recoivent ce qui « reste » une fois qu’elle a payé ses achats, ses employés, l’Etat et le service de sa dette. 
+
+L’entreprise n’a aucune autre obligation que de se soumettre aux désirs des actionnaires exprimés dans l’assemblée générale et par le choix de conseil d’administration et du président.
+
+Évidemment les actionnaires prennent plus de risque que ceux qui ont apporté de la dette. C’est pourquoi ils demandent une rémunération supérieure parce qu’ils sont adverses aux risques. C’est plus risqué d’être actionnaire que d’être apporteur de dette, donc l’actionnaire demande un rendement supérieur à celui de l’apporteur de dette.  
+
+Par exemple, si la dette de l’entreprise lui est consentie à 5 %, moi en tant qu’actionnaire je demanderai 15 %.
+
+Deuxième point :
+
+L’effet de levier et la politique optimale de financement d’une entreprise.
+
+Si une entreprise dégage un excédent brut d’exploitation après impôts, c’est-à-dire ce qui lui reste pour payer tout son capital, de 200, avec un capital total, dette plus fonds propres de 2 000, elle a une rentabilité économique, un ROCE de 200/2000 = 10 %.
+
+Si son capital de 2 000 est composé de 1 000 de dette et de 1 000 de fonds propres, elle va rémunérer sa dette à 5% donc 50. Il va rester que 150 pour les fonds propres qui eux vont être rémunérés de 150 donc à 15 %. 
+
+C’est-ce qu’on appelle « l’effet de levier de l’endettement ». Si l’entreprise s’endette pour moitié de son capital, cela augmente le rendement des fonds propres. S’il y a que des fonds propres, le rendement de fonds propres est de 10 %, le ROCE. S’il y a la moitié de dette à 5 % leur rendement des fonds propres passe à 15 %. A condition notons le bien, que le rendement économique de l’entreprise, son ROCE ( ici 10%°) soit supérieur au cout de sa dette (ici 5%).
+
+Vous voyez que l’intérêt des actionnaires serait d’augmenter l’endettement. A ROCE donné, cela « booste »,  si je puis dire, la rentabilité des fonds propres c’est-à-dire le ROE. Mais en même temps, cela le rend plus risqué, parce qu’évidement il y a un service de la dette de plus en plus important à assurer. 
+
+Si les cash-flows d’entreprise fluctuent beaucoup, il y aura des années où vous ne pourrez pas l’assurer. A ce moment-là vous serez obligés de renégocier la dette et le rendement des fonds propres va passer en dessous de 0. Il plus volatile, plus risqué.
+
+Augmenter le taux d’endettement, le « gearing » mesuré par la part de la dette dans le capital total employé, c’est augmenter le rendement des fonds propres et c’est aussi augmenter le risque sur les fonds propres : c’est l’effet de levier.
+
+Vous verrez, c’est un peu trop technique pour cette synthèse, comment le directeur financier d’une entreprise doit choisir le taux d’endettement qui minimise son cout moyen pondéré du capital, compte tenu du rendement attendu et du risque qui caractérise l’entreprise
+
+Ce qu’il faut retenir, c’est que plus une entreprise est risquée, c’est-à-dire plus ses cash-flows anticipés sont volatiles, et plus son taux d’endettement optimal est bas. Et que pour une start-up, ce taux est nul. Aucune banque ne prête à une start-up parce que ses cash flows, même très prometteurs sont trop imprévisibles et qu’on ne peut pas évaluer sa solvabilité. D’ailleurs parmi les start-ups beaucoup font faillite. En revanche, la filiale « Commercial and Investisment Bank » de la banque pourra investir en fonds propres dans la start up. 
+
+Les apporteurs de fonds propres, surveillent, avec l’aide des analystes financiers, des experts travaillant dans des banques d’affaires, les ratios de rentabilité de l’entreprise et son ratio d’endettement.
+
+Les apporteurs de dette surveillent les ratios de solvabilité de l’entreprise, avec l’aide des agences de notation qui notent la dette des entreprises et des Etats à leur demande.
+ 
+Voilà le rapport de l’entreprise aux marchés financiers représenté par les deux grandes figures d’investisseurs, les actionnaires apporteurs de fonds propres, et les apporteurs de dette.
