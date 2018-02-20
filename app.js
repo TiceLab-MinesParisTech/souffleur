@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var Express = require('express');
-var Recorder = require("./recorder");
+//var Recorder = require("./recorder");
 var PrompterModule = require("./modules/prompterModule");
 
 var Server = function() {
@@ -25,7 +25,7 @@ var Server = function() {
 		cookie: false
 	});
 
-	this.recorder = new Recorder();
+	this.recorder = Array(); //new Recorder();
 	this.modules = [new PrompterModule(this)];
 	this.init();
 };
@@ -118,7 +118,7 @@ Server.prototype.onConnect = function(socket) {
 
 	socket.data = {};
 	socket.emit('register', socket.id);
-	socket.emit("recorder::status", this.recorder.getStatus());
+	//socket.emit("recorder::status", this.recorder.getStatus());
 
 	socket.on('sendto', function(args) {
 		var socketid = args.socketid;
@@ -176,7 +176,7 @@ Server.prototype.start = function() {
 	if (this.config.user) console.log("user:", this.config.user);
 	if (this.config.group) console.log("group:", this.config.group);
 
-	this.recorder.init();
+	//this.recorder.init();
 
 	this.server.listen(this.config.port, this.config.host, function(){
 		if (self.config.group) process.setgid(self.config.group);
