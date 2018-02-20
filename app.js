@@ -64,7 +64,7 @@ Server.prototype.parseArgs = function(argv) {
 Server.prototype.init = function() {
 	var self = this;
 
-	this.app.use('/', Express.static(__dirname + "/public", {"index": "client.html"}));
+	this.app.use('/', Express.static(__dirname + "/public"));
 
 	this.app.get('/clients', function(req, res) {
 		var idList = [];

@@ -1,6 +1,5 @@
-var Server = function(standAlone) {
-	this.standAlone = standAlone;
-	if (!standAlone) this.socket = io.connect('/');
+var Server = function() {
+	this.socket = io.connect('/');
 	this.socketid = null;
 	this.terminal = null;
 }
@@ -38,11 +37,9 @@ Server.prototype.attachTerminal = function(terminal) {
 		});
 	}
 
-	if (!this.standAlone) {
-		for (name in this.mapping) {
-			bind(name, this.mapping[name]);
-		};
-	}
+	for (name in this.mapping) {
+		bind(name, this.mapping[name]);
+	};
 };
 
 Server.prototype.loadUrl = function(url, fct, mimeType) {
@@ -72,29 +69,14 @@ Server.prototype.loadFile = function(filename, fct) {
 };
 
 Server.prototype.loadFilesList = function(fct) {
-	if (this.standAlone) {
-		this.loadJSON("files/list.json", fct);
-		return;
-	}
 	this.loadJSON("files", fct);
 };
 
 Server.prototype.loadCurrentTracks = function(fct) {
-	if (this.standAlone) {
-		return;
-	}
 	this.loadJSON("tracks", fct);
 };
 
 Server.prototype.loadClientsList = function(fct) {
-	if (this.standAlone) {
-		fct([{
-			"socketid": null,
-			"data": this.terminal.getData()
-		}]);
-		return;
-	}
-	
 	var self = this;
 	this.loadJSON("/clients", function(list) {
 		for (var i = 0; i < list.length; i++) {
@@ -106,10 +88,6 @@ Server.prototype.loadClientsList = function(fct) {
 };
 
 Server.prototype.emit = function(name, args) {
-	if (this.standAlone) {
-		this.on(name, args);
-		return;
-	}
 	this.socket.emit(name, args);
 };
 
