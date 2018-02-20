@@ -2,12 +2,12 @@
 
 var fs = require('fs');
 var Express = require('express');
-//var Recorder = require("./recorder");
+var Recorder = require("./recorder");
 var PrompterModule = require("./modules/prompterModule");
 
 var Server = function() {
 	this.config = {
-		"filesdir": __dirname + "/public/prompter/files",
+		"filesdir": __dirname + "/files",
 		"port": 8080,
 		"user": null,
 		"group": null,
@@ -25,29 +25,31 @@ var Server = function() {
 		cookie: false
 	});
 
-	this.recorder = Array(); //new Recorder();
+	this.recorder = new Recorder();
 	this.modules = [new PrompterModule(this)];
 	this.init();
 };
 
 Server.prototype.help = function() {
 	console.log("app.js [args]");
+	console.log("\t-P<port>\tSet listening port. Default port is: " + this.config.port);
+	console.log("\t-H<port>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-U<user>\tChange system user");
 	console.log("\t-G<user>\tChange system group");
-	console.log("\t-P<port>\tSet listening port. Default port is: " + this.config.port);
 	console.log("\t-F<filesdir>\tSet files directory. (default is: “" + this.config.filesdir + "”)");
-	console.log("\t+H:<host>:<name>:<source>\tAdd HyperDeck. Ex: +H:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
+	console.log("\t+Hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +Hyperdeck:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
 };
 
 Server.prototype.parseArgs = function(argv) {
 	for (var i = 1; i < argv.length; i++) {
 		var arg = argv[i];
 		if (arg.substr(0, 2) == "-P") this.config.port = arg.substr(2);
+		if (arg.substr(0, 2) == "-H") this.config.host = arg.substr(2);
 		if (arg.substr(0, 2) == "-U") this.config.user = arg.substr(2);
 		if (arg.substr(0, 2) == "-G") this.config.group = arg.substr(2);
 		if (arg.substr(0, 2) == "-F") this.config.filesdir = arg.substr(2);
-		if (arg.substr(0, 3) == "+H:") {
-			var cols = arg.substr(3).split(":");
+		if (arg.substr(0, 11) == "+Hyperdeck:") {
+			var cols = arg.substr(11).split(":");
 			if (cols.length != 3) return false;
 			this.recorder.add(cols[0], cols[1], cols[2]);
 		}
@@ -62,7 +64,7 @@ Server.prototype.parseArgs = function(argv) {
 Server.prototype.init = function() {
 	var self = this;
 
-	this.app.use('/', Express.static(__dirname + "/public/prompter", {"index": "client.html"}));
+	this.app.use('/', Express.static(__dirname + "/public", {"index": "client.html"}));
 
 	this.app.get('/clients', function(req, res) {
 		var idList = [];
@@ -118,7 +120,7 @@ Server.prototype.onConnect = function(socket) {
 
 	socket.data = {};
 	socket.emit('register', socket.id);
-	//socket.emit("recorder::status", this.recorder.getStatus());
+	socket.emit("recorder::status", this.recorder.getStatus());
 
 	socket.on('sendto', function(args) {
 		var socketid = args.socketid;
@@ -172,11 +174,11 @@ Server.prototype.onConnect = function(socket) {
 
 Server.prototype.start = function() {
 	var self = this;
-	console.log("Starting server on port", this.config.port);
+	console.log("Starting server on ", this.config.host + ":" + this.config.port);
 	if (this.config.user) console.log("user:", this.config.user);
 	if (this.config.group) console.log("group:", this.config.group);
 
-	//this.recorder.init();
+	this.recorder.init();
 
 	this.server.listen(this.config.port, this.config.host, function(){
 		if (self.config.group) process.setgid(self.config.group);
