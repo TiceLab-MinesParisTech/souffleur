@@ -12,7 +12,28 @@ ToolAbout.prototype.init = function() {
 	this.node.appendChild(this.popup);
 
 	this.popup.className = "popup";
-	this.popup.appendChild(document.createTextNode("version git"));
+
+	var h1 = document.createElement("h1");
+	h1.appendChild(document.createTextNode("Souffleur"));
+	this.popup.appendChild(h1);
+
+	var h2 = document.createElement("h2");
+	h2.appendChild(document.createTextNode("An Open-Source and Innovative Teleprompter Solution"));
+	//this.popup.appendChild(h2);
+	
+	var version = document.createElement("div");
+	version.appendChild(document.createTextNode("version 0.1"));
+	version.className = "version";
+	this.popup.appendChild(version);
+
+	var more = document.createElement("div");
+	more.appendChild(document.createTextNode("learn more at:"));
+	this.popup.appendChild(more);
+
+	var url = document.createElement("div");
+	url.appendChild(document.createTextNode("http://tice-lab.mines-paristech.fr"));
+	this.popup.appendChild(url);
+
 	this.setVisibility(false);
 };
 

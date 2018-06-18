@@ -29,10 +29,11 @@ Toolbar.prototype.init = function() {
 	this.tools.add(this.toolSpeed.node);
 //	this.tools.addSeparator();
 	this.tools.add(this.toolTerminals.node);
+//	this.tools.addSeparator();
+	this.tools.add(this.toolAbout.node);
 
 	this.node.appendChild(this.icon.node);
 	this.node.appendChild(this.tools.node);
-	this.node.appendChild(this.toolAbout.node);
 
 	this.setClassName();
 };
