@@ -7,7 +7,7 @@ var PrompterModule = require("./modules/prompterModule");
 
 var Server = function() {
 	this.config = {
-		"filesdir": __dirname + "/files",
+		"filesdir": __dirname + "/public/files",
 		"port": 8080,
 		"user": null,
 		"group": null,
@@ -27,17 +27,16 @@ var Server = function() {
 
 	this.recorder = new Recorder();
 	this.modules = [new PrompterModule(this)];
-	this.init();
 };
 
 Server.prototype.help = function() {
 	console.log("app.js [args]");
-	console.log("\t-P<port>\tSet listening port. Default port is: " + this.config.port);
-	console.log("\t-H<port>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-U<user>\tChange system user");
 	console.log("\t-G<user>\tChange system group");
+	console.log("\t-P<port>\tSet listening port. Default port is: " + this.config.port);
+	console.log("\t-H<host>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-F<filesdir>\tSet files directory. (default is: “" + this.config.filesdir + "”)");
-	console.log("\t+Hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +Hyperdeck:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
+	console.log("\t+Hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +H:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
 };
 
 Server.prototype.parseArgs = function(argv) {
@@ -64,7 +63,7 @@ Server.prototype.parseArgs = function(argv) {
 Server.prototype.init = function() {
 	var self = this;
 
-	this.app.use('/', Express.static(__dirname + "/public"));
+	this.app.use('/', Express.static(__dirname + "/public", {"index": "index.html"}));
 
 	this.app.get('/clients', function(req, res) {
 		var idList = [];
@@ -174,7 +173,7 @@ Server.prototype.onConnect = function(socket) {
 
 Server.prototype.start = function() {
 	var self = this;
-	console.log("Starting server on ", this.config.host + ":" + this.config.port);
+	console.log("Starting server on port", this.config.port);
 	if (this.config.user) console.log("user:", this.config.user);
 	if (this.config.group) console.log("group:", this.config.group);
 
@@ -188,6 +187,8 @@ Server.prototype.start = function() {
 
 var server = new Server();
 if (server.parseArgs(process.argv)) {
+	server.init();
 	server.start();
 }
+
 

@@ -26,7 +26,7 @@ ToolRecorder.prototype.init = function() {
 	icon.className = "icon recordPreview";
 	this.nodePreview.appendChild(icon);
 	this.nodePreview.onclick = function(e) { self.preview() };
-	this.node.appendChild(this.nodePreview);
+	//this.node.appendChild(this.nodePreview);
 
 	var icon = document.createElement("div");
 	icon.className = "icon recordStart";

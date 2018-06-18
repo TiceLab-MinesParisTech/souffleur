@@ -31,7 +31,7 @@ ToolFile.prototype.init = function() {
 	this.nodePopup.appendChild(this.tabs.node);
 
 	var item = this.tabs.addTab("Files", this.list.node, function() { self.list.show() } );
-	this.tabs.addTab("Editor", this.editor.node);	
+	this.tabs.addTab("Source", this.editor.node);	
 	this.tabs.setCurrentItem(item);
 	
 	this.setVisibility(false);
