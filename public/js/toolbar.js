@@ -7,6 +7,7 @@ var Toolbar = function(terminal) {
 	this.toolSpeed = new ToolSpeed(terminal);
 	this.toolTerminals = new ToolTerminals(terminal);
 	this.toolTracksList = new ToolTracksList(terminal);
+	this.toolAbout = new ToolAbout();
 
 	this.tools = new ToolbarTools();
 	this.icon = new ToolbarIcon(this);
@@ -31,6 +32,7 @@ Toolbar.prototype.init = function() {
 
 	this.node.appendChild(this.icon.node);
 	this.node.appendChild(this.tools.node);
+	this.node.appendChild(this.toolAbout.node);
 
 	this.setClassName();
 };

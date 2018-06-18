@@ -13,7 +13,6 @@ var SettingsEditor = function(settings) {
 	];
 
 	this.node = document.createElement("div");
-
 	this.init();
 }
 
@@ -47,7 +46,7 @@ SettingsEditor.prototype.init = function() {
 		table.appendChild(this.createRow(tool.param.getTitle(), tool.node, tool.getId()));
 	}
 	this.node.appendChild(table);
-	};
+};
 
 SettingsEditor.prototype.show = function(key, value) {
 	this.settings.saveParam(key, value);

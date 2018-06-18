@@ -463,6 +463,15 @@ nav {
 	background-color: lightgray;
 }
 
+.toolAbout > .popup {
+	border: 1px solid black;
+	position: absolute;
+	background-color: #eee;
+	border-radius: 8px;
+	padding: 10px;
+	min-width: 200px;
+}
+
 @media (max-width: 480px) {
 	.toolbar {
 		margin: 0;

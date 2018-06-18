@@ -5,7 +5,6 @@ var ToolTerminals = function(terminal) {
 	this.popup = document.createElement("nav");
 	this.node = document.createElement("div");
 	this.items = [];
-	
 	this.init();
 }
 
