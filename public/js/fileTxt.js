@@ -87,6 +87,10 @@ FileTxt.prototype.pushAux = function(content, title) {
 	this.aux.push(this.currentAuxPart);
 };
 
+FileTxt.prototype.hasAux = function() {
+	return this.aux.length > 1 || (this.aux.length == 1 && this.aux[0].content != null);
+};
+
 FileTxt.prototype.pushAuxImg = function(src, title) {
 	src = this.baseroot + "/" + src;
 	this.pushAux("<img src=\"" + src + "\"/>", title);
@@ -140,21 +144,26 @@ FileTxt.prototype.parse = function(text) {
 
 
 FileTxt.prototype.get = function() {
+	var tracks = [];
+	tracks.push(
+		{
+  		     	"name": "main",
+			"type": "scroll",
+			"parts": this.main
+ 		}
+	);
+	if (this.hasAux()) tracks.push(
+		{
+			"name": "aux",
+			"type": "slider",
+			"parts": this.aux
+		}
+	);
+
 	return {
 		"filename": this.filename,
 		"meta": this.meta,
-		"tracks": [
-			{
-				"name": "main",
-				"type": "scroll",
-				"parts": this.main
-			},
-			{
-				"name": "aux",
-				"type": "slider",
-				"parts": this.aux
-			}
-		]
+		"tracks": tracks
 	};
 };
 

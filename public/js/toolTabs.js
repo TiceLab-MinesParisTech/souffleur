@@ -12,6 +12,10 @@ ToolTabs.prototype.init = function() {
 	this.node.appendChild(this.nodeContent);
 };
 
+ToolTabs.prototype.update = function() {
+	this.current.setCurrent(true);
+};
+
 ToolTabs.prototype.setContent = function(node) {
 	while (this.nodeContent.firstChild) this.nodeContent.removeChild(this.nodeContent.firstChild);
 	this.nodeContent.appendChild(node);

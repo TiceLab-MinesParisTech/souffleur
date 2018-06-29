@@ -75,6 +75,7 @@ ToolFile.prototype.getId = function() {
 };
 
 ToolFile.prototype.setVisibility = function(value) {
+	if (value) this.tabs.update();
 	this.nodePopup.style.display = value ? "" : "none";
 }
 

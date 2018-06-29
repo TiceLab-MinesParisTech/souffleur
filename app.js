@@ -74,6 +74,7 @@ Server.prototype.init = function() {
 				"data": socket.data
 			});
 		}
+		res.append("Cache-Control", "no-cache");
 		res.json(idList);
 	});
 
@@ -86,9 +87,10 @@ Server.prototype.init = function() {
 			var files = [];
 			for (var i = 0; i < items.length; i++) {
 				var item = items[i];
-				if (item.substr(item.length - 4) == ".txt")
-					files.push(item);
+				//if (item.substr(item.length - 4) == ".txt")
+				files.push(item);
 			}
+			res.append("Cache-Control", "no-cache");
 			res.json(files);
 		});
 	});

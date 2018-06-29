@@ -53,5 +53,5 @@ ToolFileList.prototype.show = function() {
 	this.terminal.server.loadFilesList(function(list) {
 		self.showList(list);
 	});
-}
+};
 

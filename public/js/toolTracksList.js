@@ -12,6 +12,11 @@ ToolTracksList.prototype.init = function() {
 	this.node.className = "toolTrack";
 	
 	this.node.onchange = function(e) { self.onchange(e); };
+	this.setTracks([]);
+};
+
+ToolTracksList.prototype.setVisibility = function(value) {
+	this.node.style.display = value ? "" : "none";
 };
 
 ToolTracksList.prototype.setItem = function(item) {
@@ -55,6 +60,7 @@ ToolTracksList.prototype.setTracks = function(tracks) {
 		var item = new ToolTracksListItem(track.name, track);
 		this.push(item);
 	}
+	this.setVisibility(tracks.length > 1);
 }
 
 ToolTracksListItem = function(title, track) {
