@@ -56,10 +56,12 @@ ToolFileList.prototype.loadFile = function(filename) {
 ToolFileList.prototype.createDirItems = function(ul, items) {
 	for (var i = 0; i < items.length; i++) {
 		var item = items[i];
-		var li = (item.type == "file") 
-			? this.createListFileItem(item.name, item.path)
-			: this.createListDirItem(item.name, item.path, item.content);
-		ul.appendChild(li);
+		if (item.type == "dir") {
+			ul.appendChild(this.createListDirItem(item.name, item.path, item.content));
+		}
+		if (item.type == "file" && item.name.substr(-4) == ".txt") {
+			ul.appendChild(this.createListFileItem(item.name, item.path))
+		}
 	}
 };
 
