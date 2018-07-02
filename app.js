@@ -7,7 +7,7 @@ var PrompterModule = require("./modules/prompterModule");
 
 var Server = function() {
 	this.config = {
-		"filesdir": __dirname + "/public/files",
+		"filesdir": __dirname + "/files",
 		"port": 8080,
 		"user": null,
 		"group": null,

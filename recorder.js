@@ -1,4 +1,4 @@
-var hyperdeck = require("./hyperdeck");
+var hyperdeck = require("hyperdeck");
 
 var Recorder = function() {
 	this.hyperdecks = new hyperdeck.Clients();

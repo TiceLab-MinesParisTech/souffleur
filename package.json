@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "dependencies": {
     "express": "~4.11.2",
-    "socket.io": "~2.0.3"
+    "socket.io": "~2.0.3",
+    "hyperdeck": "~1.0.0"
   },
-  "description": "Un prompteur pour les enregistrements de MOOCs"
+  "description": "A innovative Open Source teleprompter solution based on Web technologies"
 }
