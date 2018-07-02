@@ -20,14 +20,27 @@ ToolFileList.prototype.setFilename = function(value) {
 	this.button.firstChild.nodeValue = value;
 };
 
-ToolFileList.prototype.createListItem = function(filename) {
+ToolFileList.prototype.createListFileItem = function(title, path) {
 	var self = this;
 	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(filename));
+	li.className = "file";
+	li.appendChild(document.createTextNode(title));
 
 	li.onclick = function() {
-		self.loadFile(filename);
+		self.loadFile(path);
 	};
+	return li;
+}
+
+ToolFileList.prototype.createListDirItem = function(title, path, items) {
+	var self = this;
+	var li = document.createElement("li");
+	li.className = "dir";
+	li.appendChild(document.createTextNode(title));
+	var ul = document.createElement("ul");
+	li.appendChild(ul);
+	this.createDirItems(ul, items);
+
 	return li;
 }
 
@@ -40,12 +53,19 @@ ToolFileList.prototype.loadFile = function(filename) {
 	this.terminal.server.loadFile(filename, function(text) { self.loadText(filename, text); });
 };
 
-ToolFileList.prototype.showList = function(list) {
-	while (this.nodeList.firstChild) this.nodeList.removeChild(this.nodeList.firstChild);
-	for (var i = 0; i < list.length; i++) {
-		var li = this.createListItem(list[i]);
-		this.nodeList.appendChild(li);
+ToolFileList.prototype.createDirItems = function(ul, items) {
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		var li = (item.type == "file") 
+			? this.createListFileItem(item.name, item.path)
+			: this.createListDirItem(item.name, item.path, item.content);
+		ul.appendChild(li);
 	}
+};
+
+ToolFileList.prototype.showList = function(items) {
+	while (this.nodeList.firstChild) this.nodeList.removeChild(this.nodeList.firstChild);
+	this.createDirItems(this.nodeList, items);
 };
 
 ToolFileList.prototype.show = function() {

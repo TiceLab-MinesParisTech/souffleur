@@ -249,7 +249,7 @@ nav {
 .toolFileList > ul {
 	width: 300px;
 	min-height: 10px;
-	padding: 5px;
+	padding: 5px	;
 	border: 1px solid gray;
 	margin: 0px 10px 10px 10px;
 	max-height: 400px;
@@ -265,6 +265,20 @@ nav {
 	padding: 5px 8px;
 	list-style-type: none;
 	cursor: pointer;
+}
+
+.toolFileList > ul li.dir {
+	background: url("../img/folder_24px.png") no-repeat 0px 0px;
+	padding-left: 30px;
+}
+
+.toolFileList > ul li.file {
+	background: url("../img/fileTxt_24px.png") no-repeat 0px 0px;
+	padding-left: 30px;
+}
+
+.toolFileList > ul li.dir > ul{
+	padding-left: 5px; 
 }
 
 .settingToolString input {

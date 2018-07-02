@@ -1,6 +1,7 @@
 #!/usr/bin/nodejs
 
 var fs = require('fs');
+const path = require('path');
 var Express = require('express');
 var Recorder = require("./recorder");
 var PrompterModule = require("./modules/prompterModule");
@@ -60,6 +61,30 @@ Server.prototype.parseArgs = function(argv) {
 	return true;
 };
 
+Server.prototype.filesList = function(dir) {
+	var list = fs.readdirSync(path.join(this.config.filesdir, dir));
+	var result = [];
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var itemPath = path.join(dir, item);
+		result.push(
+			fs.lstatSync(path.join(this.config.filesdir, itemPath)).isDirectory()
+			? {
+				"type": "dir",
+				"name": item,
+				"path": itemPath,
+				"content": this.filesList(itemPath)
+			}
+			: {
+				"type": "file",
+				"name": item,
+				"path": itemPath
+			}
+		);
+	}
+	return result;
+};
+
 Server.prototype.init = function() {
 	var self = this;
 
@@ -80,6 +105,7 @@ Server.prototype.init = function() {
 
 	this.app.use('/files/', Express.static(this.config.filesdir));
 	this.app.get('/files', function (req, res) {
+/*
 		fs.readdir(self.config.filesdir, function (err, items) {
 			if (err) {
 				throw err;
@@ -93,6 +119,11 @@ Server.prototype.init = function() {
 			res.append("Cache-Control", "no-cache");
 			res.json(files);
 		});
+*/
+		var files = self.filesList("");
+		res.append("Cache-Control", "no-cache");
+		res.json(files);
+
 	});
 
 	this.app.get('/tracks', function (req, res) {
