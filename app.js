@@ -61,6 +61,12 @@ Server.prototype.parseArgs = function(argv) {
 	return true;
 };
 
+
+Server.prototype.isHiddenDirectory = function(dir) {
+	var realpath = fs.realpathSync(path.join(this.config.filesdir, dir));
+	return fs.existsSync(realpath + ".txt");
+}
+
 Server.prototype.filesList = function(dir) {
 	var realpath = fs.realpathSync(path.join(this.config.filesdir, dir));
 	var list = fs.readdirSync(realpath);
@@ -70,20 +76,23 @@ Server.prototype.filesList = function(dir) {
 		if (item.substr(0, 1) != ".") {
 			var itemPath = path.join(dir, item);
 			var stat = fs.lstatSync(path.join(this.config.filesdir, itemPath));
-			result.push(
-				stat.isDirectory() || stat.isSymbolicLink()
-				? {
-					"type": "dir",
-					"name": item,
-					"path": itemPath,
-					"content": this.filesList(itemPath)
+			if (stat.isDirectory() || stat.isSymbolicLink()) {
+				if (!this.isHiddenDirectory(itemPath)) {
+					result.push({
+						"type": "dir",
+						"name": item,
+						"path": itemPath,
+						"content": this.filesList(itemPath)
+					});
 				}
-				: {
+			}
+			else {
+				result.push({
 					"type": "file",
 					"name": item,
 					"path": itemPath
-				}
-			);
+				});
+			}
 		}
 	}	
 	return result;
