@@ -24,6 +24,7 @@ Keyboard.prototype.actionMapping = {
 	"F5": {"name": "RecordStartStop"},
 	"Escape": {"name": "RecordStartStop"},
 	":": {"name": "PlayStop"},
+	".": {"name": "PlayStop"},
 	"+": {"name": "IncSpeed", "args": [0.1]},
 	"-": {"name": "IncSpeed", "args": [-0.1]},
 	"v": {"name": "ToggleToolbarVisibility"},
