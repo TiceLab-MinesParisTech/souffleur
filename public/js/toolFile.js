@@ -37,11 +37,16 @@ ToolFile.prototype.init = function() {
 	this.setVisibility(false);
 };
 
+
+ToolFile.prototype.dirname = function(path) {
+	return path.substr(0, path.lastIndexOf("/"));
+};
+
 ToolFile.prototype.loadText = function(filename, text) {
 	this.close();
 	this.editor.setValue(text);
 
-	var file = new FileTxt(filename, "files/");
+	var file = new FileTxt(filename, "files/" + this.dirname(filename));
 	file.parse(text);
 	this.terminal.server.emitLoadTracks(file.get());
 };
