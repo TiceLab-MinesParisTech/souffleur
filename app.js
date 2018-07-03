@@ -62,13 +62,15 @@ Server.prototype.parseArgs = function(argv) {
 };
 
 Server.prototype.filesList = function(dir) {
-	var list = fs.readdirSync(path.join(this.config.filesdir, dir));
+	var realpath = fs.realpathSync(path.join(this.config.filesdir, dir));
+	var list = fs.readdirSync(realpath);
 	var result = [];
 	for (var i = 0; i < list.length; i++) {
 		var item = list[i];
 		var itemPath = path.join(dir, item);
+		var stat = fs.lstatSync(path.join(this.config.filesdir, itemPath));
 		result.push(
-			fs.lstatSync(path.join(this.config.filesdir, itemPath)).isDirectory()
+			stat.isDirectory() || stat.isSymbolicLink()
 			? {
 				"type": "dir",
 				"name": item,
@@ -105,21 +107,6 @@ Server.prototype.init = function() {
 
 	this.app.use('/files/', Express.static(this.config.filesdir));
 	this.app.get('/files', function (req, res) {
-/*
-		fs.readdir(self.config.filesdir, function (err, items) {
-			if (err) {
-				throw err;
-			}
-			var files = [];
-			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				//if (item.substr(item.length - 4) == ".txt")
-				files.push(item);
-			}
-			res.append("Cache-Control", "no-cache");
-			res.json(files);
-		});
-*/
 		var files = self.filesList("");
 		res.append("Cache-Control", "no-cache");
 		res.json(files);
