@@ -34,19 +34,22 @@ ToolFileList.prototype.createListFileItem = function(title, path) {
 
 ToolFileList.prototype.createListDirItem = function(title, path, items) {
 	var self = this;
+	var container = document.createElement("div");
 	var li = document.createElement("li");
 	li.className = "dir";
 	li.appendChild(document.createTextNode(title));
+	container.appendChild(li);
 
 	var ul = document.createElement("ul");
 	ul.style.display = "none";
 
-	li.appendChild(ul);
+	container.appendChild(ul);
 	this.createDirItems(ul, items);
 	li.onclick = function() {
 		ul.style.display = ul.style.display == "" ? "none" : "";
 	};
-	return li;
+
+	return container;
 }
 
 ToolFileList.prototype.loadText = function(filename, text) {

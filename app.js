@@ -67,23 +67,25 @@ Server.prototype.filesList = function(dir) {
 	var result = [];
 	for (var i = 0; i < list.length; i++) {
 		var item = list[i];
-		var itemPath = path.join(dir, item);
-		var stat = fs.lstatSync(path.join(this.config.filesdir, itemPath));
-		result.push(
-			stat.isDirectory() || stat.isSymbolicLink()
-			? {
-				"type": "dir",
-				"name": item,
-				"path": itemPath,
-				"content": this.filesList(itemPath)
-			}
-			: {
-				"type": "file",
-				"name": item,
-				"path": itemPath
-			}
-		);
-	}
+		if (item.substr(0, 1) != ".") {
+			var itemPath = path.join(dir, item);
+			var stat = fs.lstatSync(path.join(this.config.filesdir, itemPath));
+			result.push(
+				stat.isDirectory() || stat.isSymbolicLink()
+				? {
+					"type": "dir",
+					"name": item,
+					"path": itemPath,
+					"content": this.filesList(itemPath)
+				}
+				: {
+					"type": "file",
+					"name": item,
+					"path": itemPath
+				}
+			);
+		}
+	}	
 	return result;
 };
 

@@ -255,6 +255,7 @@ nav {
 	max-height: 400px;
 	overflow: auto;
 	background-color: white;
+	resize: both;
 }
 
 .toolFileList > ul li:hover {
