@@ -6,15 +6,20 @@ var ToolFileEdit = function(terminal, toolFile) {
 	this.nodeTextarea = document.createElement("textarea");
 	this.nodeOk = document.createElement("button");
 	this.nodeClose = document.createElement("button");
-
+	this.nodeFilename = document.createElement("div");
 	this.init();
 }
 
 ToolFileEdit.prototype.init = function() {
 	var self = this;
 
-	this.node.className = "toolFileEdit";
 	this.node.appendChild(this.nodeTextarea);
+
+	this.node.className = "toolFileEdit";
+
+	this.node.appendChild(this.nodeFilename);
+	this.nodeFilename.appendChild(document.createTextNode(""));
+	this.nodeFilename.className = "filename";
 
 	this.node.appendChild(this.nodeOk);
 	this.nodeOk.appendChild(document.createTextNode("Ok"));
@@ -28,7 +33,7 @@ ToolFileEdit.prototype.init = function() {
 }
 
 ToolFileEdit.prototype.onOk = function() {
-	this.toolFile.loadText(null, this.getValue());
+	this.toolFile.loadText(this.getFilename(), this.getValue());
 };
 
 ToolFileEdit.prototype.onClose = function() {
@@ -43,3 +48,10 @@ ToolFileEdit.prototype.getValue = function() {
 	return this.nodeTextarea.value;
 }
 
+ToolFileEdit.prototype.setFilename = function(path) {
+	this.nodeFilename.firstChild.nodeValue = path;
+}
+
+ToolFileEdit.prototype.getFilename = function() {
+	return this.nodeFilename.firstChild.nodeValue;
+}

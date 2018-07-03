@@ -246,6 +246,10 @@ nav {
 	padding: 5px;
 }
 
+.toolFileEdit > div.filename {
+	text-align: right;
+}
+
 .toolFileList > ul {
 	width: 300px;
 	min-height: 10px;

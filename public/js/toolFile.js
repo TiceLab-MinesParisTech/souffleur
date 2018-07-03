@@ -44,6 +44,8 @@ ToolFile.prototype.dirname = function(path) {
 
 ToolFile.prototype.loadText = function(filename, text) {
 	this.close();
+
+	this.editor.setFilename(filename);
 	this.editor.setValue(text);
 
 	var file = new FileTxt(filename, "files/" + this.dirname(filename));
