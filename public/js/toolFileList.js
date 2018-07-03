@@ -32,24 +32,29 @@ ToolFileList.prototype.createListFileItem = function(title, path) {
 	return li;
 }
 
-ToolFileList.prototype.createListDirItem = function(title, path, items) {
+ToolFileList.prototype.createListDirItem = function(title, path, items, opened) {
 	var self = this;
+	var node = document.createElement("div");
+	node.className = "dir";
+	
 	var container = document.createElement("div");
+	node.appendChild(container);
+
 	var li = document.createElement("li");
 	li.className = "dir";
 	li.appendChild(document.createTextNode(title));
 	container.appendChild(li);
 
 	var ul = document.createElement("ul");
-	ul.style.display = "none";
+	container.className = opened ? "opened" : "closed";
 
 	container.appendChild(ul);
 	this.createDirItems(ul, items);
 	li.onclick = function() {
-		ul.style.display = ul.style.display == "" ? "none" : "";
+		container.className = container.className == "opened" ? "closed" : "opened";
 	};
 
-	return container;
+	return node;
 }
 
 ToolFileList.prototype.loadText = function(filename, text) {
@@ -61,11 +66,11 @@ ToolFileList.prototype.loadFile = function(filename) {
 	this.terminal.server.loadFile(filename, function(text) { self.loadText(filename, text); });
 };
 
-ToolFileList.prototype.createDirItems = function(ul, items) {
+ToolFileList.prototype.createDirItems = function(ul, items, opened) {
 	for (var i = 0; i < items.length; i++) {
 		var item = items[i];
 		if (item.type == "dir") {
-			ul.appendChild(this.createListDirItem(item.name, item.path, item.content));
+			ul.appendChild(this.createListDirItem(item.name, item.path, item.content, opened));
 		}
 		if (item.type == "file" && item.name.substr(-4) == ".txt") {
 			ul.appendChild(this.createListFileItem(item.name, item.path))
@@ -75,7 +80,7 @@ ToolFileList.prototype.createDirItems = function(ul, items) {
 
 ToolFileList.prototype.showList = function(items) {
 	while (this.nodeList.firstChild) this.nodeList.removeChild(this.nodeList.firstChild);
-	this.createDirItems(this.nodeList, items);
+	this.createDirItems(this.nodeList, items, true);
 };
 
 ToolFileList.prototype.show = function() {

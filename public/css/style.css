@@ -278,6 +278,15 @@ nav {
 	padding-left: 30px;
 }
 
+.toolFileList div.opened > li {
+	font-weight: bold;
+}
+
+.toolFileList div.closed > ul {
+	max-height: 0;
+	overflow: hidden;
+}
+
 .toolFileList > ul li.dir > ul{
 	padding-left: 5px; 
 }
