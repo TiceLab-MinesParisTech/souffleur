@@ -1,6 +1,7 @@
 var ToolAbout = function() {
 	this.node = document.createElement("button");
 	this.popup = document.createElement("div");
+	this.version = "0.2";
 	this.init();
 };
 
@@ -22,7 +23,7 @@ ToolAbout.prototype.init = function() {
 	//this.popup.appendChild(h2);
 	
 	var version = document.createElement("div");
-	version.appendChild(document.createTextNode("version 0.1"));
+	version.appendChild(document.createTextNode("version: " + this.version));
 	version.className = "version";
 	this.popup.appendChild(version);
 
