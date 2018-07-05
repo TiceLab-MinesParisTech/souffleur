@@ -2,3 +2,4 @@ lib usr/share/souffleur
 node_modules usr/share/souffleur
 scripts/debian/etc .
 app.js usr/share/souffleur
+projects var/souffleur

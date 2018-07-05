@@ -6,6 +6,6 @@ Build-Depends: debhelper (>= 9)
 
 Package: souffleur
 Architecture: all
-Depends: nodejs
+Depends: nodejs, adduser
 Description: An innovative teleprompter solution based on web technologies
  An innovative teleprompter solution based on web technologies

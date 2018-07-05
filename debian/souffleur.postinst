@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        adduser --system --group --no-create-home souffleur
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

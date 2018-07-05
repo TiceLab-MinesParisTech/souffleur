@@ -1,4 +1,4 @@
 # Comment the following line to enable
 #SOUFFLEUR_ENABLED="no"
 
-SOUFFLEUR_OPTS="-P80 -Upi -Gpi -F/home/pi/files"
+SOUFFLEUR_OPTS="-P80 -Usouffleur -Gsouffleur -F/var/souffleur"
