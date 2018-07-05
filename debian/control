@@ -1,0 +1,11 @@
+Source: souffleur
+Section: web
+Priority: optional
+Maintainer: Nicolas Vion <nico@picapo.net>
+Build-Depends: debhelper (>= 9)
+
+Package: souffleur
+Architecture: all
+Depends: nodejs
+Description: An innovative teleprompter solution based on web technologies
+ An innovative teleprompter solution based on web technologies
