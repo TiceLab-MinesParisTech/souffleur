@@ -1,10 +1,12 @@
 {
-  "name": "prompteur",
-  "version": "0.1.0",
-  "dependencies": {
-    "express": "~4.11.2",
-    "socket.io": "~2.0.3",
-    "hyperdeck": "~1.0.0"
-  },
-  "description": "A innovative Open Source teleprompter solution based on Web technologies"
+	"name": "Souffleur",
+	"version": "0.2.0",
+	"dependencies": {
+		"express": "~4.11.2",
+		"socket.io": "~2.0.3",
+		"hyperdeck": "~1.0.0"
+	},
+	"repository": "github:TiceLab-MinesParisTech/souffleur",
+	"description": "A innovative Open Source teleprompter solution based on Web technologies",
+	"license": "GPL v3"
 }
