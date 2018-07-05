@@ -8,6 +8,7 @@ build:
 
 binary:
 	mkdir -p debian/souffleur
+	dh_installdeb
 	dh_install
 	dh_gencontrol
 	dh_builddeb
