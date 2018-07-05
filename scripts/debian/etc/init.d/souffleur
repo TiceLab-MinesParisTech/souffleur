@@ -10,9 +10,9 @@
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/home/pi/prompterNG/app.js
+DAEMON=/usr/share/souffleur/app.js
 NAME=souffleur
-DESC="NodeJS prompter server"
+DESC="Souffleur – An innovative teleprompter solution"
 SOUFFLEUR_OPTS="-P80 -Upi -Gpi" # Additional options given to the server
 
 test -x $DAEMON || exit 0

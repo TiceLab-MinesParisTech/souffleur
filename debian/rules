@@ -1,14 +1,13 @@
 #!/usr/bin/make -f
 
 clean:
-	@# Do nothing
+	rm -rf debian/souffleur
 
 build:
 	@# Do nothing
 
 binary:
 	mkdir -p debian/souffleur
-	mkdir -p debian/souffleur/usr/bin
-	cp hello debian/souffleur/usr/bin/
+	dh_install
 	dh_gencontrol
 	dh_builddeb

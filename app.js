@@ -3,8 +3,8 @@
 var fs = require('fs');
 const path = require('path');
 var Express = require('express');
-var Recorder = require("./recorder");
-var PrompterModule = require("./modules/prompterModule");
+var Recorder = require("./lib/recorder");
+var PrompterModule = require("./lib/prompterModule");
 
 var Server = function() {
 	this.config = {
