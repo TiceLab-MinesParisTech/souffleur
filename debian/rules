@@ -2,12 +2,14 @@
 
 clean:
 	rm -rf debian/souffleur
+	rm -fr node_modules
 
 build:
 	@# Do nothing
 
 binary:
 	mkdir -p debian/souffleur
+	npm install
 	dh_installdeb
 	dh_install
 	dh_gencontrol
