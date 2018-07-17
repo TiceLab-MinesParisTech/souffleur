@@ -2,7 +2,7 @@ Source: souffleur
 Section: web
 Priority: optional
 Maintainer: Nicolas Vion <nico@picapo.net>
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper (>= 9), npm
 
 Package: souffleur
 Architecture: all
