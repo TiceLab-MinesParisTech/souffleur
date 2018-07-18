@@ -1,0 +1,61 @@
+#!/bin/bash
+
+NODEJS=/bin/nodejs
+
+host=0.0.0.0
+#port=8080
+filesdir=/var/souffleur
+user=souffleur
+group=souffleur
+
+hyperdeck1_name=cam1
+hyperdeck1_host=192.168.0.10
+
+
+CMD=""
+if [ -n "$host" ]
+then
+	CMD="$CMD -H$host"
+fi
+
+if [ -n "$port" ]
+then
+	CMD="$CMD -P$port"
+fi
+
+if [ -n "$filesdir" ]
+then
+	CMD="$CMD -F$filesdir"
+fi
+
+if [ -n "$user" ]
+then
+	CMD="$CMD -U$user"
+fi
+
+if [ -n "$group" ]
+then
+	CMD="$CMD -G$group"
+fi
+
+for i in {1..999}
+do
+	VAR_HOST="hyperdeck${i}_host"
+	VAR_NAME="hyperdeck${i}_name"
+	VAR_SOURCE="hyperdeck${i}_source"
+
+	if [ -n "${!VAR_NAME}" ]
+	then
+		HOST=${!VAR_HOST}
+		NAME=${!VAR_NAME}
+		SOURCE=${!VAR_SOURCE}
+		
+		CMD="$CMD +Hyperdeck:$HOST:$NAME:$SOURCE"
+	else
+		break
+	fi
+done
+
+echo $NODEJS $CMD
+
+
