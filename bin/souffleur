@@ -1,16 +1,20 @@
 #!/bin/bash
 
-NODEJS=/bin/nodejs
+NODEJS=/usr/bin/nodejs
 
-host=0.0.0.0
+#default settings
+
+#host=0.0.0.0
 #port=8080
 filesdir=/var/souffleur
 user=souffleur
 group=souffleur
 
-hyperdeck1_name=cam1
-hyperdeck1_host=192.168.0.10
 
+# Include conf if available
+if [ -f /etc/souffleur.conf ] ; then
+	. /etc/souffleur.conf
+fi
 
 CMD=""
 if [ -n "$host" ]
@@ -56,6 +60,6 @@ do
 	fi
 done
 
-echo $NODEJS $CMD
+$NODEJS $CMD
 
 

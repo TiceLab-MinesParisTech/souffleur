@@ -4,3 +4,4 @@ scripts/debian/etc .
 public usr/share/souffleur
 app.js usr/share/souffleur
 samples var/souffleur
+bin usr
