@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NODEJS=/usr/bin/nodejs
+APP=/usr/share/souffleur/app.js
 
 #default settings
 
@@ -60,6 +61,6 @@ do
 	fi
 done
 
-$NODEJS $CMD
+$NODEJS $APP $CMD
 
 
