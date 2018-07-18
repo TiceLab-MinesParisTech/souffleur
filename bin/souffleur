@@ -55,12 +55,12 @@ do
 		NAME=${!VAR_NAME}
 		SOURCE=${!VAR_SOURCE}
 
-		CMD="$CMD +Hyperdeck:$HOST:$NAME:$SOURCE"
+		CMD="$CMD +Hyperdeck:$(printf %q "$HOST"):$(printf %q "$NAME"):$(printf %q "$SOURCE")"
 	else
 		break
 	fi
 done
 
-$NODEJS $APP $CMD
-
+#echo $NODEJS $APP $CMD
+eval "$NODEJS $APP $CMD"
 
