@@ -1,0 +1,10 @@
+[Unit]
+Description=A innovative teleprompter solution based on Web technologies
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/souffleur
+
+[Install]
+WantedBy=multi-user.target

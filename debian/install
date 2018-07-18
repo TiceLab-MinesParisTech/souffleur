@@ -1,6 +1,6 @@
 lib usr/share/souffleur
 node_modules usr/share/souffleur
-scripts/debian/etc .
+conf/debian/lib .
 public usr/share/souffleur
 app.js usr/share/souffleur
 samples var/souffleur
