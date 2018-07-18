@@ -54,7 +54,7 @@ do
 		HOST=${!VAR_HOST}
 		NAME=${!VAR_NAME}
 		SOURCE=${!VAR_SOURCE}
-		
+
 		CMD="$CMD +Hyperdeck:$HOST:$NAME:$SOURCE"
 	else
 		break
