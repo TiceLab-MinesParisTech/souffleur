@@ -66,7 +66,7 @@ Terminal.prototype.play = function(position, speed) {
 
 Terminal.prototype.stop = function(position) {
 	this.player.stop(position);
-	this.Actionbar.toolStartStop.setValue(false);
+	this.actionbar.toolStartStop.setValue(false);
 	this.toolbar.toolRecorder.setPlaying(false);
 };
 
