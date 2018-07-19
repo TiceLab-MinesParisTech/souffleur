@@ -132,6 +132,7 @@ nav {
 	background: none;
 	padding: 0;
 	opacity: 0.8;
+	margin: 5px;
 }
 
 .toolbar > button.menu {
@@ -148,6 +149,9 @@ nav {
 	border-radius: 40px;
 	border: 1px solid gray;
 	background-color: lightgray;
+}
+
+.actionbar button {
 	margin: 20px 10px;
 }
 
