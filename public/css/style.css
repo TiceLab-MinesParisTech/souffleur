@@ -84,21 +84,12 @@ nav {
 	background-color: lightgray;
 }
 
+.toolbar > button.menu {
+	border: none;
+	background: none;
+} 
+
 .toolbarTools > button {
-}
-
-.toolbar.minified {
-	opacity: 0.3;
-	transition: opacity 0.1s ease-in-out;
-	padding: 15px;
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	border-radius: 30px;
-}
-
-.toolbar.minified:hover {
-	opacity: 1;
 }
 
 .toolbarTools {
@@ -142,7 +133,15 @@ nav {
 	opacity: 0.8;
 }
 
-.actionbar button {
+.toolbar.minified {
+	border: none;
+	background: none;
+	padding: 0;
+	opacity: 0.8;
+}
+
+.actionbar button, .toolbar.minified > button.menu {
+	display: block;
 	padding: 25px;
 	width: 80px;
 	height: 80px;
@@ -150,13 +149,12 @@ nav {
 	border-radius: 40px;
 	border: 1px solid gray;
 	background-color: lightgray;
-	margin: 10px;
+	margin: 20px 10px;
 }
 
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
-	display: inline-block;
 	width: 15px;
 	height: 15px;
 	cursor: pointer;
@@ -470,7 +468,7 @@ nav {
 .viewEmpty {
 	position: absolute;
 	top: 50%;
-	width: 100%;
+	width: 90%;
 	text-align: center;
 	transform: translateY(-50%);
 }

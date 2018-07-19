@@ -25,7 +25,9 @@ Toolbar.prototype.init = function() {
 //	this.tools.addSeparator();
 	this.tools.add(this.toolAbout.node);
 
+	
 	this.node.appendChild(this.icon.node);
+
 	this.node.appendChild(this.tools.node);
 
 	this.setClassName();
@@ -100,7 +102,10 @@ ToolbarTools.prototype.switchVisibility = function() {
 
 var ToolbarIcon = function(toolbar) {
 	this.toolbar = toolbar;
-	this.node = document.createElement("div");
+
+	this.node = document.createElement("button");
+	this.iconNode = document.createElement("div");
+
 	this.init();
 };
 
@@ -111,8 +116,11 @@ ToolbarIcon.prototype.onclick = function(e) {
 
 ToolbarIcon.prototype.init = function() {
 	var self = this;
-	this.node.className = "icon menu";
+	this.node.className = "menu";
 	this.node.onclick = function(e) { self.onclick(e); };
+
+	this.iconNode.className = "icon menu";
+	this.node.appendChild(this.iconNode);
 };
 
 
