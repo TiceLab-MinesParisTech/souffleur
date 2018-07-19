@@ -7,6 +7,7 @@ var Terminal = function(server, ref) {
 	this.view = new ViewEmpty(this);
 	this.tally = new Tally(this);
 	this.toolbar = new Toolbar(this);
+	this.actionbar = new Actionbar(this);
 	this.player = new Player(this);	
 	this.keyboard = new Keyboard(this);	
 
@@ -19,9 +20,10 @@ var Terminal = function(server, ref) {
 Terminal.prototype.init = function() {
 	var self = this;
 	this.node.className = "terminal";
-
-	this.node.appendChild(this.toolbar.node);
+	
 	this.node.appendChild(this.output.node);
+	this.node.appendChild(this.toolbar.node);
+	this.node.appendChild(this.actionbar.node);
 	this.output.setContent(this.view.node);
 	this.node.appendChild(this.notifier.node);
 	this.node.appendChild(this.tally.node);
@@ -57,13 +59,14 @@ Terminal.prototype.setView = function(view) {
 
 Terminal.prototype.play = function(position, speed) {
 	this.player.play(position, speed);
-	this.toolbar.toolStartStop.setValue(true);
+	this.actionbar.toolStartStop.setValue(true);
+
 	this.toolbar.toolRecorder.setPlaying(true);
 };
 
 Terminal.prototype.stop = function(position) {
 	this.player.stop(position);
-	this.toolbar.toolStartStop.setValue(false);
+	this.actionbar.toolStartStop.setValue(false);
 	this.toolbar.toolRecorder.setPlaying(false);
 };
 

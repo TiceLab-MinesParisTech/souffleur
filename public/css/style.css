@@ -80,7 +80,6 @@ nav {
 	font-size: 14px;
 	position: absolute; 
 	border: 1px solid gray;
-	z-index: 1;
 	padding: 5px;
 	background-color: lightgray;
 }
@@ -91,7 +90,11 @@ nav {
 .toolbar.minified {
 	opacity: 0.3;
 	transition: opacity 0.1s ease-in-out;
-	padding: 5px;
+	padding: 15px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	border-radius: 30px;
 }
 
 .toolbar.minified:hover {
@@ -129,12 +132,29 @@ nav {
 	background-color: white;
 }
 
+.actionbar {
+	position: fixed; 
+	top: 50%;
+	width: 50px;
+	right: 30px;
+	padding: 20px;
+	transform: translate(0, -50%);
+}
+
+.actionbar button {
+	padding: 15px;
+	text-align: center;
+	border-radius: 30px;
+	border: 1px solid gray;
+}
+
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
 	display: inline-block;
-	width: 14px;
-	height: 14px;
+	width: 15px;
+	height: 15px;
+	padding: 5px;
 	cursor: pointer;
 }
 

@@ -3,7 +3,6 @@ var Toolbar = function(terminal) {
 
 	this.toolFile = new ToolFile(terminal);
 	this.toolRecorder = new ToolRecorder(terminal);
-	this.toolStartStop = new ToolStartStop(terminal);
 	this.toolSpeed = new ToolSpeed(terminal);
 	this.toolTerminals = new ToolTerminals(terminal);
 	this.toolTracksList = new ToolTracksList(terminal);
@@ -25,7 +24,6 @@ Toolbar.prototype.init = function() {
 
 //	this.tools.addSeparator();
 	this.tools.add(this.toolRecorder.node);
-	this.tools.add(this.toolStartStop.node);
 	this.tools.add(this.toolSpeed.node);
 //	this.tools.addSeparator();
 	this.tools.add(this.toolTerminals.node);
