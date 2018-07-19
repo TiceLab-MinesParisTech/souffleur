@@ -139,6 +139,7 @@ nav {
 	right: 30px;
 	padding: 20px;
 	transform: translate(0, -50%);
+	opacity: 0.8;
 }
 
 .actionbar button {

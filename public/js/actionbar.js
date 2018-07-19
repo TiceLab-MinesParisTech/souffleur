@@ -13,15 +13,15 @@ Actionbar.prototype.init = function() {
 	this.node.appendChild(this.toolStartStop.node);
 };
 
-Toolbar.prototype.setVisibility = function(value) {
+Actionbar.prototype.setVisibility = function(value) {
 	this.node.style.display = value ? "" : "none";
 };
 
-Toolbar.prototype.getVisibility = function(value) {
+Actionbar.prototype.getVisibility = function(value) {
 	return this.node.style.display == "" ? true : false;
 };
 
-Toolbar.prototype.switchVisibility = function() {
+Actionbar.prototype.switchVisibility = function() {
 	this.setVisibility(!this.getVisibility());
 };
 

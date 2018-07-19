@@ -66,7 +66,7 @@ Terminal.prototype.play = function(position, speed) {
 
 Terminal.prototype.stop = function(position) {
 	this.player.stop(position);
-	this.actionbar.toolStartStop.setValue(false);
+	this.Actionbar.toolStartStop.setValue(false);
 	this.toolbar.toolRecorder.setPlaying(false);
 };
 
@@ -144,6 +144,7 @@ Terminal.prototype.applyFlip = function(value) {
 
 Terminal.prototype.applyToolbarVisibility = function(value) {
 	this.toolbar.setVisibility(value);
+	this.actionbar.setVisibility(value);
 };
 
 Terminal.prototype.applyNotifierVisibility = function(value) {
