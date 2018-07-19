@@ -84,16 +84,10 @@ nav {
 	background-color: lightgray;
 }
 
-.toolbar > button.menu {
-	border: none;
-	background: none;
-} 
-
-.toolbarTools > button {
-}
-
 .toolbarTools {
 	display: inline-block;
+	padding: 0;
+	margin: 0;
 }
 
 .toolbarTools > div {
@@ -140,6 +134,11 @@ nav {
 	opacity: 0.8;
 }
 
+.toolbar > button.menu {
+	border: none;
+	background: none;
+} 
+
 .actionbar button, .toolbar.minified > button.menu {
 	display: block;
 	padding: 25px;
@@ -155,7 +154,7 @@ nav {
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
-	width: 15px;
+	min-width: 15px;
 	height: 15px;
 	cursor: pointer;
 }
@@ -557,11 +556,6 @@ nav {
 		font-size: 18px;
 	}
 
-	button, select {
-		padding: 6px;
-		min-width: 50px;
-	}
-
 	.terminalOutput {
 		font-size: 30px;
 	}
@@ -570,10 +564,6 @@ nav {
 		right: auto;
 	}
 
-	.toolbar.minified .icon.menu {
-		padding: 15px;
-	}
-	
 	.toolFile > nav {
 		right: 0;
 		left: 0;
