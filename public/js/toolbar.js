@@ -2,8 +2,6 @@ var Toolbar = function(terminal) {
 	this.terminal = terminal;
 
 	this.toolFile = new ToolFile(terminal);
-	this.toolRecorder = new ToolRecorder(terminal);
-	this.toolSpeed = new ToolSpeed(terminal);
 	this.toolTerminals = new ToolTerminals(terminal);
 	this.toolTracksList = new ToolTracksList(terminal);
 	this.toolAbout = new ToolAbout();
@@ -22,9 +20,6 @@ Toolbar.prototype.init = function() {
 	this.tools.add(this.toolFile.node);
 	this.tools.add(this.toolTracksList.node);
 
-//	this.tools.addSeparator();
-	this.tools.add(this.toolRecorder.node);
-	this.tools.add(this.toolSpeed.node);
 //	this.tools.addSeparator();
 	this.tools.add(this.toolTerminals.node);
 //	this.tools.addSeparator();

@@ -60,14 +60,13 @@ Terminal.prototype.setView = function(view) {
 Terminal.prototype.play = function(position, speed) {
 	this.player.play(position, speed);
 	this.actionbar.toolStartStop.setValue(true);
-
-	this.toolbar.toolRecorder.setPlaying(true);
+	this.actionbar.toolRecorder.setPlaying(true);
 };
 
 Terminal.prototype.stop = function(position) {
 	this.player.stop(position);
 	this.actionbar.toolStartStop.setValue(false);
-	this.toolbar.toolRecorder.setPlaying(false);
+	this.actionbar.toolRecorder.setPlaying(false);
 };
 
 Terminal.prototype.load = function() {
@@ -102,7 +101,7 @@ Terminal.prototype.loadTracks = function(arr) {
 
 Terminal.prototype.emitPlay = function(position) {
 	if (position == null) position = this.view.getPosition(); 
-	this.server.emitPlay(position, this.toolbar.toolSpeed.getSpeed());
+	this.server.emitPlay(position, this.actionbar.toolSpeed.getSpeed());
 };
 
 Terminal.prototype.emitStop = function(position) {
@@ -119,11 +118,11 @@ Terminal.prototype.emitRecorderStop = function() {
 };
 
 Terminal.prototype.setRecorderState = function(value) {
-	this.toolbar.toolRecorder.setState(value);
+	this.actionbar.toolRecorder.setState(value);
 };
 
 Terminal.prototype.setRecorderStatus = function(arr) {
-	this.toolbar.toolRecorder.showStatus(arr);
+	this.actionbar.toolRecorder.showStatus(arr);
 };
 
 Terminal.prototype.emitSetSpeed = function(value) {

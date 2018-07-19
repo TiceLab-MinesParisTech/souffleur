@@ -126,7 +126,7 @@ Server.prototype.emitSetSpeed = function(value) {
 };
 
 Server.prototype.onSetSpeed = function(value) {
-	this.terminal.toolbar.toolSpeed.setSpeed(value);
+	this.terminal.actionbar.toolSpeed.setSpeed(value);
 };
 
 Server.prototype.emitPlay = function(position, speed) {

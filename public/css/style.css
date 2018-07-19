@@ -135,19 +135,20 @@ nav {
 .actionbar {
 	position: fixed; 
 	top: 50%;
-	width: 50px;
-	right: 30px;
+	width: 100px;
+	right: 10px;
 	padding: 20px;
 	transform: translate(0, -50%);
 	opacity: 0.8;
 }
 
 .actionbar button {
-	padding: 20px;
+	padding: 25px;
 	text-align: center;
 	border-radius: 35px;
 	border: 1px solid gray;
 	background-color: lightgray;
+	margin: 10px;
 }
 
 .icon {
@@ -156,7 +157,6 @@ nav {
 	display: inline-block;
 	width: 15px;
 	height: 15px;
-	padding: 5px;
 	cursor: pointer;
 }
 
@@ -325,10 +325,12 @@ nav {
 	min-width: 200px;
 }
 
+.toolSpeed {
+	position: relative;
+}
+
 .toolSpeed > .label {
-	display: inline-block;
 	text-align: center;
-	width: 3em;
 }
 
 .settingsEditor td {

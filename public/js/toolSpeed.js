@@ -30,16 +30,16 @@ ToolSpeed.prototype.init = function() {
 
 	this.node.className = "toolSpeed";
 	
-	this.buttonLess.appendChild(document.createTextNode("−"));
-	this.node.appendChild(this.buttonLess);
+	this.buttonMore.appendChild(document.createTextNode("+"));
+	this.node.appendChild(this.buttonMore);
 
 	this.node.appendChild(this.label);
 	this.label.className = "label";
 	this.label.appendChild(document.createTextNode(""));
 	this.setSpeed(1);
 
-	this.buttonMore.appendChild(document.createTextNode("+"));
-	this.node.appendChild(this.buttonMore);
+	this.buttonLess.appendChild(document.createTextNode("−"));
+	this.node.appendChild(this.buttonLess);
 
 	this.buttonMore.onclick = function() {
 		self.emitIncSpeed(0.1);
