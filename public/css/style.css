@@ -144,8 +144,10 @@ nav {
 
 .actionbar button {
 	padding: 25px;
+	width: 80px;
+	height: 80px;
 	text-align: center;
-	border-radius: 35px;
+	border-radius: 40px;
 	border: 1px solid gray;
 	background-color: lightgray;
 	margin: 10px;
