@@ -8,5 +8,5 @@
 	},
 	"repository": "github:TiceLab-MinesParisTech/souffleur",
 	"description": "A innovative Open Source teleprompter solution based on Web technologies",
-	"license": "GPL v3"
+	"license": "GPL-3.0-or-later"
 }
