@@ -28,19 +28,19 @@ ToolRecorder.prototype.init = function() {
 	var icon = document.createElement("div");
 	icon.className = "icon recordPreview";
 	this.nodePreview.appendChild(icon);
-	this.nodePreview.onclick = function(e) { self.preview() };
+	this.nodePreview.onclick = function(e) { self.preview(); return false; };
 	//this.node.appendChild(this.nodePreview);
 
 	var icon = document.createElement("div");
 	icon.className = "icon recordStart";
 	this.nodeStart.appendChild(icon);
-	this.nodeStart.onclick = function(e) { self.start() };
+	this.nodeStart.onclick = function(e) { self.start(); return false; };
 	this.node.appendChild(this.nodeStart);
 	
 	var icon = document.createElement("div");
 	icon.className = "icon recordStop";
 	this.nodeStop.appendChild(icon);
-	this.nodeStop.onclick = function(e) { self.stop() };
+	this.nodeStop.onclick = function(e) { self.stop(); return false; };
 	this.node.appendChild(this.nodeStop);
 
 	this.setState(false);

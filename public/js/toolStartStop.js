@@ -14,7 +14,7 @@ ToolStartStop.prototype.init = function() {
 	
 	this.node.appendChild(this.iconNode);
 
-	this.node.onclick = function(e) { self.onclick(e) };
+	this.node.onclick = function(e) { self.onclick(e); return false; };
 	this.setValue(false);
 }
 
