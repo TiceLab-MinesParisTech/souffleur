@@ -117,7 +117,7 @@ ToolbarIcon.prototype.onclick = function(e) {
 ToolbarIcon.prototype.init = function() {
 	var self = this;
 	this.node.className = "menu";
-	this.node.onclick = function(e) { self.onclick(e); };
+	this.node.onclick = function(e) { self.onclick(e); return false; };
 
 	this.iconNode.className = "icon menu";
 	this.node.appendChild(this.iconNode);
