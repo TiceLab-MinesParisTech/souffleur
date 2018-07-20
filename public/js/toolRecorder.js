@@ -21,7 +21,10 @@ ToolRecorder.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "toolRecorder";
-	
+
+	this.node.appendChild(this.nodeRecorders);
+	this.nodeRecorders.className = "recorders";
+
 	var icon = document.createElement("div");
 	icon.className = "icon recordPreview";
 	this.nodePreview.appendChild(icon);
@@ -39,9 +42,6 @@ ToolRecorder.prototype.init = function() {
 	this.nodeStop.appendChild(icon);
 	this.nodeStop.onclick = function(e) { self.stop() };
 	this.node.appendChild(this.nodeStop);
-
-	this.node.appendChild(this.nodeRecorders);
-	this.nodeRecorders.className = "recorders";
 
 	this.setState(false);
 	this.setEnabled(false);

@@ -119,11 +119,12 @@ nav {
 
 .actionbar {
 	position: fixed; 
-	top: 50%;
+	top: 10%;
 	width: 100px;
 	right: 10px;
 	padding: 20px;
-	transform: translate(0, -50%);
+	font-family: vernada, verdana, arial;
+	font-weight: bold;
 	opacity: 0.8;
 }
 
@@ -183,19 +184,27 @@ nav {
 	background-image: url(../img/recordStart_16px.png);
 }
 
+.toolRecorder {
+	position: relative;
+}
+
 .toolRecorder > button {
 	color: darkred;
 }
 
 .recorders {
-	display: inline-block;
+	position: absolute;
+	right: 25px;
+	top: 40px;
+	transform: translateY(-50%);
 }
 
 .toolRecorder .recorder {
-	width: 7px;
+	display: block;
+	width: 8px;
 	height: 4px;
 	padding: 0;
-	margin: 1px;
+	margin: 2px;
 	background-color: black;
 }
 
