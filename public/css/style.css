@@ -121,7 +121,7 @@ nav {
 	position: fixed; 
 	top: 10%;
 	width: 100px;
-	right: 10px;
+	right: 0;
 	padding: 20px;
 	font-family: vernada, verdana, arial;
 	font-weight: bold;

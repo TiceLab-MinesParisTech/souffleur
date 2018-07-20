@@ -43,9 +43,11 @@ ToolSpeed.prototype.init = function() {
 
 	this.buttonMore.onclick = function() {
 		self.emitIncSpeed(0.1);
+		return false;
 	};
 
 	this.buttonLess.onclick = function() {
 		self.emitIncSpeed(-0.1);
+		return false;
 	};
 }
