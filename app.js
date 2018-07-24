@@ -124,6 +124,18 @@ Server.prototype.init = function() {
 
 	});
 
+	this.app.put('/files/*', function(req, res) {
+		var filename = req.path.substr(6);
+		var text = req.body;
+		var text = '';
+    	req.on('data', function(data) {
+        	text += data.toString();
+    	});
+    	req.on('end', function() {
+			console.log("write file", filename, text);
+    	});
+ 	});
+
 	this.app.get('/tracks', function (req, res) {
 		res.json(self.tracks);
 	});
