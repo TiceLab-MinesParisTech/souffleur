@@ -45,9 +45,8 @@ Server.prototype.attachTerminal = function(terminal) {
 	}
 };
 
-Server.prototype.loadUrl = function(url, fct, mimeType, method, params) {
+Server.prototype.loadUrl = function(url, fct, method, params) {
 	var xhttp = new XMLHttpRequest();
-	if (mimeType) xhttp.overrideMimeType(mimeType);
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200 || this.status == 0)
@@ -60,20 +59,23 @@ Server.prototype.loadUrl = function(url, fct, mimeType, method, params) {
 	xhttp.send(params);
 }
 
-Server.prototype.loadJSON = function(url, fct) {
+Server.prototype.loadJSON = function(url, fct, method, params) {
 	this.loadUrl(url, function(text) {
 		var arr = JSON.parse(text);
 		if (arr) fct(arr);
-	}, "application/json");
+	}, method, params);
 };
 
 Server.prototype.loadFile = function(filename, fct) {
 	this.loadUrl("files/" + filename, fct);
-	this.saveFile("test.txt", "ceci est un test", function() {});
+	//this.saveFile("test.txt", "ceci est un test", function() {});
 };
 
 Server.prototype.saveFile = function(filename, data, fct) {
-	this.loadUrl("files/" + filename, fct, null, "PUT", data);
+	console.log("save file...");
+	this.loadJSON("files/" + filename, function(result) {
+		console.log("save file result:", result.err ? "error" : "ok");
+	}, "PUT", data);
 };
 
 Server.prototype.loadFilesList = function(fct) {
