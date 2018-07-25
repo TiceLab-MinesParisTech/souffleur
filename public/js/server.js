@@ -68,14 +68,11 @@ Server.prototype.loadJSON = function(url, fct, method, params) {
 
 Server.prototype.loadFile = function(filename, fct) {
 	this.loadUrl("files/" + filename, fct);
-	//this.saveFile("test.txt", "ceci est un test", function() {});
 };
 
 Server.prototype.saveFile = function(filename, data, fct) {
 	console.log("save file...");
-	this.loadJSON("files/" + filename, function(result) {
-		console.log("save file result:", result.err ? "error" : "ok");
-	}, "PUT", data);
+	this.loadJSON("files/" + filename, fct, "PUT", data);
 };
 
 Server.prototype.loadFilesList = function(fct) {
