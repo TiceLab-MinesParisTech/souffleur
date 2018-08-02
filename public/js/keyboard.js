@@ -25,11 +25,18 @@ Keyboard.prototype.actionMapping = {
 	"Escape": {"name": "RecordStartStop"},
 	":": {"name": "PlayStop"},
 	".": {"name": "PlayStop"},
+
 	"+": {"name": "IncSpeed", "args": [0.1]},
 	"-": {"name": "IncSpeed", "args": [-0.1]},
-	"v": {"name": "ToggleToolbarVisibility"},
+	"ArrowRight": {"name": "IncSpeed", "args": [0.1]},
+	"ArrowLeft": {"name": "IncSpeed", "args": [-0.1]},
+
+	"ArrowUp": {"name": "Previous"},
+	"ArrowDown": {"name": "Next"},
 	"PageUp": {"name": "Dec", "args": [0.1]},
-	"PageDown": {"name": "Inc", "args": [0.1]}
+	"PageDown": {"name": "Inc", "args": [0.1]},
+
+	"v": {"name": "ToggleToolbarVisibility"}
 };
 
 Keyboard.prototype.init = function() {
