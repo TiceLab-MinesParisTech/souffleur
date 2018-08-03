@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Souffleur</title>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/dmx.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">		
+		<script src="js/dmx/fader.js"></script>
+		<script src="js/dmx/faders.js"></script>
+
+		<script>
+			var faders = new Faders();
+			faders.add(new Fader("front.right", "Face Droite", 0, 255, 1));
+			faders.add(new Fader("top.right", "Haut Droite", 0, 255, 1));
+			faders.add(new Fader("top.left", "Haut Gauche", 0, 255, 1));
+			faders.add(new Fader("front.left", "Face Left", 0, 255, 1));
+
+			
+			faders.add(new Fader("back.right", "Fond Droite", 0, 255, 1));
+			faders.add(new Fader("back.left", "Fond Gauche", 0, 255, 1));
+
+			faders.add(new Fader("temp", "Temérature Panels", 2700, 6500, 100, [3200, 5600]));
+
+			faders.add(new Fader("rear.right", "Contre Droite", 0, 255, 1));
+			faders.add(new Fader("rear.left", "Contre Gauche", 0, 255, 1));
+			faders.add(new Fader("rear.temp", "Temérature Contres", 3200, 5600, 100));
+
+			window.onload = function() {
+				document.body.appendChild(faders.node);
+			};
+		</script>
+	</head>
+	<body></body>
+</html>
+
