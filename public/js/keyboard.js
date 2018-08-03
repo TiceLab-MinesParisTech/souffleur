@@ -69,7 +69,7 @@ Keyboard.prototype.onkeydown = function(e) {
 
 //--Actions
 Keyboard.prototype.actionPlayStop = function() {
-	this.terminal.toolbar.toolStartStop.emitPlayStop();
+	this.terminal.actionbar.toolStartStop.emitPlayStop();
 };
 
 Keyboard.prototype.actionStop = function() {
@@ -89,11 +89,11 @@ Keyboard.prototype.actionRecordStart = function() {
 };
 
 Keyboard.prototype.actionRecordStartStop = function() {
-	this.terminal.toolbar.toolRecorder.startStop();
+	this.terminal.actionbar.toolRecorder.startStop();
 };
 
 Keyboard.prototype.actionIncSpeed = function(value) {
-	this.terminal.toolbar.toolSpeed.emitIncSpeed(value);
+	this.terminal.actionbar.toolSpeed.emitIncSpeed(value);
 };
 
 Keyboard.prototype.actionToggleToolbarVisibility = function() {

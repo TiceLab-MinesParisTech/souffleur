@@ -120,7 +120,6 @@ nav {
 .actionbar {
 	position: fixed; 
 	top: 10%;
-	width: 100px;
 	right: 0;
 	padding: 20px;
 	font-family: vernada, verdana, arial;
@@ -339,6 +338,10 @@ nav {
 
 .toolSpeed {
 	position: relative;
+}
+
+.toolSpeed > button {
+	margin: 5px 10px;
 }
 
 .toolSpeed > .label {

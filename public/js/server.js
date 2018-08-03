@@ -45,9 +45,8 @@ Server.prototype.attachTerminal = function(terminal) {
 	}
 };
 
-Server.prototype.loadUrl = function(url, fct, mimeType) {
+Server.prototype.loadUrl = function(url, fct, method, params) {
 	var xhttp = new XMLHttpRequest();
-	if (mimeType) xhttp.overrideMimeType(mimeType);
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200 || this.status == 0)
@@ -56,19 +55,24 @@ Server.prototype.loadUrl = function(url, fct, mimeType) {
 				console.log("HTTP Error:", this.status);
 		}
 	};
-	xhttp.open("GET", url, true);
-	xhttp.send();
+	xhttp.open(method ? method : "GET", url, true);
+	xhttp.send(params);
 }
 
-Server.prototype.loadJSON = function(url, fct) {
+Server.prototype.loadJSON = function(url, fct, method, params) {
 	this.loadUrl(url, function(text) {
 		var arr = JSON.parse(text);
 		if (arr) fct(arr);
-	}, "application/json");
+	}, method, params);
 };
 
 Server.prototype.loadFile = function(filename, fct) {
 	this.loadUrl("files/" + filename, fct);
+};
+
+Server.prototype.saveFile = function(filename, data, fct) {
+	console.log("save file...");
+	this.loadJSON("files/" + filename, fct, "PUT", data);
 };
 
 Server.prototype.loadFilesList = function(fct) {

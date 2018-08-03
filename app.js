@@ -62,6 +62,11 @@ Server.prototype.parseArgs = function(argv) {
 };
 
 
+Server.prototype.saveFile = function(filename, content, fct) {
+	var path_ = path.join(this.config.filesdir, filename);
+    fs.writeFile(path_, content, fct);
+}
+
 Server.prototype.isHiddenDirectory = function(dir) {
 	var realpath = fs.realpathSync(path.join(this.config.filesdir, dir));
 	return fs.existsSync(realpath + ".txt");
@@ -123,6 +128,22 @@ Server.prototype.init = function() {
 		res.json(files);
 
 	});
+
+	this.app.put('/files/*', function(req, res) {
+		var filename = req.path.substr(7);
+		var content = '';
+    	req.on('data', function(data) {
+        	content += data.toString();
+    	});
+    	req.on('end', function() {
+    		self.saveFile(filename, content, function(err) {
+    			console.log("write file", filename, err ? "error" : "ok");
+				res.json({
+					"err": err ? err.message : null
+				});
+  			});
+  		});
+ 	});
 
 	this.app.get('/tracks', function (req, res) {
 		res.json(self.tracks);
