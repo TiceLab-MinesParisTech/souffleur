@@ -5,6 +5,10 @@ div.faders {
 	background-color: #fff;
 }
 
+div.label {
+	font-weight: bold;
+}
+
 div.fader {
 	position: relative;
 	padding: 5px;
@@ -18,4 +22,16 @@ div.fader div.display {
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+
+div.fader div.channels {
+	display: none;
+}
+
+div.fader span.channel::before {
+	content: "#";
+}
+
+div.fader span.channel {
+	margin: 2px 4px;
 }
