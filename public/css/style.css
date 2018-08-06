@@ -236,7 +236,6 @@ nav {
 	border: 1px solid black;
 	overflow: auto;
 	position: absolute;
-	z-index: 1;
 	background-color: #eee;
 	border-radius: 8px;
 	overflow: auto;
@@ -549,20 +548,26 @@ nav {
 	font-size: 100%;
 }
 
-div.faders {
-	position: absolute;
-	padding: 20px;
-	border: 3px solid #aaa;
+div.faders fieldset {
 	background-color: #fff;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 8px;
 }
 
-div.label {
+div.faders fieldset legend {
 	font-weight: bold;
+}
+	
+div.fader div.label {
+	font-weight: bold;
+	font-size: 80%;
 }
 
 div.fader {
 	position: relative;
 	padding: 5px;
+	margin: 5px;
 }
 
 div.fader input {
@@ -589,6 +594,11 @@ div.fader span.channel {
 
 div.toolDmx > nav {
 	position: absolute;
+	border: 1px solid black;
+	background-color: #eee;
+	border-radius: 8px;
+	overflow: auto;
+	padding: 5px;
 }
 
 @media (max-width: 480px) {
