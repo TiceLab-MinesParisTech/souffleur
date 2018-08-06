@@ -4,7 +4,6 @@ var fs = require('fs');
 const path = require('path');
 var Express = require('express');
 var Recorder = require("./lib/recorder");
-var PrompterModule = require("./lib/prompterModule");
 
 var Server = function() {
 	this.config = {
@@ -27,7 +26,14 @@ var Server = function() {
 	});
 
 	this.recorder = new Recorder();
-	this.modules = [new PrompterModule(this)];
+
+	this.modules = [];
+
+	var PrompterModule = require("./lib/prompterModule");
+	this.modules.push(new PrompterModule(this));
+
+	var DmxModule = require("./lib/dmxModule");
+	this.modules.push(new DmxModule(this));
 };
 
 Server.prototype.help = function() {
@@ -218,11 +224,6 @@ Server.prototype.onConnect = function(socket) {
 	socket.on('recorder::preview', function(state) {
 		console.log("recorder::preview", JSON.stringify(state));
 		self.recorder.previewEnable(state);
-	});
-
-	socket.on('dmx::faders::set', function(arr) {
-		console.log("dmx::faders::set", JSON.stringify(arr));
-		self.io.emit('dmx::faders::set', arr);
 	});
 
 	for (var i = 0; i < this.modules.length; i++) {

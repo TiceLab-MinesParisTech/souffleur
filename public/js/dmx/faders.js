@@ -58,7 +58,13 @@ Faders.prototype.createItems = function(container, items) {
 	}
 };
 
-Faders.prototype.create = function(items) {
+Faders.prototype.clear = function() {
+	this.faders = {};
+	while(this.node.firstChild) this.node.removeChild(this.node.firstChild);
+};
+
+Faders.prototype.define = function(items) {
+	this.clear();
 	this.createItems(this.node, items);
 };
 
