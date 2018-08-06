@@ -132,12 +132,14 @@ Server.prototype.init = function() {
 	this.app.put('/files/*', function(req, res) {
 		var filename = req.path.substr(7);
 		var content = '';
-    	req.on('data', function(data) {
-        	content += data.toString();
-    	});
-    	req.on('end', function() {
-    		self.saveFile(filename, content, function(err) {
-    			console.log("write file", filename, err ? "error" : "ok");
+
+		req.on('data', function(data) {
+			content += data.toString();
+		});
+
+		req.on('end', function() {
+		self.saveFile(filename, content, function(err) {
+		console.log("write file", filename, err ? "error" : "ok");
 				res.json({
 					"err": err ? err.message : null
 				});
@@ -216,6 +218,11 @@ Server.prototype.onConnect = function(socket) {
 	socket.on('recorder::preview', function(state) {
 		console.log("recorder::preview", JSON.stringify(state));
 		self.recorder.previewEnable(state);
+	});
+
+	socket.on('dmx::faders::set', function(arr) {
+		console.log("dmx::faders::set", JSON.stringify(arr));
+		self.io.emit('dmx::faders::set', arr);
 	});
 
 	for (var i = 0; i < this.modules.length; i++) {

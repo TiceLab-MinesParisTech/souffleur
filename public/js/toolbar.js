@@ -5,6 +5,7 @@ var Toolbar = function(terminal) {
 	this.toolTerminals = new ToolTerminals(terminal);
 	this.toolTracksList = new ToolTracksList(terminal);
 	this.toolAbout = new ToolAbout();
+	this.toolDmx = new ToolDmx(terminal);
 
 	this.tools = new ToolbarTools();
 	this.icon = new ToolbarIcon(this);
@@ -23,6 +24,7 @@ Toolbar.prototype.init = function() {
 //	this.tools.addSeparator();
 	this.tools.add(this.toolTerminals.node);
 //	this.tools.addSeparator();
+	this.tools.add(this.toolDmx.node);
 	this.tools.add(this.toolAbout.node);
 
 	

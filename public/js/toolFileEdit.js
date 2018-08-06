@@ -33,7 +33,7 @@ ToolFileEdit.prototype.init = function() {
 }
 
 ToolFileEdit.prototype.apply = function(filename, text) {
-	if (filename) this.terminal.server.saveFile(filename, text, function(result) {
+	if (filename) this.terminal.client.saveFile(filename, text, function(result) {
 		this.terminal.notifier.show(result.err ? "Could not save file!" : "Saved");
 	});
 	this.toolFile.loadText(filename, text);

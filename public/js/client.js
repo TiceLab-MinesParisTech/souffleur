@@ -1,11 +1,12 @@
-var Server = function(standAlone) {
-	this.standAlone = standAlone;
-	if (!standAlone) this.socket = io.connect('/');
+var Client = function(terminal) {
+	this.socket = io.connect('/');
 	this.socketid = null;
-	this.terminal = null;
+	this.terminal = terminal;
+	
+	this.attachTerminal(terminal);
 }
 
-Server.prototype.mapping =  { 
+Client.prototype.mapping =  { 
 	"client::settings::param::set": "onSettingsParam",
 	"play": "onPlay",
 	"stop": "onStop",
@@ -18,7 +19,7 @@ Server.prototype.mapping =  {
 	"recorder::state": "onRecorderState"
 };
 
-Server.prototype.on = function(name, args) {
+Client.prototype.on = function(name, args) {
 	if (!(name in this.mapping))
 		return false;
 		
@@ -28,7 +29,7 @@ Server.prototype.on = function(name, args) {
 	return true;
 };
 
-Server.prototype.attachTerminal = function(terminal) {
+Client.prototype.attachTerminal = function(terminal) {
 	var self = this;
 	this.terminal = terminal;
 	
@@ -38,14 +39,12 @@ Server.prototype.attachTerminal = function(terminal) {
 		});
 	}
 
-	if (!this.standAlone) {
-		for (name in this.mapping) {
-			bind(name, this.mapping[name]);
-		};
-	}
+	for (name in this.mapping) {
+		bind(name, this.mapping[name]);
+	};
 };
 
-Server.prototype.loadUrl = function(url, fct, method, params) {
+Client.prototype.loadUrl = function(url, fct, method, params) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
@@ -59,46 +58,31 @@ Server.prototype.loadUrl = function(url, fct, method, params) {
 	xhttp.send(params);
 }
 
-Server.prototype.loadJSON = function(url, fct, method, params) {
+Client.prototype.loadJSON = function(url, fct, method, params) {
 	this.loadUrl(url, function(text) {
 		var arr = JSON.parse(text);
 		if (arr) fct(arr);
 	}, method, params);
 };
 
-Server.prototype.loadFile = function(filename, fct) {
+Client.prototype.loadFile = function(filename, fct) {
 	this.loadUrl("files/" + filename, fct);
 };
 
-Server.prototype.saveFile = function(filename, data, fct) {
+Client.prototype.saveFile = function(filename, data, fct) {
 	console.log("save file...");
 	this.loadJSON("files/" + filename, fct, "PUT", data);
 };
 
-Server.prototype.loadFilesList = function(fct) {
-	if (this.standAlone) {
-		this.loadJSON("files/list.json", fct);
-		return;
-	}
+Client.prototype.loadFilesList = function(fct) {
 	this.loadJSON("files", fct);
 };
 
-Server.prototype.loadCurrentTracks = function(fct) {
-	if (this.standAlone) {
-		return;
-	}
+Client.prototype.loadCurrentTracks = function(fct) {
 	this.loadJSON("tracks", fct);
 };
 
-Server.prototype.loadClientsList = function(fct) {
-	if (this.standAlone) {
-		fct([{
-			"socketid": null,
-			"data": this.terminal.getData()
-		}]);
-		return;
-	}
-	
+Client.prototype.loadClientsList = function(fct) {
 	var self = this;
 	this.loadJSON("/clients", function(list) {
 		for (var i = 0; i < list.length; i++) {
@@ -109,71 +93,67 @@ Server.prototype.loadClientsList = function(fct) {
 	});
 };
 
-Server.prototype.emit = function(name, args) {
-	if (this.standAlone) {
-		this.on(name, args);
-		return;
-	}
+Client.prototype.emit = function(name, args) {
 	this.socket.emit(name, args);
 };
 
-Server.prototype.emitLoadTracks = function(tracks) {
+Client.prototype.emitLoadTracks = function(tracks) {
 	this.emit('tracks::load', tracks);
 };
 
-Server.prototype.onLoadTracks = function(tracks) {
+Client.prototype.onLoadTracks = function(tracks) {
 	this.terminal.loadTracks(tracks);
 };
 
-Server.prototype.emitSetSpeed = function(value) {
+Client.prototype.emitSetSpeed = function(value) {
 	this.emit('speed::set', value);
 };
 
-Server.prototype.onSetSpeed = function(value) {
+Client.prototype.onSetSpeed = function(value) {
 	this.terminal.actionbar.toolSpeed.setSpeed(value);
 };
 
-Server.prototype.emitPlay = function(position, speed) {
+Client.prototype.emitPlay = function(position, speed) {
 	this.emit('play', {"position": position, "speed": speed});
 };
 
-Server.prototype.onPlay = function(args) {
+Client.prototype.onPlay = function(args) {
 	this.terminal.play(args.position, args.speed);
 };
 
-Server.prototype.emitStop = function(position) {
+Client.prototype.emitStop = function(position) {
 	this.emit('stop', position);
 };
 
-Server.prototype.onStop = function(position) {
+Client.prototype.onStop = function(position) {
 	this.terminal.stop(position);
 };
 
-Server.prototype.emitRecorderStart = function(name) {
+Client.prototype.emitRecorderStart = function(name) {
 	this.emit('recorder::start', name ? name : null);
 };
 
-Server.prototype.emitRecorderStop = function() {
+Client.prototype.emitRecorderStop = function() {
 	this.emit('recorder::stop');
 };
 
-Server.prototype.emitRecorderPreview = function(state) {
+Client.prototype.emitRecorderPreview = function(state) {
 	this.emit('recorder::preview', state);
 };
 
-Server.prototype.emitSettings = function(arr) {
+Client.prototype.emitSettings = function(arr) {
 	this.emit("client::settings::set", arr);
 };
 
-Server.prototype.emitSettingsParam = function(socketid, key, value) {
+Client.prototype.emitSettingsParam = function(socketid, key, value) {
 	this.emit("client::settings::param::set", {"socketid": socketid ? socketid : this.socketid, "key": key, "value": value});
 };
 
-Server.prototype.onSettingsParam = function(args) {
+Client.prototype.onSettingsParam = function(args) {
 	this.terminal.setSettingsParam(args.socketid == this.socketid ? null : args.socketid, args.key, args.value);
 };
 
-Server.prototype.emitSendTo = function(socketid, eventName, args) {
+Client.prototype.emitSendTo = function(socketid, eventName, args) {
 	this.emit("sendto", {
 		"socketid":  socketid ? socketid : this.socketid,
 		"eventName": eventName,
@@ -181,35 +161,35 @@ Server.prototype.emitSendTo = function(socketid, eventName, args) {
 	});
 };
 
-Server.prototype.emitNotify = function(socketid, text) {
+Client.prototype.emitNotify = function(socketid, text) {
 	this.emitSendTo(socketid, "notify", text);
 };
 
-Server.prototype.onNotify = function(text) {
+Client.prototype.onNotify = function(text) {
 	this.terminal.notifier.show(text);
 };
 
-Server.prototype.emitId = function(socketid) {
+Client.prototype.emitId = function(socketid) {
 	this.emitSendTo(socketid, "id");
 };
 
-Server.prototype.emitClientSet = function() {
+Client.prototype.emitClientSet = function() {
 	this.emit("client::set", this.terminal.getData());
 };
 
-Server.prototype.onRegister = function(socketid) {
+Client.prototype.onRegister = function(socketid) {
 	this.socketid = socketid;
 	this.emitClientSet();
 };
 
-Server.prototype.onRecorderStatus = function(args) {
+Client.prototype.onRecorderStatus = function(args) {
 	this.terminal.setRecorderStatus(args);
 };
 
-Server.prototype.onRecorderState = function(value) {
+Client.prototype.onRecorderState = function(value) {
 	this.terminal.setRecorderState(value);
 };
 
-Server.prototype.onId = function() {
+Client.prototype.onId = function() {
 	this.terminal.id();
 };

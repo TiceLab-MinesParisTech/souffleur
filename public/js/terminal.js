@@ -1,6 +1,5 @@
-var Terminal = function(server, ref) {
-	this.server = server;
-
+var Terminal = function(ref) {
+	this.client = new Client(this);
 	this.settings = new Settings(this, ref);
 	this.notifier = new Notifier(this);
 	this.output = new TerminalOutput(this);
@@ -28,7 +27,6 @@ Terminal.prototype.init = function() {
 	this.node.appendChild(this.notifier.node);
 	this.node.appendChild(this.tally.node);
 
-	this.server.attachTerminal(this);	
 	this.settings.applyParams();
 
 	this.nodeCSS.setAttribute("rel", "stylesheet");
@@ -71,7 +69,7 @@ Terminal.prototype.stop = function(position) {
 
 Terminal.prototype.load = function() {
 	var self = this;
-	this.server.loadCurrentTracks(function(tracks) {
+	this.client.loadCurrentTracks(function(tracks) {
 		if (tracks) self.loadTracks(tracks) 
 	});
 };
@@ -101,20 +99,20 @@ Terminal.prototype.loadTracks = function(arr) {
 
 Terminal.prototype.emitPlay = function(position) {
 	if (position == null) position = this.view.getPosition(); 
-	this.server.emitPlay(position, this.actionbar.toolSpeed.getSpeed());
+	this.client.emitPlay(position, this.actionbar.toolSpeed.getSpeed());
 };
 
 Terminal.prototype.emitStop = function(position) {
-	this.server.emitStop(position);
+	this.client.emitStop(position);
 };
 
 Terminal.prototype.emitRecorderStart = function() {
 	var fileId = this.toolbar.toolFile.getId();
-	this.server.emitRecorderStart(fileId ? fileId + "-%src%" : null);
+	this.client.emitRecorderStart(fileId ? fileId + "-%src%" : null);
 };
 
 Terminal.prototype.emitRecorderStop = function() {
-	this.server.emitRecorderStop();
+	this.client.emitRecorderStop();
 };
 
 Terminal.prototype.setRecorderState = function(value) {
@@ -126,8 +124,8 @@ Terminal.prototype.setRecorderStatus = function(arr) {
 };
 
 Terminal.prototype.emitSetSpeed = function(value) {
-	this.server.emitSetSpeed(value);
-	if (this.player.isPlaying()) this.server.emitPlay(this.player.getPosition(), value);
+	this.client.emitSetSpeed(value);
+	if (this.player.isPlaying()) this.client.emitPlay(this.player.getPosition(), value);
 };
 
 Terminal.prototype.applySize = function(value) {
@@ -189,7 +187,7 @@ Terminal.prototype.getData = function() {
 };
 
 Terminal.prototype.onresize = function() {
-	this.server.emitClientSet();
+	this.client.emitClientSet();
 };
 
 var TerminalOutput = function(terminal) {

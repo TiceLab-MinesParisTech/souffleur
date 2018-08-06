@@ -6,7 +6,7 @@
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">		
-		<script src="js/server.js"></script>
+		<script src="js/client.js"></script>
 		<script src="js/fileTxt.js"></script>
 		<script src="js/terminal.js"></script>
 		<script src="js/keyboard.js"></script>
@@ -40,11 +40,14 @@
 		<script src="js/player.js"></script>
 		<script src="js/notifier.js"></script>
 
+		<script src="js/dmx/fader.js"></script>
+		<script src="js/dmx/faders.js"></script>
+		<script src="js/dmx/toolDmx.js"></script>
+
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			var ref = window.location.search.substr(1);
-			var server = new Server();
-			var terminal = new Terminal(server, ref);
+			var terminal = new Terminal(ref);
 
 			window.onload = function() {
 				document.body.appendChild(terminal.node);

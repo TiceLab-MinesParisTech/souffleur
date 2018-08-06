@@ -58,7 +58,7 @@ ToolTerminals.prototype.setItems = function(list) {
 
 ToolTerminals.prototype.show = function() {
 	var self = this;
-	this.terminal.server.loadClientsList(function(data) {
+	this.terminal.client.loadClientsList(function(data) {
 		self.setItems(data);
 		self.setVisibility(true);
 	});
@@ -99,7 +99,7 @@ var ToolTerminalsItem = function(terminal, arr) {
 };
 
 ToolTerminalsItem.prototype.id = function() {
-	this.terminal.server.emitId(this.socketid);
+	this.terminal.client.emitId(this.socketid);
 };
 
 ToolTerminalsItem.prototype.resize = function() {

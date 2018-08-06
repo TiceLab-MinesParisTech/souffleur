@@ -63,7 +63,7 @@ ToolFileList.prototype.loadText = function(filename, text) {
 
 ToolFileList.prototype.loadFile = function(filename) {
 	var self = this;
-	this.terminal.server.loadFile(filename, function(text) { self.loadText(filename, text); });
+	this.terminal.client.loadFile(filename, function(text) { self.loadText(filename, text); });
 };
 
 ToolFileList.prototype.createDirItems = function(ul, items, opened) {
@@ -85,7 +85,7 @@ ToolFileList.prototype.showList = function(items) {
 
 ToolFileList.prototype.show = function() {
 	var self = this;
-	this.terminal.server.loadFilesList(function(list) {
+	this.terminal.client.loadFilesList(function(list) {
 		self.showList(list);
 	});
 };

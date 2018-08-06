@@ -27,7 +27,7 @@ Settings.prototype.setParam = function(key, value) {
 	if (!(key in Settings.params))
 		return false;
 
-	this.terminal.server.emitSettingsParam(null, key, value);
+	this.terminal.client.emitSettingsParam(null, key, value);
 };
 
 Settings.prototype.notifyParam = function(key, value) {
@@ -77,5 +77,5 @@ Settings.prototype.applyParams = function() {
 }
 
 Settings.prototype.emit = function() {
-	this.terminal.server.emitSettings(this.get());
+	this.terminal.client.emitSettings(this.get());
 }

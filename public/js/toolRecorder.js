@@ -103,7 +103,7 @@ ToolRecorder.prototype.startStop = function() {
 }
 
 ToolRecorder.prototype.preview = function() {
-	this.terminal.server.emitRecorderPreview(true);
+	this.terminal.client.emitRecorderPreview(true);
 }
 
 ToolRecorder.prototype.setState = function(value) {

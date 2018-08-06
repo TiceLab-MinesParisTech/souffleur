@@ -10,7 +10,7 @@ SettingsExternal.prototype.getParam = function(key) {
 
 SettingsExternal.prototype.setParam = function(key, value) {
 	this.saveParam(key, value);
-	this.terminal.server.emitSettingsParam(this.socketid, key, value);
+	this.terminal.client.emitSettingsParam(this.socketid, key, value);
 };
 
 SettingsExternal.prototype.saveParam = function(key, value) {

@@ -1,4 +1,5 @@
-var Fader = function(ref, title, min, max, step, marks, format, channels) {
+var Fader = function(tool, ref, title, min, max, step, marks, format, channels) {
+	this.tool = tool;
 	this.ref = ref;
 	this.min = min;
 	this.max = max;
@@ -59,6 +60,10 @@ Fader.prototype.init = function(title, min, max, step, marks, channels) {
 	this.setValue(min);
 };
 
+Fader.prototype.emitValue = function(value) {
+	this.tool.emitSetValue(this.ref, value);
+};
+
 Fader.prototype.setValue = function(value) {
 	this.value = value;
 	this.display.firstChild.nodeValue = this.formatValue(this.value);
@@ -66,11 +71,11 @@ Fader.prototype.setValue = function(value) {
 };
 
 Fader.prototype.onchange = function(e) {
-	this.setValue(this.input.value);
+	this.emitValue(this.input.value);
 };
 
 var FaderMark = function(parent, value) {
 	this.node = document.createElement("button");
 	this.node.appendChild(document.createTextNode(parent.formatValue(value)));
-	this.node.addEventListener("click", function() { parent.setValue(value) });
+	this.node.addEventListener("click", function() { parent.emitValue(value) });
 };
