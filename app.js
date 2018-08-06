@@ -246,9 +246,9 @@ Server.prototype.start = function() {
 };
 
 var server = new Server();
-if (server.parseArgs(process.argv)) {
-	server.init();
-	server.start();
-}
-
-
+setTimeout(function() {
+	if (server.parseArgs(process.argv)) {
+		server.init();
+		server.start();
+	}
+}, 1000);
