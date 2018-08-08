@@ -28,6 +28,8 @@ ToolTerminals.prototype.init = function() {
 	this.button.className = "toolButton";
 
 	this.node.appendChild(this.popup);
+	this.popup.className = "toolbarPopup";
+	
 	this.setVisibility(false);
 
 }

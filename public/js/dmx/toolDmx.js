@@ -42,7 +42,10 @@ ToolDmx.prototype.init = function() {
 	this.nodeButton.className = "toolButton";
 	
 	this.node.appendChild(this.nodeButton);
+	
 	this.node.appendChild(this.nodePopup);
+	this.nodePopup.className = "toolbarPopup";
+	
 	this.nodeButton.onclick = function() { self.onclick() };
 	this.setVisibility(false);
 

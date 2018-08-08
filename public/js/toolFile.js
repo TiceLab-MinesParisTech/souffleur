@@ -30,6 +30,7 @@ ToolFile.prototype.init = function() {
 	
 	this.node.appendChild(this.nodePopup);
 	this.nodePopup.appendChild(this.tabs.node);
+	this.nodePopup.className = "toolbarPopup";
 
 	var item = this.tabs.addTab("Files", this.list.node, function() { self.list.show() } );
 	this.tabs.addTab("Source", this.editor.node);	

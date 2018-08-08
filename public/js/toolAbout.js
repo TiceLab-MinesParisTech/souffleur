@@ -1,5 +1,6 @@
 var ToolAbout = function() {
-	this.node = document.createElement("button");
+	this.node = document.createElement("div");
+	this.button = document.createElement("button");
 	this.popup = document.createElement("div");
 	this.version = "0.2";
 	this.init();
@@ -8,12 +9,15 @@ var ToolAbout = function() {
 ToolAbout.prototype.init = function() {
 	var self = this;
 	
-	this.node.appendChild(document.createTextNode("About"));
-	this.node.onclick = function() { self.switchVisibility() };
-	this.node.className = "toolAbout toolButton";
-	this.node.appendChild(this.popup);
+	this.node.className = "toolAbout";
+	
+	this.button.className = "toolButton";
+	this.button.appendChild(document.createTextNode("About"));
+	this.button.onclick = function() { self.switchVisibility() };
+	this.node.appendChild(this.button);
 
-	this.popup.className = "popup";
+	this.popup.className = "toolbarPopup";
+	this.node.appendChild(this.popup);
 
 	var h1 = document.createElement("h1");
 	h1.appendChild(document.createTextNode("Souffleur"));

@@ -5,6 +5,7 @@ var Terminal = function(ref) {
 	this.output = new TerminalOutput(this);
 	this.view = new ViewEmpty(this);
 	this.tally = new Tally(this);
+	this.menubar = new Menubar(this);
 	this.toolbar = new Toolbar(this);
 	this.actionbar = new Actionbar(this);
 	this.player = new Player(this);	
@@ -22,7 +23,7 @@ Terminal.prototype.init = function() {
 	
 	this.node.appendChild(this.output.node);
 	this.node.appendChild(this.actionbar.node);
-	this.node.appendChild(this.toolbar.node);
+	this.node.appendChild(this.menubar.node);
 	this.output.setContent(this.view.node);
 	this.node.appendChild(this.notifier.node);
 	this.node.appendChild(this.tally.node);
