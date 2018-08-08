@@ -68,7 +68,7 @@ Faders.prototype.configure = function(items) {
 	this.createItems(this.node, items);
 };
 
-Faders.prototype.setValue = function(ref, value) {
-	if (ref in this.faders) this.faders[ref].setValue(value);
+Faders.prototype.onSetValue = function(ref, value) {
+	if (ref in this.faders) this.faders[ref].onSetValue(value);
 };
 

@@ -4,7 +4,8 @@ var Fader = function(tool, ref, title, min, max, step, marks, format, channels) 
 	this.min = min;
 	this.max = max;
 	this.format = format;
-	
+	this.updateTimeout = null;
+
 	this.node = document.createElement("div");
 	this.label = document.createElement("div");
 	this.display = document.createElement("div");
@@ -42,7 +43,7 @@ Fader.prototype.init = function(title, min, max, step, marks, channels) {
 	if (marks) {
 		var container = document.createElement("div");
 		this.node.appendChild(container);
-		console.log(marks.length);
+		
 		for (var i = 0; i < marks.length; i++) {
 			var mark = new FaderMark(this, marks[i]);
 			container.appendChild(mark.node);
@@ -60,22 +61,35 @@ Fader.prototype.init = function(title, min, max, step, marks, channels) {
 	this.setValue(min);
 };
 
-Fader.prototype.emitValue = function(value) {
+Fader.prototype.emitSetValue = function(value) {
 	this.tool.emitSetValue(this.ref, value);
 };
 
+Fader.prototype.showValue = function(value) {
+	this.display.firstChild.nodeValue = this.formatValue(value);
+}
+
+Fader.prototype.onSetValue = function(value) {
+	this.showValue(value);
+	this.input.value = value;
+};
+
 Fader.prototype.setValue = function(value) {
-	this.value = value;
-	this.display.firstChild.nodeValue = this.formatValue(this.value);
-	if (this.input.value != value) this.input.value = value;
+	this.input.value = value;
+	this.onChangeValue(value);
+};
+
+Fader.prototype.onChangeValue = function(value) {
+	this.emitSetValue(value);
+	this.showValue(value);
 };
 
 Fader.prototype.onchange = function(e) {
-	this.emitValue(this.input.value);
+	this.onChangeValue(this.input.value);
 };
 
 var FaderMark = function(parent, value) {
 	this.node = document.createElement("button");
 	this.node.appendChild(document.createTextNode(parent.formatValue(value)));
-	this.node.addEventListener("click", function() { parent.emitValue(value) });
+	this.node.addEventListener("click", function() { parent.setValue(value) });
 };

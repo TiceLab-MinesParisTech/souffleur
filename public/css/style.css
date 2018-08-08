@@ -599,6 +599,7 @@ div.toolDmx > nav {
 	border-radius: 8px;
 	overflow: auto;
 	padding: 5px;
+	width_: 400px;
 }
 
 @media (max-width: 480px) {
@@ -650,6 +651,19 @@ div.toolDmx > nav {
 
 	.viewScroll div.parts div.slide {
 		font-size: 75%;
+	}
+	
+	div.toolDmx > nav {
+		right: 0;
+		left: 0;
+	}
+	
+	div.toolDmx div.fader input {
+		width: 90%;
+	}
+
+	div.toolDmx fieldset {
+		margin: 10px 0;
 	}
 }
 

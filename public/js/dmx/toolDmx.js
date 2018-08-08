@@ -59,7 +59,7 @@ ToolDmx.prototype.emitSetValue = function(ref, value) {
 };
 
 ToolDmx.prototype.onSetValue = function(args) {
-	this.faders.setValue(args.ref, args.value);
+	this.faders.onSetValue(args.ref, args.value);
 };
 
 ToolDmx.prototype.onConfigure = function(args) {

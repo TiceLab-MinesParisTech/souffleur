@@ -21,8 +21,8 @@ Terminal.prototype.init = function() {
 	this.node.className = "terminal";
 	
 	this.node.appendChild(this.output.node);
-	this.node.appendChild(this.toolbar.node);
 	this.node.appendChild(this.actionbar.node);
+	this.node.appendChild(this.toolbar.node);
 	this.output.setContent(this.view.node);
 	this.node.appendChild(this.notifier.node);
 	this.node.appendChild(this.tally.node);
