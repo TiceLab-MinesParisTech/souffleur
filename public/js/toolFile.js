@@ -26,7 +26,8 @@ ToolFile.prototype.init = function() {
 
 	this.nodeButton.appendChild(document.createTextNode("File"));
 	this.nodeButton.onclick = function() { self.onclick() };
-
+	this.nodeButton.className = "toolButton";
+	
 	this.node.appendChild(this.nodePopup);
 	this.nodePopup.appendChild(this.tabs.node);
 

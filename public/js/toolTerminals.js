@@ -25,6 +25,7 @@ ToolTerminals.prototype.init = function() {
 
 	this.button.appendChild(document.createTextNode("Settings"));
 	this.button.onclick = function() { self.onclick() };
+	this.button.className = "toolButton";
 
 	this.node.appendChild(this.popup);
 	this.setVisibility(false);

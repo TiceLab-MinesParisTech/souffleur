@@ -39,6 +39,7 @@ ToolDmx.prototype.init = function() {
 	
 	this.node.className = "toolDmx";
 	this.nodeButton.appendChild(document.createTextNode("DMX"));
+	this.nodeButton.className = "toolButton";
 	
 	this.node.appendChild(this.nodeButton);
 	this.node.appendChild(this.nodePopup);

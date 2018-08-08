@@ -7,9 +7,10 @@ var ToolAbout = function() {
 
 ToolAbout.prototype.init = function() {
 	var self = this;
+	
 	this.node.appendChild(document.createTextNode("About"));
 	this.node.onclick = function() { self.switchVisibility() };
-	this.node.className = "toolAbout";
+	this.node.className = "toolAbout toolButton";
 	this.node.appendChild(this.popup);
 
 	this.popup.className = "popup";

@@ -92,10 +92,9 @@ nav {
 
 .toolbarTools > div {
 	display: inline-block;
-	margin: 5px;
 }
 
-.toolbarTools > button {
+.toolbarTools .toolButton {
 	margin: 5px;
 }
 
@@ -121,7 +120,7 @@ nav {
 	position: fixed; 
 	top: 10%;
 	right: 0;
-	padding: 20px;
+	padding: 10px;
 	font-family: vernada, verdana, arial;
 	font-weight: bold;
 	opacity: 0.8;
@@ -606,6 +605,7 @@ div.toolDmx > nav {
 	.toolbar {
 		margin: 0;
 		right: 0;
+		font-size: 18px;
 	}
 
 	.toolTerminals > nav {
@@ -621,8 +621,8 @@ div.toolDmx > nav {
 		max-height: none;
 	}
 
-	.toolbar {
-		font-size: 18px;
+	.toolbarTools .toolButton {
+		margin: 0;
 	}
 
 	.terminalOutput {
@@ -651,6 +651,14 @@ div.toolDmx > nav {
 
 	.viewScroll div.parts div.slide {
 		font-size: 75%;
+	}
+	
+	.actionbar {
+		padding: 0;
+	}
+	
+	.actionbar button {
+		margin: 10px 0;
 	}
 	
 	div.toolDmx > nav {
