@@ -623,6 +623,7 @@ div.toolDmx > nav {
 
 	.toolbarTools .toolButton {
 		margin: 0;
+		font-size: 80%;
 	}
 
 	.terminalOutput {
