@@ -36,8 +36,8 @@ SettingToolSize.prototype.init = function() {
 	this.buttonMore.appendChild(document.createTextNode("+"));
 	this.node.appendChild(this.buttonMore);
 
-	this.buttonMore.onclick = function() { self.inc(1); };
-	this.buttonLess.onclick = function() { self.inc(-1); };
+	this.buttonMore.onclick = function() { self.inc(1); return false; };
+	this.buttonLess.onclick = function() { self.inc(-1); return false; };
 
 	this.show(this.get());
 };

@@ -21,8 +21,8 @@ ViewScroll.prototype.init = function() {
 	this.node.appendChild(this.scroller.node);
 	this.scroller.node.appendChild(this.parts.node);
 
-	this.node.onclick = function(e) { self.onclick(e); };
-	this.node.ondblclick = function(e) { self.ondblclick(e); };
+	this.node.onclick = function(e) { self.onclick(e); return false; };
+	this.node.ondblclick = function(e) { self.ondblclick(e); return false; };
 };
 
 ViewScroll.prototype.load = function(data) {

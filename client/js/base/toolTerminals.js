@@ -100,11 +100,11 @@ ToolTerminalsItem.prototype.init = function() {
 	nav.appendChild(div);
 
 	div.appendChild(document.createTextNode(this.data.size.width + "×" + this.data.size.height));
-	div.onclick = this.socketid ? function() { self.resize() } : function() { self.resetSize() };
+	div.onclick = this.socketid ? function() { self.resize() } : function() { self.resetSize(); return false; };
 
 	var div = document.createElement("div");
 	div.className = "id";
-	div.onclick = function() { self.id() };
+	div.onclick = function() { self.id(); return false; };
 	nav.appendChild(div);
 };
 
