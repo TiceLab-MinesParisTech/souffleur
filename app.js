@@ -112,7 +112,7 @@ Server.prototype.filesList = function(dir) {
 Server.prototype.init = function() {
 	var self = this;
 
-	this.app.use('/', Express.static(__dirname + "/public", {"index": "index.html"}));
+	this.app.use('/', Express.static(__dirname + "/client", {"index": "index.html"}));
 
 	this.app.get('/clients', function(req, res) {
 		var idList = [];
