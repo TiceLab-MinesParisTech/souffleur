@@ -4,6 +4,13 @@ var Menubar = function(terminal) {
 	this.node = document.createElement("nav");
 	this.icon = new MenubarIcon(this);
 	this.items = new MenubarItems(this);
+	this.current = null;
+	
+	this.toolTracksList = new ToolTracksList(this.terminal);
+	this.toolFile = new ToolFile(this.terminal);
+	this.toolTerminals = new ToolTerminals(this.terminal);
+	this.toolDmx = new ToolDmx(this.terminal);
+
 	this.init();
 };
 
@@ -12,11 +19,19 @@ Menubar.prototype.init = function() {
 	this.node.appendChild(this.icon.node);
 	this.node.appendChild(this.items.node);
 	
-	this.items.addItem(new MenubarItem("File"));
-	this.items.addItem(new MenubarItem("Settings"));
-	this.items.addItem(new MenubarItem("DMX"));
-	this.items.addItem(new MenubarItem("About…"));
+	this.items.addItem(new MenubarItem(this, "File", this.toolFile));
+	this.items.addItem(new MenubarItem(this, "Settings", this.toolTerminals));
+	this.items.addItem(new MenubarItem(this, "DMX", this.toolDmx));
+	this.items.addItem(new MenubarItem(this, "About…", new ToolAbout()));
 	this.items.setVisibility(false);
+};
+
+Menubar.prototype.setCurrent = function(item) {
+	if (this.current == item) return;
+	
+	if (this.current) this.current.setCurrent(false);
+	this.current = item;
+	if (this.current) this.current.setCurrent(true);
 };
 
 Menubar.prototype.setVisibility = function(value) {
@@ -61,6 +76,43 @@ MenubarItems.prototype.switchVisibility = function() {
 	this.setVisibility(!this.getVisibility());
 };
 
+var MenubarItem = function(menubar, title, tool) {
+	var self = this;
+	this.menubar = menubar;
+	this.tool = tool;
+
+	this.node = document.createElement("li");
+
+	this.nodeTitle = document.createElement("div");
+	this.nodeContent = document.createElement("div");
+
+	this.nodeTitle.appendChild(document.createTextNode(title));
+	this.nodeTitle.className = "title";
+	this.nodeTitle.addEventListener("click", function(e) { return self.onclick(e); });
+	this.node.appendChild(this.nodeTitle);
+
+	this.node.appendChild(this.nodeContent);
+	this.nodeContent.className = "tool";
+	
+	this.nodeContent.appendChild(tool.node);
+	this.tool.close = function() { self.close() };
+};
+ 
+MenubarItem.prototype.onclick = function(e) {
+	this.menubar.setCurrent(this.isCurrent ? null : this);
+	return false;
+};
+
+MenubarItem.prototype.close = function() {
+	this.menubar.items.setVisibility(false);
+};
+
+MenubarItem.prototype.setCurrent = function(value) {
+	this.isCurrent = value;
+	if ("show" in this.tool) this.tool.show();
+	this.node.className = value ? "current" : "";
+};
+
 var MenubarIcon = function(menubar) {
 	this.menubar = menubar;
 
@@ -83,9 +135,4 @@ MenubarIcon.prototype.init = function() {
 	this.node.appendChild(this.iconNode);
 };
 
-var MenubarItem = function(title, tool) {
-	this.node = document.createElement("li");
-	this.node.appendChild(document.createTextNode(title));
-};
- 
 

@@ -1,9 +1,7 @@
 var ToolTerminals = function(terminal) {
 	this.terminal = terminal;
 
-	this.button = document.createElement("button");
-	this.popup = document.createElement("nav");
-	this.node = document.createElement("div");
+	this.node = document.createElement("nav");
 	this.items = [];
 	this.init();
 }
@@ -18,33 +16,20 @@ ToolTerminals.prototype.onclick = function() {
 }
 
 ToolTerminals.prototype.init = function() {
-	var self = this;
-
 	this.node.className = "toolTerminals";
-	this.node.appendChild(this.button);
-
-	this.button.appendChild(document.createTextNode("Settings"));
-	this.button.onclick = function() { self.onclick() };
-	this.button.className = "toolButton";
-
-	this.node.appendChild(this.popup);
-	this.popup.className = "toolbarPopup";
-	
-	this.setVisibility(false);
-
 }
 
 ToolTerminals.prototype.clearItems = function() {
 	this.items = [];
-	while (this.popup.firstChild) this.popup.removeChild(this.popup.firstChild);
+	while (this.node.firstChild) this.node.removeChild(this.node.firstChild);
 };
 
 ToolTerminals.prototype.addItem = function(item, ontop) {
 	this.items.push(item);
 	if (ontop)
-		this.popup.insertBefore(item.node, this.popup.firstChild);
+		this.node.insertBefore(item.node, this.node.firstChild);
 	else
-		this.popup.appendChild(item.node);
+		this.node.appendChild(item.node);
 };
 
 ToolTerminals.prototype.setItems = function(list) {
@@ -55,7 +40,7 @@ ToolTerminals.prototype.setItems = function(list) {
 		this.addItem(item, arr.socketid == null);
 	}
 	if (this.items.length < 1) {
-		this.popup.appendChild(document.createTextNode("No connected terminals"));
+		this.node.appendChild(document.createTextNode("No connected terminals"));
 	}
 }
 
@@ -63,7 +48,6 @@ ToolTerminals.prototype.show = function() {
 	var self = this;
 	this.terminal.client.loadClientsList(function(data) {
 		self.setItems(data);
-		self.setVisibility(true);
 	});
 }
 
@@ -74,18 +58,6 @@ ToolTerminals.prototype.showParam = function(socketid, key, value) {
 			item.settingsEditor.show(key, value);
 		}
 	}
-};
-
-ToolTerminals.prototype.setVisibility = function(value) {
-	this.popup.style.display = value ? "" : "none";
-};
-
-ToolTerminals.prototype.getVisibility = function(value) {
-	return this.popup.style.display == "" ? true : false;
-};
-
-ToolTerminals.prototype.switchVisibility = function() {
-	this.setVisibility(!this.getVisibility());
 };
 
 var ToolTerminalsItem = function(terminal, arr) {

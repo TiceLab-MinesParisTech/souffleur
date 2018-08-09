@@ -3,55 +3,27 @@ var ToolDmx = function(terminal) {
 	this.faders = new Faders(this);
 	
 	this.node = document.createElement("div");
-	this.nodeButton = document.createElement("button");
-	this.nodePopup = document.createElement("nav");
 	this.init();
 };
 
-ToolDmx.prototype.onclick = function() {
-	this.switchVisibility();
-};
-
-ToolDmx.prototype.getVisibility = function(value) {
-	return this.nodePopup.style.display == "";
-};
-
-ToolDmx.prototype.setVisibility = function(value) {
-	this.nodePopup.style.display = value ? "" : "none";
-};
-
 ToolDmx.prototype.setEnabled = function(value) {
-	this.node.style.display = value ? "" : "none";
-};
-
-ToolDmx.prototype.switchVisibility = function() {
-	this.setVisibility(!this.getVisibility());
+	//this.node.style.display = value ? "" : "none";
 };
 
 ToolDmx.prototype.configure = function(arr) {
 	this.faders.setChannels(arr.channels);
 	this.faders.configure(arr.faders);
-	this.nodePopup.appendChild(this.faders.node);
 };
 
 ToolDmx.prototype.init = function() {
 	var self = this;
 	
 	this.node.className = "toolDmx";
-	this.nodeButton.appendChild(document.createTextNode("DMX"));
-	this.nodeButton.className = "toolButton";
+	this.node.appendChild(this.faders.node);
 	
-	this.node.appendChild(this.nodeButton);
-	
-	this.node.appendChild(this.nodePopup);
-	this.nodePopup.className = "toolbarPopup";
-	
-	this.nodeButton.onclick = function() { self.onclick() };
-	this.setVisibility(false);
-
 	this.terminal.client.socket.on("dmx::faders::set", function(args) { self.onSetValue(args); });
 	this.terminal.client.socket.on("dmx::faders::configure", function(args) { self.onConfigure(args); });
-	this.setEnabled(false);
+//	this.setEnabled(false);
 };
 
 ToolDmx.prototype.emit = function(name, args) {

@@ -74,7 +74,7 @@ nav.menubar > button {
 	margin: 0;
 	padding: 15px;
 	border: 1px solid gray;
-	background-color: #eee;
+	background-color: lightgray;
 }
 
 nav.menubar {
@@ -90,10 +90,9 @@ nav.menubar {
 nav.menubar button.icon {
 }
 
-nav.menubar ul {
-	background-color: #eee;
+nav.menubar > ul {
+	background-color: lightgray;
 	border: 1px solid gray;
-	border-radius: 8px;
 	padding: 2px;
 	margin: 0;
 	list-style-type: none;
@@ -101,58 +100,30 @@ nav.menubar ul {
 	top: -20px;
 }
 
-nav.menubar ul li {
+nav.menubar > ul li > div.title {
 	padding: 5px 15px;
 	cursor: pointer;
 }
 
-nav.menubar ul li:hover {
-	background-color: #ddd;
+nav.menubar > ul li.current > div.title {
+	font-weight: bold;
 }
 
-.toolbar {
-	font-family: vernada, verdana, arial;
-	top: 0;
-	left: 0;
-	margin: 20px;
-	font-size: 14px;
-	position: absolute; 
-	border: 1px solid gray;
-	padding: 5px;
-	background-color: lightgray;
-}
-
-.toolbarTools {
-	display: inline-block;
-	padding: 0;
-	margin: 0;
-}
-
-.toolbarTools > div {
-	display: inline-block;
-}
-
-.toolbarTools .toolButton {
-	margin: 5px;
-}
-
-.toolbarTools > .separator:after {
-	content: " ";
-}
-
-.toolbarTools > .separator {
-	display: inline-block;
-	border-left: 1px solid white;
-	margin: 5px 10px;
-	width: 10px;
-}
-
-.toolbarPopup {
-	border: 1px solid black;
-	position: absolute;
+nav.menubar > ul li > div.tool {
 	background-color: #eee;
-	border-radius: 8px;
-	padding: 5px;
+	max-height: 0;
+	max-width: 250px;
+	overflow: hidden;
+}
+
+nav.menubar > ul li.current > div.tool {
+	max-width: none;
+	max-height: none;
+	overflow: auto;
+}
+
+nav.menubar > ul li:hover {
+	background-color: #ddd;
 }
 
 .actionbar {
@@ -164,19 +135,6 @@ nav.menubar ul li:hover {
 	font-weight: bold;
 	opacity: 0.8;
 }
-
-.toolbar.minified {
-	border: none;
-	background: none;
-	padding: 0;
-	opacity: 0.8;
-	margin: 5px;
-}
-
-.toolbar > button.menu {
-	border: none;
-	background: none;
-} 
 
 .actionbar button {
 	display: block;
@@ -271,13 +229,6 @@ nav.menubar ul li:hover {
 
 .toolTerminals > nav {
 	min-width: 200px;
-	border: 1px solid black;
-	overflow: auto;
-	position: absolute;
-	background-color: #eee;
-	border-radius: 8px;
-	overflow: auto;
-	max-height: 800px;
 }
 
 .toolFile > nav {
@@ -562,7 +513,7 @@ nav.menubar ul li:hover {
 	background-color: lightgray;
 }
 
-.toolAbout > .toolbarPopup {
+.toolAbout {
 	font-size: 90%;
 	min-width: 200px;
 	text-align: center;
@@ -601,7 +552,7 @@ div.fader {
 }
 
 div.fader input {
-	width: 400px;
+	width: 380px;
 }
 
 div.fader div.display {
@@ -626,37 +577,22 @@ div.toolDmx > nav {
 	overflow: auto;
 }
 
-@media (max-width: 900px) {
-	.toolbarPopup {
-		left: 0;
-	}
-}
-
 @media (max-width: 480px) {
-	.toolbar {
-		margin: 0;
+	nav.menubar {
 		right: 0;
-		font-size: 18px;
-	}
-
-	.toolTerminals > nav {
-		overflow: normal;
-		max-height: none;
-	}
-
-	.toolbarTools .toolButton {
+		left: 0;
 		margin: 0;
-		font-size: 80%;
+		padding: 0;
+	}
+
+	div.fader input {
+		width: 90%;
 	}
 
 	.terminalOutput {
 		font-size: 30px;
 	}
 	
-	.toolbar.minified {
-		right: auto;
-	}
-
 	.notifier {
 		margin: 4px;
 		top: auto;
@@ -679,15 +615,7 @@ div.toolDmx > nav {
 		margin: 10px 0;
 	}
 	
-	.toolbarPopup {
-		right: 0;
-		left: 0;
-		width: auto;
-		padding: 5px 0;
-	}
-	
 	div.toolDmx div.fader input {
-		width: 90%;
 	}
 
 	div.toolDmx fieldset {

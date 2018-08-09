@@ -6,7 +6,6 @@ var Terminal = function(ref) {
 	this.view = new ViewEmpty(this);
 	this.tally = new Tally(this);
 	this.menubar = new Menubar(this);
-	this.toolbar = new Toolbar(this);
 	this.actionbar = new Actionbar(this);
 	this.player = new Player(this);	
 	this.keyboard = new Keyboard(this);	
@@ -91,9 +90,9 @@ Terminal.prototype.loadTrack = function(track) {
 
 Terminal.prototype.loadTracks = function(arr) {
 	this.setView(null);
-	this.toolbar.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
-	this.toolbar.toolFile.setFilename(arr.filename);
-	this.toolbar.toolTracksList.setTracks(arr.tracks);
+	this.menubar.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
+	this.menubar.toolFile.setFilename(arr.filename);
+	this.menubar.toolTracksList.setTracks(arr.tracks);
 	this.applyDefaultTrack(this.settings.getParam("defaultTrack"));
 	this.stop(0);
 };
@@ -108,7 +107,7 @@ Terminal.prototype.emitStop = function(position) {
 };
 
 Terminal.prototype.emitRecorderStart = function() {
-	var fileId = this.toolbar.toolFile.getId();
+	var fileId = this.menubar.toolFile.getId();
 	this.client.emitRecorderStart(fileId ? fileId + "-%src%" : null);
 };
 
@@ -141,7 +140,7 @@ Terminal.prototype.applyFlip = function(value) {
 };
 
 Terminal.prototype.applyToolbarVisibility = function(value) {
-	this.toolbar.setVisibility(value);
+	this.menubar.setVisibility(value);
 	this.actionbar.setVisibility(value);
 };
 
@@ -149,7 +148,7 @@ Terminal.prototype.applyNotifierVisibility = function(value) {
 	this.notifier.setVisibility(value);
 }
 Terminal.prototype.applyDefaultTrack = function(value) {
-	this.toolbar.toolTracksList.set(value);
+	this.menubar.toolTracksList.set(value);
 };
 
 Terminal.prototype.applyColors = function(value) {
@@ -165,7 +164,7 @@ Terminal.prototype.setSettingsParam = function(socketid, key, value) {
 		this.settings.saveParam(key, value);
 		this.settings.notifyParam(key, value);
 	}
-	this.toolbar.toolTerminals.showParam(socketid, key, value);
+	this.menubar.toolTerminals.showParam(socketid, key, value);
 };
 
 Terminal.prototype.id = function() {
