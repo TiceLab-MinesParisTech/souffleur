@@ -88,7 +88,7 @@ ToolTerminalsItem.prototype.resetSize = function() {
 ToolTerminalsItem.prototype.init = function() {
 	var self = this;
 	
-	this.node.className = "toolTerminalsItem" + (this.socketid == null ? this.node.className = " local" : "");
+	this.node.className = "toolTerminalsItem" + (this.socketid == null ? this.node.className = "" : " external");
 
 	this.node.appendChild(this.settingsEditor.node);
 

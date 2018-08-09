@@ -11,7 +11,7 @@ Settings.params = {
 	"toolbarVisibility": new SettingsParamBool("toolbarVisibility", "toolbar", true),
 	"notifierVisibility": new SettingsParamBool("notifierVisibility", "notifications", true),
 	"defaultTrack": new SettingsParamString("defaultTrack", "default track", "main", "<no default track>"),
-	"colors": new SettingsParamChoice("colors", "colors", "", {"": "Black on white", "wb": "White on black", "gb" : "Green on black"})
+	"colors": new SettingsParamChoice("colors", "colors", "", {"": "Black on white", "wb": "White on black"})
 };
 	
 Settings.prototype.applyParam = function(key) {

@@ -36,7 +36,7 @@ ToolFile.prototype.loadText = function(filename, text) {
 
 	var file = new FileTxt(filename, "files/" + this.dirname(filename));
 	file.parse(text);
-	this.terminal.client.emitLoadTracks(file.get());
+//	this.terminal.client.emitLoadTracks(file.get());
 };
 
 ToolFile.prototype.updateTitle = function() {

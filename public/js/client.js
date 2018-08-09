@@ -11,7 +11,6 @@ Client.prototype.mapping =  {
 	"play": "onPlay",
 	"stop": "onStop",
 	"speed::set": "onSetSpeed",
-	"tracks::load": "onLoadTracks",
 	"notify": "onNotify",
 	"id": "onId",
 	"register": "onRegister",
@@ -99,10 +98,6 @@ Client.prototype.emit = function(name, args) {
 
 Client.prototype.emitLoadTracks = function(tracks) {
 	this.emit('tracks::load', tracks);
-};
-
-Client.prototype.onLoadTracks = function(tracks) {
-	this.terminal.loadTracks(tracks);
 };
 
 Client.prototype.emitSetSpeed = function(value) {

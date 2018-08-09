@@ -20,6 +20,10 @@ Actionbar.prototype.init = function() {
 	this.node.appendChild(this.toolJump.node);
 };
 
+Actionbar.prototype.addAction = function(action) {
+	this.node.appendChild(action.node);
+};
+
 Actionbar.prototype.setVisibility = function(value) {
 	this.node.style.display = value ? "" : "none";
 };

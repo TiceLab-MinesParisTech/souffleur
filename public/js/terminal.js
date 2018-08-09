@@ -3,12 +3,11 @@ var Terminal = function(ref) {
 	this.settings = new Settings(this, ref);
 	this.notifier = new Notifier(this);
 	this.output = new TerminalOutput(this);
-	this.view = new ViewEmpty(this);
 	this.tally = new Tally(this);
 	this.menubar = new Menubar(this);
 	this.actionbar = new Actionbar(this);
-	this.player = new Player(this);	
 	this.keyboard = new Keyboard(this);	
+	this.prompterModule = new PrompterModule(this);
 
 	this.node = document.createElement("div");
 	this.nodeCSS = document.createElement("link");
@@ -23,7 +22,7 @@ Terminal.prototype.init = function() {
 	this.node.appendChild(this.output.node);
 	this.node.appendChild(this.actionbar.node);
 	this.node.appendChild(this.menubar.node);
-	this.output.setContent(this.view.node);
+
 	this.node.appendChild(this.notifier.node);
 	this.node.appendChild(this.tally.node);
 
@@ -49,52 +48,16 @@ Terminal.prototype.setSettings = function(arr) {
 	this.settings.set(arr);
 }
 
-Terminal.prototype.setView = function(view) {
-	if (!view) view = new ViewEmpty(this);
-	this.output.setContent(view.node);
-	this.view = view;
-};
-
 Terminal.prototype.play = function(position, speed) {
-	this.player.play(position, speed);
+	this.prompterModule.player.play(position, speed);
 	this.actionbar.toolStartStop.setValue(true);
 	this.actionbar.toolRecorder.setPlaying(true);
 };
 
 Terminal.prototype.stop = function(position) {
-	this.player.stop(position);
+	this.prompterModule.player.stop(position);
 	this.actionbar.toolStartStop.setValue(false);
 	this.actionbar.toolRecorder.setPlaying(false);
-};
-
-Terminal.prototype.load = function() {
-	var self = this;
-	this.client.loadCurrentTracks(function(tracks) {
-		if (tracks) self.loadTracks(tracks) 
-	});
-};
-
-Terminal.prototype.loadTrack = function(track) {
-	var mapping = {
-		"scroll": ViewScroll,
-		"slider": ViewSlider
-	};
-	var Class = track.type in mapping ? mapping[track.type] : ViewEmpty;
-	var view = new Class(this);
-	this.setView(view);
-	this.settings.applyParam("size");
-	this.settings.applyParam("flip");
-	this.view.load(track.parts);
-	this.view.setPosition(this.player.getPosition());
-};
-
-Terminal.prototype.loadTracks = function(arr) {
-	this.setView(null);
-	this.menubar.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
-	this.menubar.toolFile.setFilename(arr.filename);
-	this.menubar.toolTracksList.setTracks(arr.tracks);
-	this.applyDefaultTrack(this.settings.getParam("defaultTrack"));
-	this.stop(0);
 };
 
 Terminal.prototype.emitPlay = function(position) {
@@ -125,11 +88,11 @@ Terminal.prototype.setRecorderStatus = function(arr) {
 
 Terminal.prototype.emitSetSpeed = function(value) {
 	this.client.emitSetSpeed(value);
-	if (this.player.isPlaying()) this.client.emitPlay(this.player.getPosition(), value);
+	if (this.prompterModule.player.isPlaying()) this.client.emitPlay(this.prompterModule.player.getPosition(), value);
 };
 
 Terminal.prototype.applySize = function(value) {
-	this.view.setSize(value);
+	//this.view.setSize(value);
 };
 
 Terminal.prototype.applyName = function(value) {
@@ -148,7 +111,7 @@ Terminal.prototype.applyNotifierVisibility = function(value) {
 	this.notifier.setVisibility(value);
 }
 Terminal.prototype.applyDefaultTrack = function(value) {
-	this.menubar.toolTracksList.set(value);
+//	this.menubar.toolTracksList.set(value);
 };
 
 Terminal.prototype.applyColors = function(value) {
@@ -186,6 +149,10 @@ Terminal.prototype.getData = function() {
 	};
 };
 
+Terminal.prototype.load = function() {
+	this.prompterModule.load();
+};
+
 Terminal.prototype.onresize = function() {
 	this.client.emitClientSet();
 };
@@ -213,8 +180,8 @@ TerminalOutput.prototype.resetSize = function() {
 };
 
 TerminalOutput.prototype.setSize = function(width, height) {
-	this.node.style.top = "90px";
-	this.node.style.left = "20px";
+	this.node.style.top = "60px";
+	this.node.style.left = "10px";
 	this.node.style.width = width + "px";
 	this.node.style.height = height + "px";
 };

@@ -21,9 +21,13 @@ ToolDmx.prototype.init = function() {
 	this.node.className = "toolDmx";
 	this.node.appendChild(this.faders.node);
 	
-	this.terminal.client.socket.on("dmx::faders::set", function(args) { self.onSetValue(args); });
-	this.terminal.client.socket.on("dmx::faders::configure", function(args) { self.onConfigure(args); });
+	this.on("dmx::faders::set", function(args) { self.onSetValue(args); });
+	this.on("dmx::faders::configure", function(args) { self.onConfigure(args); });
 //	this.setEnabled(false);
+};
+
+ToolDmx.prototype.on = function(name, cb) {
+	this.terminal.client.socket.on(name, cb);
 };
 
 ToolDmx.prototype.emit = function(name, args) {

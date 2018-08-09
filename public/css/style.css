@@ -91,6 +91,7 @@ nav.menubar button.icon {
 }
 
 nav.menubar > ul {
+	border-radius: 0 8px 8px 8px; 
 	background-color: lightgray;
 	border: 1px solid gray;
 	padding: 2px;
@@ -482,7 +483,6 @@ nav.menubar > ul li:hover {
 	padding: 15px;
 	border-radius: 8px;
 	margin: 5px;
-	background-color: white;
 }
 
 .toolTerminalsItem nav > div {
@@ -510,9 +510,8 @@ nav.menubar > ul li:hover {
 	text-align: right;
 }
 
-.toolTerminalsItem.local {
-	border:inherit;
-	background-color: lightgray;
+.toolTerminalsItem.external {
+	background-color: white;
 }
 
 .toolAbout {
