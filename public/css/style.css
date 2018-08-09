@@ -45,7 +45,6 @@ nav {
 	font-weight: bold;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 15px;
-	z-index: 2;
 }
 
 .terminal.flip .notifier {
@@ -71,76 +70,73 @@ nav {
 	transition: opacity 0.1s ease-in-out;
 } 
 
-.toolbar {
-	line-height: 0;
-	font-family: vernada, verdana, arial;
-	top: 0;
-	left: 0;
-	margin: 20px;
-	font-size: 14px;
-	position: absolute; 
+nav.menubar > button {
+	margin: 0;
+	padding: 15px;
 	border: 1px solid gray;
-	padding: 5px;
 	background-color: lightgray;
 }
 
-.toolbarTools {
-	display: inline-block;
-	padding: 0;
+nav.menubar {
+	font-family: vernada, verdana, arial;
+	top: 0;
+	left: 0;
+	margin: 5px;
+	font-size: 14px;
+	position: absolute; 
+	padding: 2px;
+}
+
+nav.menubar button.icon {
+}
+
+nav.menubar > ul {
+	background-color: lightgray;
+	border: 1px solid gray;
+	padding: 2px;
 	margin: 0;
+	list-style-type: none;
+	left: 20px;
+	top: -20px;
 }
 
-.toolbarTools > div {
-	display: inline-block;
-	margin: 5px;
+nav.menubar > ul li > div.title {
+	padding: 5px 15px;
+	cursor: pointer;
 }
 
-.toolbarTools > button {
-	margin: 5px;
+nav.menubar > ul li.current > div.title {
+	font-weight: bold;
 }
 
-.toolbarTools > .separator:after {
-	content: " ";
+nav.menubar > ul li > div.tool {
+	background-color: #eee;
+	max-height: 0;
+	max-width: 250px;
+	overflow: hidden;
 }
 
-.toolbarTools > .separator {
-	display: inline-block;
-	border-left: 1px solid white;
-	margin: 5px 10px;
-	width: 10px;
+nav.menubar > ul li.current > div.tool {
+	max-width: none;
+	max-height: none;
+	overflow: auto;
 }
 
-.toolbarPopup .popup {
-	border: 1px solid black;
-	padding: 10px;
-	position: absolute;
-	background-color: white;
+nav.menubar > ul li:hover {
+	background-color: #ddd;
 }
 
 .actionbar {
 	position: fixed; 
 	top: 10%;
 	right: 0;
-	padding: 20px;
+	padding: 10px;
 	font-family: vernada, verdana, arial;
 	font-weight: bold;
 	opacity: 0.8;
 }
 
-.toolbar.minified {
-	border: none;
-	background: none;
-	padding: 0;
-	opacity: 0.8;
-	margin: 5px;
-}
-
-.toolbar > button.menu {
-	border: none;
-	background: none;
-} 
-
-.actionbar button, .toolbar.minified > button.menu {
+.actionbar button {
 	display: block;
 	padding: 25px;
 	width: 80px;
@@ -233,27 +229,15 @@ nav {
 
 .toolTerminals > nav {
 	min-width: 200px;
-	border: 1px solid black;
-	overflow: auto;
-	position: absolute;
-	background-color: #eee;
-	border-radius: 8px;
-	overflow: auto;
-	max-height: 800px;
 }
 
 .toolFile > nav {
-	border: 1px solid black;
 	overflow: auto;
-	position: absolute;
-	z-index: 1;
-	background-color: #eee;
-	border-radius: 8px;
 }
 
 .toolTabs > ul {
+	padding: 0;
 	margin: 0;
-	padding: 4px;
 }
 
 .toolTabs > ul li {
@@ -288,7 +272,9 @@ nav {
 	padding: 5px	;
 	border: 1px solid gray;
 	margin: 0px 10px 10px 10px;
-	max-height: 400px;
+	max-height: 600px;
+	min-height: 200px;
+	min-width: 200px;
 	overflow: auto;
 	background-color: white;
 	resize: both;
@@ -529,14 +515,11 @@ nav {
 	background-color: lightgray;
 }
 
-.toolAbout > .popup {
+.toolAbout {
 	font-size: 90%;
-	border: 1px solid black;
-	position: absolute;
-	background-color: #eee;
-	border-radius: 8px;
-	padding: 10px;
 	min-width: 200px;
+	text-align: center;
+	padding: 20px;
 }
 
 .toolAbout .version {
@@ -571,7 +554,7 @@ div.fader {
 }
 
 div.fader input {
-	width: 400px;
+	width: 380px;
 }
 
 div.fader div.display {
@@ -593,51 +576,25 @@ div.fader span.channel {
 }
 
 div.toolDmx > nav {
-	position: absolute;
-	border: 1px solid black;
-	background-color: #eee;
-	border-radius: 8px;
 	overflow: auto;
-	padding: 5px;
 }
 
 @media (max-width: 480px) {
-	.toolbar {
+	nav.menubar {
+		right: 0;
+		left: 0;
 		margin: 0;
-		right: 0;
+		padding: 0;
 	}
 
-	.toolTerminals > nav {
-		right: 0;
-		left: 0;
-		overflow: normal;
-		max-height: none;
-	}
-
-	.toolAbout .popup {
-		right: 0;
-		left: 0;
-		max-height: none;
-	}
-
-	.toolbar {
-		font-size: 18px;
+	div.fader input {
+		width: 90%;
 	}
 
 	.terminalOutput {
 		font-size: 30px;
 	}
 	
-	.toolbar.minified {
-		right: auto;
-	}
-
-	.toolFile > nav {
-		right: 0;
-		left: 0;
-		width: auto;
-	}
-
 	.notifier {
 		margin: 4px;
 		top: auto;
@@ -650,6 +607,21 @@ div.toolDmx > nav {
 
 	.viewScroll div.parts div.slide {
 		font-size: 75%;
+	}
+	
+	.actionbar {
+		padding: 0;
+	}
+	
+	.actionbar button {
+		margin: 10px 0;
+	}
+	
+	div.toolDmx div.fader input {
+	}
+
+	div.toolDmx fieldset {
+		margin: 10px 0;
 	}
 }
 
