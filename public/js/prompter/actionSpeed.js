@@ -1,5 +1,5 @@
-var ToolSpeed = function(terminal) {
-	this.terminal = terminal;
+var ActionSpeed = function(module) {
+	this.module = module;
 
 	this.buttonMore = document.createElement("button");
 	this.buttonLess = document.createElement("button");
@@ -10,22 +10,22 @@ var ToolSpeed = function(terminal) {
 	this.init();
 }
 
-ToolSpeed.prototype.emitIncSpeed = function(value) {
-	this.terminal.emitSetSpeed(Math.round((this.speed + value) * 10) / 10);
+ActionSpeed.prototype.emitIncSpeed = function(value) {
+	this.module.emitSetSpeed(Math.round((this.speed + value) * 10) / 10);
 }
 
-ToolSpeed.prototype.setSpeed = function(value) {
+ActionSpeed.prototype.setSpeed = function(value) {
 	this.speed = value;
 	var str = Math.floor(value * 100) + "%";
 	this.label.firstChild.nodeValue = str;
-	this.terminal.notifier.showParam("speed", str);
+	this.module.terminal.notifier.showParam("speed", str);
 }
 
-ToolSpeed.prototype.getSpeed = function() {
+ActionSpeed.prototype.getSpeed = function() {
 	return this.speed;
 }
 
-ToolSpeed.prototype.init = function() {
+ActionSpeed.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "toolSpeed";

@@ -1,5 +1,5 @@
-var ToolJump = function(terminal) {
-	this.terminal = terminal;
+var ActionJump = function(module) {
+	this.module = module;
 
 	this.buttonNext = document.createElement("button");
 	this.buttonPrev = document.createElement("button");
@@ -9,7 +9,7 @@ var ToolJump = function(terminal) {
 }
 
 
-ToolJump.prototype.init = function() {
+ActionJump.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "toolJump";
@@ -31,14 +31,14 @@ ToolJump.prototype.init = function() {
 	};
 }
 
-ToolJump.prototype.begining = function() {
-	this.terminal.view.setPosition(0);
+ActionJump.prototype.begining = function() {
+	this.module.view.setPosition(0);
 }
 
-ToolJump.prototype.previous = function() {
-	this.terminal.view.previous();
+ActionJump.prototype.previous = function() {
+	this.module.view.previous();
 }
 
-ToolJump.prototype.next = function() {
-	this.terminal.view.next();
+ActionJump.prototype.next = function() {
+	this.module.view.next();
 }

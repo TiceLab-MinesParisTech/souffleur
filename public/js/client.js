@@ -8,9 +8,6 @@ var Client = function(terminal) {
 
 Client.prototype.mapping =  { 
 	"client::settings::param::set": "onSettingsParam",
-	"play": "onPlay",
-	"stop": "onStop",
-	"speed::set": "onSetSpeed",
 	"notify": "onNotify",
 	"id": "onId",
 	"register": "onRegister",
@@ -94,34 +91,6 @@ Client.prototype.loadClientsList = function(fct) {
 
 Client.prototype.emit = function(name, args) {
 	this.socket.emit(name, args);
-};
-
-Client.prototype.emitLoadTracks = function(tracks) {
-	this.emit('tracks::load', tracks);
-};
-
-Client.prototype.emitSetSpeed = function(value) {
-	this.emit('speed::set', value);
-};
-
-Client.prototype.onSetSpeed = function(value) {
-	this.terminal.actionbar.toolSpeed.setSpeed(value);
-};
-
-Client.prototype.emitPlay = function(position, speed) {
-	this.emit('play', {"position": position, "speed": speed});
-};
-
-Client.prototype.onPlay = function(args) {
-	this.terminal.play(args.position, args.speed);
-};
-
-Client.prototype.emitStop = function(position) {
-	this.emit('stop', position);
-};
-
-Client.prototype.onStop = function(position) {
-	this.terminal.stop(position);
 };
 
 Client.prototype.emitRecorderStart = function(name) {

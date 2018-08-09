@@ -49,15 +49,15 @@ Terminal.prototype.setSettings = function(arr) {
 }
 
 Terminal.prototype.play = function(position, speed) {
-	this.prompterModule.player.play(position, speed);
-	this.actionbar.toolStartStop.setValue(true);
-	this.actionbar.toolRecorder.setPlaying(true);
+////	this.prompterModule.player.play(position, speed);
+//	this.actionbar.toolStartStop.setValue(true);
+//	this.actionbar.toolRecorder.setPlaying(true);
 };
 
 Terminal.prototype.stop = function(position) {
-	this.prompterModule.player.stop(position);
-	this.actionbar.toolStartStop.setValue(false);
-	this.actionbar.toolRecorder.setPlaying(false);
+//	this.prompterModule.player.stop(position);
+//	this.actionbar.toolStartStop.setValue(false);
+//	this.actionbar.toolRecorder.setPlaying(false);
 };
 
 Terminal.prototype.emitPlay = function(position) {

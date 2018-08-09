@@ -3,10 +3,7 @@ var Actionbar = function(terminal) {
 
 	this.node = document.createElement("div");
 	
-	this.toolStartStop = new ToolStartStop(terminal);
 	this.toolRecorder = new ToolRecorder(terminal);
-	this.toolSpeed = new ToolSpeed(terminal);
-	this.toolJump = new ToolJump(terminal);
 
 	this.init();
 };
@@ -14,10 +11,7 @@ var Actionbar = function(terminal) {
 Actionbar.prototype.init = function() {
 	this.node.className = "actionbar";
 
-	this.node.appendChild(this.toolStartStop.node);
 	this.node.appendChild(this.toolRecorder.node);
-	this.node.appendChild(this.toolSpeed.node);
-	this.node.appendChild(this.toolJump.node);
 };
 
 Actionbar.prototype.addAction = function(action) {
