@@ -1,6 +1,6 @@
-var ToolDmx = function(terminal) {
-	this.terminal = terminal;
-	this.faders = new Faders(this);
+var ToolDmx = function(module) {
+	this.module = module;
+	this.faders = new Faders(module);
 	
 	this.node = document.createElement("div");
 	this.init();
@@ -21,29 +21,7 @@ ToolDmx.prototype.init = function() {
 	this.node.className = "toolDmx";
 	this.node.appendChild(this.faders.node);
 	
-	this.on("dmx::faders::set", function(args) { self.onSetValue(args); });
-	this.on("dmx::faders::configure", function(args) { self.onConfigure(args); });
 //	this.setEnabled(false);
 };
 
-ToolDmx.prototype.on = function(name, cb) {
-	this.terminal.client.socket.on(name, cb);
-};
-
-ToolDmx.prototype.emit = function(name, args) {
-	this.terminal.client.emit(name, args);
-};
-
-ToolDmx.prototype.emitSetValue = function(ref, value) {
-	this.emit("dmx::faders::set", {"ref": ref, "value": value});
-};
-
-ToolDmx.prototype.onSetValue = function(args) {
-	this.faders.onSetValue(args.ref, args.value);
-};
-
-ToolDmx.prototype.onConfigure = function(args) {
-	this.configure(args);
-	this.setEnabled(true);
-};
 

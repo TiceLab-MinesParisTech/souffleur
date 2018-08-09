@@ -27,7 +27,7 @@ ActionStartStop.prototype.emitPlayStop = function() {
 		this.module.emitStop();
 	}
 	else{
-		this.module.play();
+		this.module.emitPlay();
 	}
 }
 

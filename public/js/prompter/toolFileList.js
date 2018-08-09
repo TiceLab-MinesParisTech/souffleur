@@ -1,5 +1,5 @@
-var ToolFileList = function(terminal, toolFile) {
-	this.terminal = terminal;
+var ToolFileList = function(module, toolFile) {
+	this.module = module;
 	this.toolFile = toolFile;
 	
 	this.node = document.createElement("div");
@@ -63,7 +63,7 @@ ToolFileList.prototype.loadText = function(filename, text) {
 
 ToolFileList.prototype.loadFile = function(filename) {
 	var self = this;
-	this.terminal.client.loadFile(filename, function(text) { self.loadText(filename, text); });
+	this.module.terminal.client.loadFile(filename, function(text) { self.loadText(filename, text); });
 };
 
 ToolFileList.prototype.createDirItems = function(ul, items, opened) {
@@ -85,8 +85,7 @@ ToolFileList.prototype.showList = function(items) {
 
 ToolFileList.prototype.show = function() {
 	var self = this;
-	this.terminal.client.loadFilesList(function(list) {
+	this.module.terminal.client.loadFilesList(function(list) {
 		self.showList(list);
 	});
 };
-

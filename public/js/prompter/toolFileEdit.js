@@ -1,5 +1,5 @@
-var ToolFileEdit = function(terminal, toolFile) {
-	this.terminal = terminal;
+var ToolFileEdit = function(module, toolFile) {
+	this.module = module;
 	this.toolFile = toolFile;
 
 	this.node = document.createElement("form");
@@ -33,8 +33,8 @@ ToolFileEdit.prototype.init = function() {
 }
 
 ToolFileEdit.prototype.apply = function(filename, text) {
-	if (filename) this.terminal.client.saveFile(filename, text, function(result) {
-		this.terminal.notifier.show(result.err ? "Could not save file!" : "Saved");
+	if (filename) this.modulesaveFile(filename, text, function(result) {
+		this.module.terminal.notifier.show(result.err ? "Could not save file!" : "Saved");
 	});
 	this.toolFile.loadText(filename, text);
 }

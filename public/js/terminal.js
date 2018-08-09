@@ -7,7 +7,9 @@ var Terminal = function(ref) {
 	this.menubar = new Menubar(this);
 	this.actionbar = new Actionbar(this);
 	this.keyboard = new Keyboard(this);	
+
 	this.prompterModule = new PrompterModule(this);
+	this.dmxModule = new DmxModule(this);
 
 	this.node = document.createElement("div");
 	this.nodeCSS = document.createElement("link");
@@ -48,27 +50,6 @@ Terminal.prototype.setSettings = function(arr) {
 	this.settings.set(arr);
 }
 
-Terminal.prototype.play = function(position, speed) {
-////	this.prompterModule.player.play(position, speed);
-//	this.actionbar.toolStartStop.setValue(true);
-//	this.actionbar.toolRecorder.setPlaying(true);
-};
-
-Terminal.prototype.stop = function(position) {
-//	this.prompterModule.player.stop(position);
-//	this.actionbar.toolStartStop.setValue(false);
-//	this.actionbar.toolRecorder.setPlaying(false);
-};
-
-Terminal.prototype.emitPlay = function(position) {
-	if (position == null) position = this.view.getPosition(); 
-	this.client.emitPlay(position, this.actionbar.toolSpeed.getSpeed());
-};
-
-Terminal.prototype.emitStop = function(position) {
-	this.client.emitStop(position);
-};
-
 Terminal.prototype.emitRecorderStart = function() {
 	var fileId = this.menubar.toolFile.getId();
 	this.client.emitRecorderStart(fileId ? fileId + "-%src%" : null);
@@ -84,11 +65,6 @@ Terminal.prototype.setRecorderState = function(value) {
 
 Terminal.prototype.setRecorderStatus = function(arr) {
 	this.actionbar.toolRecorder.showStatus(arr);
-};
-
-Terminal.prototype.emitSetSpeed = function(value) {
-	this.client.emitSetSpeed(value);
-	if (this.prompterModule.player.isPlaying()) this.client.emitPlay(this.prompterModule.player.getPosition(), value);
 };
 
 Terminal.prototype.applySize = function(value) {
@@ -111,7 +87,7 @@ Terminal.prototype.applyNotifierVisibility = function(value) {
 	this.notifier.setVisibility(value);
 }
 Terminal.prototype.applyDefaultTrack = function(value) {
-//	this.menubar.toolTracksList.set(value);
+	this.prompterModule.toolTracksList.set(value);
 };
 
 Terminal.prototype.applyColors = function(value) {

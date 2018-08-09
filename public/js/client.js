@@ -3,41 +3,22 @@ var Client = function(terminal) {
 	this.socketid = null;
 	this.terminal = terminal;
 	
-	this.attachTerminal(terminal);
+	this.init();
 }
 
-Client.prototype.mapping =  { 
-	"client::settings::param::set": "onSettingsParam",
-	"notify": "onNotify",
-	"id": "onId",
-	"register": "onRegister",
-	"recorder::status": "onRecorderStatus",
-	"recorder::state": "onRecorderState"
+Client.prototype.init = function() {
+	var self = this;
+
+	this.on("client::settings::param::set", function(args) { self.onSettingsParam(args); });
+	this.on("notify", function(args) { self.onNotify(args); });
+	this.on("id", function(args) { self.onId(args); });
+	this.on("register", function(args) { self.onRegister(args); });
+	this.on("recorder::status", function(args) { self.onRecorderStatus(args); });
+	this.on("recorder::state", function(args) { self.onRecorderState(args); });
 };
 
 Client.prototype.on = function(name, args) {
-	if (!(name in this.mapping))
-		return false;
-		
-	var fct = this.mapping[name];
-	console.log(name, fct);
-	this[fct](args);
-	return true;
-};
-
-Client.prototype.attachTerminal = function(terminal) {
-	var self = this;
-	this.terminal = terminal;
-	
-	function bind(name, fct) {
-		self.socket.on(name, function(args) {
-			self[fct](args);
-		});
-	}
-
-	for (name in this.mapping) {
-		bind(name, this.mapping[name]);
-	};
+	this.socket.on(name, args);
 };
 
 Client.prototype.loadUrl = function(url, fct, method, params) {

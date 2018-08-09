@@ -6,6 +6,9 @@ var PrompterModule = function(terminal) {
 	this.actionStartStop = new ActionStartStop(this);
 	this.actionSpeed = new ActionSpeed(this);
 	this.actionJump = new ActionJump(this);
+	
+	this.toolTracksList = new ToolTracksList(this);
+	this.toolFile = new ToolFile(this);
 
 	this.init();
 };
@@ -18,6 +21,7 @@ PrompterModule.prototype.init = function() {
 	this.terminal.actionbar.addAction(this.actionJump);
 
 	this.terminal.output.setContent(this.view.node);
+	this.terminal.menubar.addTool("File", this.toolFile);
 
 	this.on("play", function(args) { self.onPlay(args); })
 	this.on("stop", function(args) { self.onStop(args); })
@@ -33,17 +37,22 @@ PrompterModule.prototype.on = function(name, cb) {
 	this.terminal.client.socket.on(name, cb);
 };
 
-PrompterModule.prototype.emitPlay = function(position, speed) {
+PrompterModule.prototype.emitPlaySpeed = function(position, speed) {
 	this.emit('play', {"position": position, "speed": speed});
 };
 
-PrompterModule.prototype.play = function(position) {
+PrompterModule.prototype.emitPlay = function(position) {
 	if (position == null) position = this.view.getPosition(); 
-	this.emitPlay(position, 1);
+	this.emitPlaySpeed(position, this.actionSpeed.getSpeed());
+};
+
+PrompterModule.prototype.play = function(position, speed) {
+	this.actionStartStop.setValue(true);
+	this.player.play(position, speed);
 };
 
 PrompterModule.prototype.onPlay = function(args) {
-	this.actionStartStop.setValue(true);
+	this.play(args.position, args.speed);
 };
 
 PrompterModule.prototype.stop = function(position) {
@@ -51,8 +60,8 @@ PrompterModule.prototype.stop = function(position) {
 	this.actionStartStop.setValue(false);
 };
 
-PrompterModule.prototype.onStop = function(args) {
-	this.stop();
+PrompterModule.prototype.onStop = function(position) {
+	this.stop(position);
 };
 
 PrompterModule.prototype.emitStop = function(position) {
@@ -96,9 +105,9 @@ PrompterModule.prototype.emitLoadTracks = function(tracks) {
 
 PrompterModule.prototype.loadTracks = function(arr) {
 	this.setView(null);
-//	this.menubar.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
-//	this.menubar.toolFile.setFilename(arr.filename);
-//	this.menubar.toolTracksList.setTracks(arr.tracks);
+	this.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
+	this.toolFile.setFilename(arr.filename);
+	this.toolTracksList.setTracks(arr.tracks);
 	this.terminal.applyDefaultTrack(this.terminal.settings.getParam("defaultTrack"));
 	this.stop(0);
 };
@@ -109,10 +118,10 @@ PrompterModule.prototype.onLoadTracks = function(tracks) {
 
 PrompterModule.prototype.emitSetSpeed = function(value) {
 	this.emit('speed::set', value);
+	if (this.player.isPlaying()) this.emitPlaySpeed(this.player.getPosition(), value);
 };
 
 PrompterModule.prototype.onSetSpeed = function(value) {
 	this.actionSpeed.setSpeed(value);
 };
-
 

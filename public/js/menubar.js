@@ -6,12 +6,13 @@ var Menubar = function(terminal) {
 	this.items = new MenubarItems(this);
 	this.current = null;
 	
-	this.toolTracksList = new ToolTracksList(this.terminal);
-	this.toolFile = new ToolFile(this.terminal);
 	this.toolTerminals = new ToolTerminals(this.terminal);
-	this.toolDmx = new ToolDmx(this.terminal);
 
 	this.init();
+};
+
+Menubar.prototype.addTool = function(title, tool) {
+	this.items.addItem(new MenubarItem(this, title, tool));
 };
 
 Menubar.prototype.init = function() {
@@ -19,9 +20,7 @@ Menubar.prototype.init = function() {
 	this.node.appendChild(this.icon.node);
 	this.node.appendChild(this.items.node);
 	
-	this.items.addItem(new MenubarItem(this, "File", this.toolFile));
 	this.items.addItem(new MenubarItem(this, "Settings", this.toolTerminals));
-	this.items.addItem(new MenubarItem(this, "DMX", this.toolDmx));
 	this.items.addItem(new MenubarItem(this, "About…", new ToolAbout()));
 	this.items.setVisibility(false);
 };

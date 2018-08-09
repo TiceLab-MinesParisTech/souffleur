@@ -1,5 +1,5 @@
-var Fader = function(tool, ref, title, min, max, step, marks, format, channels) {
-	this.tool = tool;
+var Fader = function(module, ref, title, min, max, step, marks, format, channels) {
+	this.module = module;
 	this.ref = ref;
 	this.min = min;
 	this.max = max;
@@ -62,7 +62,7 @@ Fader.prototype.init = function(title, min, max, step, marks, channels) {
 };
 
 Fader.prototype.emitSetValue = function(value) {
-	this.tool.emitSetValue(this.ref, value);
+	this.module.emitSetValue(this.ref, value);
 };
 
 Fader.prototype.showValue = function(value) {

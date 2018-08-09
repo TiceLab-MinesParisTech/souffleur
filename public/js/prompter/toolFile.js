@@ -1,5 +1,5 @@
-var ToolFile = function(terminal) {
-	this.terminal = terminal;
+var ToolFile = function(module) {
+	this.module = module;
 	
 	this.node = document.createElement("nav");
 
@@ -7,8 +7,8 @@ var ToolFile = function(terminal) {
 	this.filename = null;
 	
 	this.tabs = new ToolTabs();
-	this.editor = new ToolFileEdit(terminal, this);
-	this.list = new ToolFileList(terminal, this);
+	this.editor = new ToolFileEdit(module, this);
+	this.list = new ToolFileList(module, this);
 	this.init();
 };
 
@@ -36,7 +36,7 @@ ToolFile.prototype.loadText = function(filename, text) {
 
 	var file = new FileTxt(filename, "files/" + this.dirname(filename));
 	file.parse(text);
-//	this.terminal.client.emitLoadTracks(file.get());
+	this.module.emitLoadTracks(file.get());
 };
 
 ToolFile.prototype.updateTitle = function() {
