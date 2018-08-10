@@ -1,5 +1,5 @@
-var ToolTerminals = function(terminal) {
-	this.terminal = terminal;
+var ToolTerminals = function(module) {
+	this.module = module;
 
 	this.node = document.createElement("nav");
 	this.items = [];
@@ -36,7 +36,7 @@ ToolTerminals.prototype.setItems = function(list) {
 	this.clearItems();
 	for (var i = 0; i < list.length; i++) {
 		var arr = list[i];
-		var item = new ToolTerminalsItem(this.terminal, arr);
+		var item = new ToolTerminalsItem(this.module, arr);
 		this.addItem(item, arr.socketid == null);
 	}
 	if (this.items.length < 1) {
@@ -46,7 +46,7 @@ ToolTerminals.prototype.setItems = function(list) {
 
 ToolTerminals.prototype.show = function() {
 	var self = this;
-	this.terminal.client.loadClientsList(function(data) {
+	this.module.terminal.client.loadClientsList(function(data) {
 		self.setItems(data);
 	});
 }
@@ -60,8 +60,8 @@ ToolTerminals.prototype.showParam = function(socketid, key, value) {
 	}
 };
 
-var ToolTerminalsItem = function(terminal, arr) {
-	this.terminal = terminal;
+var ToolTerminalsItem = function(module, arr) {
+	this.module = module;
 	this.socketid = arr.socketid;
 	this.data = arr.data;
 	
@@ -74,15 +74,15 @@ var ToolTerminalsItem = function(terminal, arr) {
 };
 
 ToolTerminalsItem.prototype.id = function() {
-	this.terminal.client.emitId(this.socketid);
+	this.module.terminal.client.emitId(this.socketid);
 };
 
 ToolTerminalsItem.prototype.resize = function() {
-	this.terminal.output.setSize(this.data.size.width, this.data.size.height);
+	this.module.terminal.modulePrompter.output.setSize(this.data.size.width, this.data.size.height);
 };
 
 ToolTerminalsItem.prototype.resetSize = function() {
-	this.terminal.output.resetSize();
+	this.module.terminal.modulePrompter.output.resetSize();
 };
 
 ToolTerminalsItem.prototype.init = function() {

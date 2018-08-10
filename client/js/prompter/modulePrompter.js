@@ -2,6 +2,7 @@ var ModulePrompter = function(terminal) {
 	this.terminal = terminal;
 	this.player = new Player(this);	
 	this.view = new ViewEmpty(this);
+	this.output = new PrompterOutput(this);
 
 	this.actionStartStop = new ActionStartStop(this);
 	this.actionSpeed = new ActionSpeed(this);
@@ -20,7 +21,7 @@ ModulePrompter.prototype.init = function() {
 	this.terminal.actionbar.addAction(this.actionSpeed);
 	this.terminal.actionbar.addAction(this.actionJump);
 
-	this.terminal.output.setContent(this.view.node);
+	this.terminal.background.add(this.output, "prompter");
 	this.terminal.menubar.addTool("File", this.toolFile);
 
 	this.terminal.keyboard.on("Space", function() { self.kbdPlayStop(); });
@@ -37,6 +38,8 @@ ModulePrompter.prototype.init = function() {
 	this.on("stop", function(args) { self.onStop(args); })
 	this.on("tracks::load", function(args) { self.onLoadTracks(args); })
 	this.on("speed::set", function(args) { self.onSetSpeed(args); })
+
+	this.output.setContent(this.view.node);
 };
 
 
@@ -92,7 +95,7 @@ ModulePrompter.prototype.load = function() {
 
 ModulePrompter.prototype.setView = function(view) {
 	if (!view) view = new ViewEmpty(this);
-	this.terminal.output.setContent(view.node);
+	this.output.setContent(view.node);
 	this.view = view;
 };
 

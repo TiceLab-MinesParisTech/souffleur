@@ -12,6 +12,7 @@ ModuleRecorders.prototype.init = function() {
 	
 	this.terminal.actionbar.addAction(this.actionRecorders);
 	this.terminal.keyboard.on("F5", function() { self.kbdRecordStartStop(); });
+	this.terminal.foreground.add(this.tally);
 
 	this.on("status", function(args) { self.onStatus(args); });
 	this.on("state", function(args) { self.onState(args); });

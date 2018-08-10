@@ -2,10 +2,11 @@ var Terminal = function(ref) {
 	this.client = new Client(this);
 	this.settings = new Settings(this, ref);
 	this.notifier = new Notifier(this);
-	this.output = new TerminalOutput(this);
 	this.menubar = new Menubar(this);
 	this.actionbar = new Actionbar(this);
 	this.keyboard = new Keyboard(this);	
+	this.background = new TerminalBackground(this);
+	this.foreground = new TerminalForeground(this);
 
 	this.node = document.createElement("div");
 	this.nodeCSS = document.createElement("link");
@@ -23,11 +24,12 @@ Terminal.prototype.init = function() {
 	var self = this;
 	this.node.className = "terminal";
 	
-	this.node.appendChild(this.output.node);
+	this.node.appendChild(this.background.node);
 	this.node.appendChild(this.actionbar.node);
 	this.node.appendChild(this.menubar.node);
+	this.node.appendChild(this.foreground.node);
 
-	this.node.appendChild(this.notifier.node);
+	this.foreground.add(this.notifier);
 
 	this.settings.applyParams();
 
@@ -79,7 +81,7 @@ Terminal.prototype.applyColors = function(value) {
 };
 
 Terminal.prototype.applyMask = function(value) {
-	this.output.mask.set(value);
+	this.modulePrompter.output.mask.set(value);
 };
 
 Terminal.prototype.setSettingsParam = function(socketid, key, value) {
@@ -113,36 +115,19 @@ Terminal.prototype.onresize = function() {
 	this.client.emitClientSet();
 };
 
-var TerminalOutput = function(terminal) {
-	this.terminal = terminal;
-	
+var TerminalBackground = function() {
 	this.node = document.createElement("div");
-	this.node.className = "terminalOutput";
-
-	this.nodeContent = document.createElement("div");
-	this.nodeContent.className = "content";
-
-	this.mask = new Mask();
-	this.node.appendChild(this.mask.node);
-
-	this.node.appendChild(this.nodeContent);
 };
 
-TerminalOutput.prototype.resetSize = function() {
-	this.node.style.top = "";
-	this.node.style.left = "";
-	this.node.style.width = "";
-	this.node.style.height = "";
+TerminalBackground.prototype.add = function(widget, title) {
+	this.node.appendChild(widget.node);
 };
 
-TerminalOutput.prototype.setSize = function(width, height) {
-	this.node.style.top = "60px";
-	this.node.style.left = "10px";
-	this.node.style.width = width + "px";
-	this.node.style.height = height + "px";
+var TerminalForeground = function() {
+	this.node = document.createElement("div");
 };
 
-TerminalOutput.prototype.setContent = function(node) {
-	while (this.nodeContent.firstChild) this.nodeContent.removeChild(this.nodeContent.firstChild);
-	this.nodeContent.appendChild(node);
+TerminalForeground.prototype.add = function(widget) {
+	this.node.appendChild(widget.node);
 };
+

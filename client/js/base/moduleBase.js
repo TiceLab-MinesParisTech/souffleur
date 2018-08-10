@@ -1,8 +1,8 @@
 var ModuleBase = function(terminal) {
 	this.terminal = terminal;
 
-	this.toolTerminals = new ToolTerminals(this.terminal);
-	this.toolAbout = new ToolAbout(this.terminal);
+	this.toolTerminals = new ToolTerminals(this);
+	this.toolAbout = new ToolAbout(this);
 
 	this.init();
 };
