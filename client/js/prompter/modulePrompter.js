@@ -23,11 +23,22 @@ ModulePrompter.prototype.init = function() {
 	this.terminal.output.setContent(this.view.node);
 	this.terminal.menubar.addTool("File", this.toolFile);
 
+	this.terminal.keyboard.on("Space", function() { self.kbdPlayStop(); });
+	this.terminal.keyboard.on("ArrowUp", function() { self.kbdPrevious(); });
+	this.terminal.keyboard.on("ArrowDown", function() { self.kbdNext(); });
+	this.terminal.keyboard.on("ArrowRight", function() { self.kbdIncSpeed(); });
+	this.terminal.keyboard.on("ArrowLeft", function() { self.kbdDecSpeed(); });
+	this.terminal.keyboard.on("+", function() { self.kbdIncSpeed(); });
+	this.terminal.keyboard.on("-", function() { self.kbdDecSpeed(); });
+	this.terminal.keyboard.on("PageUp", function() { self.kbdDec(); });
+	this.terminal.keyboard.on("PageDown", function() { self.kbdInc(); });
+	
 	this.on("play", function(args) { self.onPlay(args); })
 	this.on("stop", function(args) { self.onStop(args); })
 	this.on("tracks::load", function(args) { self.onLoadTracks(args); })
 	this.on("speed::set", function(args) { self.onSetSpeed(args); })
 };
+
 
 ModulePrompter.prototype.emit = function(cmd, args) {
 	this.terminal.client.emit(cmd, args);
@@ -125,3 +136,36 @@ ModulePrompter.prototype.onSetSpeed = function(value) {
 	this.actionSpeed.setSpeed(value);
 };
 
+ModulePrompter.prototype.kbdPlayStop = function() {
+	this.actionStartStop.emitPlayStop();
+};
+
+ModulePrompter.prototype.kbdNext = function() {
+	this.view.next();
+};
+
+ModulePrompter.prototype.kbdPrevious = function() {
+	this.view.previous();
+};
+
+ModulePrompter.prototype.kbdIncSpeed = function() {
+	this.actionSpeed.emitIncSpeed(0.1);
+};
+
+ModulePrompter.prototype.kbdDecSpeed = function() {
+	this.actionSpeed.emitIncSpeed(-0.1);
+};
+
+ModulePrompter.prototype.kbdInc = function() {
+	if (this.player.isPlaying())
+		this.kbdIncSpeed();
+	else
+		this.kbdNext();
+};
+
+ModulePrompter.prototype.kbdDec = function() {
+	if (this.player.isPlaying())
+		this.kbdDecSpeed();
+	else
+		this.kbdPrevious();
+};
