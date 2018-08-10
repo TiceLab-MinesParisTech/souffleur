@@ -3,7 +3,7 @@
 var fs = require('fs');
 const path = require('path');
 var Express = require('express');
-var Recorder = require("./lib/recorder");
+var Recorder = require("./server/recorder");
 
 var Server = function() {
 	this.config = {
@@ -29,10 +29,10 @@ var Server = function() {
 
 	this.modules = [];
 
-	var PrompterModule = require("./lib/prompterModule");
+	var PrompterModule = require("./server/prompterModule");
 	this.modules.push(new PrompterModule(this));
 
-	var DmxModule = require("./lib/dmxModule");
+	var DmxModule = require("./server/dmxModule");
 	this.modules.push(new DmxModule(this));
 };
 
