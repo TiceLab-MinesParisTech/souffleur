@@ -7,12 +7,14 @@ var Terminal = function(ref) {
 	this.actionbar = new Actionbar(this);
 	this.keyboard = new Keyboard(this);	
 
-	this.modulePrompter = new ModulePrompter(this);
-	this.moduleDmx = new ModuleDmx(this);
-	this.moduleBase = new ModuleBase(this);
-
 	this.node = document.createElement("div");
 	this.nodeCSS = document.createElement("link");
+
+	//modules
+	this.modulePrompter = new ModulePrompter(this);
+	this.moduleRecorders = new ModuleRecorders(this);
+	this.moduleDmx = new ModuleDmx(this);
+	this.moduleBase = new ModuleBase(this);
 	
 	this.init();
 }
@@ -48,23 +50,6 @@ Terminal.prototype.setCSS = function(href) {
 Terminal.prototype.setSettings = function(arr) {
 	this.settings.set(arr);
 }
-
-Terminal.prototype.emitRecorderStart = function() {
-	var fileId = this.menubar.toolFile.getId();
-	this.client.emitRecorderStart(fileId ? fileId + "-%src%" : null);
-};
-
-Terminal.prototype.emitRecorderStop = function() {
-	this.client.emitRecorderStop();
-};
-
-Terminal.prototype.setRecorderState = function(value) {
-//	this.actionbar.toolRecorder.setState(value);
-};
-
-Terminal.prototype.setRecorderStatus = function(arr) {
-//	this.actionbar.toolRecorder.showStatus(arr);
-};
 
 Terminal.prototype.applySize = function(value) {
 	this.modulePrompter.view.setSize(value);

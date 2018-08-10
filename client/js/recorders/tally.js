@@ -1,4 +1,4 @@
-var Tally = function(terminal) {
+var Tally = function(module) {
 	this.node = document.createElement("div");
 	this.node.className = "tally";
 };

@@ -1,10 +1,9 @@
-var ToolRecorder = function(terminal) {
-	this.terminal = terminal;
+var ActionRecorders = function(module) {
+	this.module = module;
 
 	this.node = document.createElement("div");
 	this.nodeStart = document.createElement("button");
 	this.nodeStop = document.createElement("button");
-	this.nodePreview = document.createElement("button");
 	this.nodeRecorders = document.createElement("div");
 
 	this.state = undefined;
@@ -17,19 +16,13 @@ var ToolRecorder = function(terminal) {
 	this.init();
 }
 
-ToolRecorder.prototype.init = function() {
+ActionRecorders.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "toolRecorder";
 
 	this.node.appendChild(this.nodeRecorders);
 	this.nodeRecorders.className = "recorders";
-
-	var icon = document.createElement("div");
-	icon.className = "icon recordPreview";
-	this.nodePreview.appendChild(icon);
-	this.nodePreview.onclick = function(e) { self.preview(); return false; };
-	//this.node.appendChild(this.nodePreview);
 
 	var icon = document.createElement("div");
 	icon.className = "icon recordStart";
@@ -47,7 +40,7 @@ ToolRecorder.prototype.init = function() {
 	this.setEnabled(false);
 };
 
-ToolRecorder.prototype.showStatus = function(arr) {
+ActionRecorders.prototype.showStatus = function(arr) {
 	while (this.nodeRecorders.firstChild) this.nodeRecorders.removeChild(this.nodeRecorders.firstChild);
 	
 	this.setEnabled(arr.length > 0);
@@ -60,40 +53,40 @@ ToolRecorder.prototype.showStatus = function(arr) {
 	}
 };
 
-ToolRecorder.prototype.clearTimeouts = function() {
+ActionRecorders.prototype.clearTimeouts = function() {
 	if (this.startTimeout) clearTimeout(this.startTimeout);
 	if (this.stopTimeout) clearTimeout(this.stopTimeout);
 };
 
-ToolRecorder.prototype.waitForStart = function() {
+ActionRecorders.prototype.waitForStart = function() {
 	var self = this;
 	this.clearTimeouts();
-	this.startTimeout = setTimeout(function() { self.terminal.emitPlay(); }, this.startDuration);
+	//this.startTimeout = setTimeout(function() { self.module.emitPlay(); }, this.startDuration);
 };
 
-ToolRecorder.prototype.setPlaying = function(playing) {
+ActionRecorders.prototype.setPlaying = function(playing) {
 	if (!this.active) return;
 	
 	this.clearTimeouts();
 
 	if (!playing && this.state) {
 		var self = this;
-		this.stopTimeout = setTimeout(function() { self.terminal.emitRecorderStop() }, this.stopDuration);
+		this.stopTimeout = setTimeout(function() { self.module.stop() }, this.stopDuration);
 	}
 };
 
-ToolRecorder.prototype.stop = function() {
+ActionRecorders.prototype.stop = function() {
 	this.clearTimeouts();
-	this.terminal.emitRecorderStop();
+	this.module.stop();
 }
 
-ToolRecorder.prototype.start = function() {
+ActionRecorders.prototype.start = function() {
 	this.clearTimeouts();
 	this.active = true;
-	this.terminal.emitRecorderStart();
+	this.module.start();
 };
 
-ToolRecorder.prototype.startStop = function() {
+ActionRecorders.prototype.startStop = function() {
 	if (!this.state) {
 		this.start();
 	}
@@ -102,37 +95,33 @@ ToolRecorder.prototype.startStop = function() {
 	}
 }
 
-ToolRecorder.prototype.preview = function() {
-	this.terminal.client.emitRecorderPreview(true);
-}
-
-ToolRecorder.prototype.setState = function(value) {
+ActionRecorders.prototype.setState = function(value) {
 	var previousState = this.state;
 	if (this.state === value) return;
 	this.state = value;
 	
 	this.nodeStart.style.display = this.state === true ? "none" : "";
 	this.nodeStop.style.display = this.state === false ? "none" : "";
-	this.terminal.tally.set(this.state);
+	this.module.tally.set(this.state);
 
-	if (this.state != undefined) this.terminal.notifier.show(value ? "record" : "stop recording");
+	if (this.state != undefined) this.module.terminal.notifier.show(value ? "record" : "stop recording");
 
 	if (this.active) {
 		if (this.state) {
 			this.waitForStart();
 		}
 		else if (previousState) {
-			this.terminal.emitStop();
+			//this.module.emitStop();
 			this.active = false;
 		}
 	}
 };
 
-ToolRecorder.prototype.getState = function() {
+ActionRecorders.prototype.getState = function() {
 	return this.state;
 };
 
-ToolRecorder.prototype.setEnabled = function(value) {
+ActionRecorders.prototype.setEnabled = function(value) {
 	this.enabled = value;
 	this.node.style.display = value ? "" : "none";
 };

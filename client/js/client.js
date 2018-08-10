@@ -13,8 +13,6 @@ Client.prototype.init = function() {
 	this.on("notify", function(args) { self.onNotify(args); });
 	this.on("id", function(args) { self.onId(args); });
 	this.on("register", function(args) { self.onRegister(args); });
-	this.on("recorder::status", function(args) { self.onRecorderStatus(args); });
-	this.on("recorder::state", function(args) { self.onRecorderState(args); });
 };
 
 Client.prototype.on = function(name, args) {
@@ -74,18 +72,6 @@ Client.prototype.emit = function(name, args) {
 	this.socket.emit(name, args);
 };
 
-Client.prototype.emitRecorderStart = function(name) {
-	this.emit('recorder::start', name ? name : null);
-};
-
-Client.prototype.emitRecorderStop = function() {
-	this.emit('recorder::stop');
-};
-
-Client.prototype.emitRecorderPreview = function(state) {
-	this.emit('recorder::preview', state);
-};
-
 Client.prototype.emitSettings = function(arr) {
 	this.emit("client::settings::set", arr);
 };
@@ -125,14 +111,6 @@ Client.prototype.emitClientSet = function() {
 Client.prototype.onRegister = function(socketid) {
 	this.socketid = socketid;
 	this.emitClientSet();
-};
-
-Client.prototype.onRecorderStatus = function(args) {
-	this.terminal.setRecorderStatus(args);
-};
-
-Client.prototype.onRecorderState = function(value) {
-	this.terminal.setRecorderState(value);
 };
 
 Client.prototype.onId = function() {

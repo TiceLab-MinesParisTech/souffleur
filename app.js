@@ -158,13 +158,13 @@ Server.prototype.init = function() {
 	});
 
 	this.recorder.onChangeStatus = function(status) {
-		console.log("recorder::status", JSON.stringify(status));
-		self.io.emit('recorder::status', status);
+		console.log("recorders::status", JSON.stringify(status));
+		self.io.emit('recorders::status', status);
 	};
 
 	this.recorder.onChangeState = function(state) {
-		console.log("recorder::state", JSON.stringify(state));
-		self.io.emit('recorder::state', state);
+		console.log("recorders::state", JSON.stringify(state));
+		self.io.emit('recorders::state', state);
 	};
 
 	this.io.on('connection', function(socket) {
@@ -179,7 +179,7 @@ Server.prototype.onConnect = function(socket) {
 
 	socket.data = {};
 	socket.emit('register', socket.id);
-	socket.emit("recorder::status", this.recorder.getStatus());
+	socket.emit("recorders::status", this.recorder.getStatus());
 
 	socket.on('sendto', function(args) {
 		var socketid = args.socketid;
@@ -208,22 +208,17 @@ Server.prototype.onConnect = function(socket) {
 		console.log("deconnexion d’un client");
 	});
 
-	socket.on('recorder::start', function(name) {
-		console.log("recorder::start", name ? name : "-");
+	socket.on('recorders::start', function(name) {
+		console.log("recorders::start", name ? name : "-");
 		if (name)
 			self.recorder.recordName(name);
 		else
 			self.recorder.record();
 	});
 
-	socket.on('recorder::stop', function() {
-		console.log("recorder::stop");
+	socket.on('recorders::stop', function() {
+		console.log("recorders::stop");
 		self.recorder.stop();
-	});
-
-	socket.on('recorder::preview', function(state) {
-		console.log("recorder::preview", JSON.stringify(state));
-		self.recorder.previewEnable(state);
 	});
 
 	for (var i = 0; i < this.modules.length; i++) {
