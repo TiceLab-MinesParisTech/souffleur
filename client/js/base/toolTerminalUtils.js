@@ -9,6 +9,7 @@ ToolTerminalUtils.prototype.add = function(widget) {
 
 var ToolTerminalUtilResize = function(module, size) {
 	this.module = module;
+	this.target = module.terminal.modulePrompter.output;
 	this.node = document.createElement("div");
 	this.size = size;
 	this.init();
@@ -23,7 +24,30 @@ ToolTerminalUtilResize.prototype.init = function() {
 };
 
 ToolTerminalUtilResize.prototype.onclick = function() {
-	this.module.terminal.modulePrompter.output.setSize(this.size.width, this.size.height);
+	this.target.setSize(this.size.width, this.size.height);
+};
+
+var ToolTerminalUtilResetSize = function(module) {
+	this.module = module;
+	this.target = module.terminal.modulePrompter.output;
+	this.node = document.createElement("div");
+	this.init();
+};
+
+ToolTerminalUtilResetSize.prototype.init = function() {
+	var self = this;
+	this.node.className = "resolution";
+
+	this.node.appendChild(document.createTextNode("Fullscreen"));
+	this.node.onclick = function() { self.onclick(); return false; };
+};
+
+ToolTerminalUtilResetSize.prototype.setVisibility = function(value) {
+	this.node.style.display = value ? "" : "none";
+};
+
+ToolTerminalUtilResetSize.prototype.onclick = function() {
+	this.target.resetSize();
 };
 
 var ToolTerminalUtilId = function(module, key) {
