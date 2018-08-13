@@ -81,3 +81,7 @@ Settings.prototype.applyParams = function() {
 Settings.prototype.emit = function() {
 	this.terminal.client.emitSettings(this.get());
 };
+
+Settings.prototype.getKey = function() {
+	return null;
+};

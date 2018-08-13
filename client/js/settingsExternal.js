@@ -19,5 +19,5 @@ SettingsExternal.prototype.saveParam = function(key, value) {
 };
 
 SettingsExternal.prototype.getKey = function() {
-	return this.socketid ? this.socketid : "local";
+	return this.socketid;
 };

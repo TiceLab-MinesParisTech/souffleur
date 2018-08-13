@@ -1,4 +1,4 @@
-var ToolTerminal = function(settings) {
+var ToolSettings = function(settings) {
 	this.settings = settings;
 
 	this.tools = [
@@ -16,7 +16,7 @@ var ToolTerminal = function(settings) {
 	this.init();
 }
 
-ToolTerminal.prototype.createRow = function(title, node, name) {
+ToolSettings.prototype.createRow = function(title, node, name) {
 	var tr = document.createElement("tr");
 	this.node.appendChild(tr);
 
@@ -35,10 +35,10 @@ ToolTerminal.prototype.createRow = function(title, node, name) {
 	return tr;
 };
 
-ToolTerminal.prototype.init = function() {
+ToolSettings.prototype.init = function() {
 	var self = this;
 
-	this.node.className = "toolTerminal";
+	this.node.className = "toolSettings";
 
 	var table = document.createElement("table");
 	for (var i = 0; i < this.tools.length; i++) {
@@ -48,7 +48,7 @@ ToolTerminal.prototype.init = function() {
 	this.node.appendChild(table);
 };
 
-ToolTerminal.prototype.show = function(key, value) {
+ToolSettings.prototype.show = function(key, value) {
 	this.settings.saveParam(key, value);
 	for (var i = 0; i < this.tools.length; i++) {
 		var tool = this.tools[i];
@@ -58,3 +58,4 @@ ToolTerminal.prototype.show = function(key, value) {
 		}
 	}
 };
+

@@ -228,10 +228,6 @@ nav.menubar > ul li:hover {
 	bottom: 0;
 }
 
-.toolTerminals > nav {
-	min-width: 200px;
-}
-
 .toolFile > nav {
 	overflow: auto;
 }
@@ -332,6 +328,10 @@ nav.menubar > ul li:hover {
 
 .toolSpeed > .label {
 	text-align: center;
+}
+
+.toolTerminals > nav {
+	min-width: 200px;
 }
 
 .toolTerminal td {
@@ -478,40 +478,40 @@ nav.menubar > ul li:hover {
 	transform: translateY(-50%) scaleY(-1);
 }
 
-.toolTerminalsItem {
+.toolTerminal {
 	position: relative;
 	padding: 15px;
 	border-radius: 8px;
 	margin: 5px;
 }
 
-.toolTerminalsItem nav > div {
+.toolTerminal.external {
+	background-color: white;
+}
+
+.toolTerminalExternalUtils > div {
 	display: inline-block;
 	padding: 3px;
 }
 
-.toolTerminalsItem div.resolution {
+.toolTerminalExternalUtils div.resolution {
 	font-size: 80%;
 }
 
-.toolTerminalsItem nav > div {
+.toolTerminalExternalUtils > div {
 	cursor: pointer;
 }
 
-.toolTerminalsItem div.id:before {
+.toolTerminalExternalUtils div.id:before {
 	content: "🔍";
 }
 
-.toolTerminalsItem nav > div:hover {
+.toolTerminalExternalUtils > div:hover {
 	font-weight: bold;
 }
 
-.toolTerminalsItem nav {
+.toolTerminalExternalUtils {
 	text-align: right;
-}
-
-.toolTerminalsItem.external {
-	background-color: white;
 }
 
 .toolAbout {
