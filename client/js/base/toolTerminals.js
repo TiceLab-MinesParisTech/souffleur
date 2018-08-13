@@ -55,7 +55,7 @@ ToolTerminals.prototype.showParam = function(socketid, key, value) {
 	for (var i = 0; i < this.items.length; i++) {
 		var item = this.items[i];
 		if (item.socketid == socketid) {
-			item.settingsEditor.show(key, value);
+			item.toolTerminal.show(key, value);
 		}
 	}
 };
@@ -68,7 +68,7 @@ var ToolTerminalsItem = function(module, arr) {
 	this.node = document.createElement("div");
 
 	this.settingsExternal = new SettingsExternal(terminal, arr.socketid, arr.data.settings);
-	this.settingsEditor = new SettingsEditor(this.settingsExternal);
+	this.toolTerminal = new ToolTerminal(this.settingsExternal);
 
 	this.init();
 };
@@ -90,7 +90,7 @@ ToolTerminalsItem.prototype.init = function() {
 	
 	this.node.className = "toolTerminalsItem" + (this.socketid == null ? this.node.className = "" : " external");
 
-	this.node.appendChild(this.settingsEditor.node);
+	this.node.appendChild(this.toolTerminal.node);
 
 	var nav = document.createElement("nav");
 	this.node.appendChild(nav);

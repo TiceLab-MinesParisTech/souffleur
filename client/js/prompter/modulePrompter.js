@@ -39,6 +39,10 @@ ModulePrompter.prototype.init = function() {
 	this.on("tracks::load", function(args) { self.onLoadTracks(args); })
 	this.on("speed::set", function(args) { self.onSetSpeed(args); })
 
+	this.terminal.settings.addParam(new SettingsParamPercent("mask", function(value) { self.applyMask(value) }, "mask", 0, -0.001, 0.4, 0.01));
+	this.terminal.settings.addParam(new SettingsParamPercent("size", function(value) { self.applySize(value) }, "size", 1, 0.001, 3.001, 0.1));
+	this.terminal.settings.addParam(new SettingsParamString("defaultTrack", function(value) { self.applyDefaultTrack(value) }, "default track", "main", "<no default track>"));
+
 	this.output.setContent(this.view.node);
 };
 
@@ -172,3 +176,16 @@ ModulePrompter.prototype.kbdDec = function() {
 	else
 		this.kbdPrevious();
 };
+
+ModulePrompter.prototype.applySize = function(value) {
+	this.view.setSize(value);
+};
+
+ModulePrompter.prototype.applyDefaultTrack = function(value) {
+	this.toolTracksList.set(value);
+};
+
+ModulePrompter.prototype.applyMask = function(value) {
+	this.output.mask.set(value);
+};
+

@@ -10,8 +10,6 @@ Client.prototype.init = function() {
 	var self = this;
 
 	this.on("client::settings::param::set", function(args) { self.onSettingsParam(args); });
-	this.on("notify", function(args) { self.onNotify(args); });
-	this.on("id", function(args) { self.onId(args); });
 	this.on("register", function(args) { self.onRegister(args); });
 };
 
@@ -72,36 +70,12 @@ Client.prototype.emit = function(name, args) {
 	this.socket.emit(name, args);
 };
 
-Client.prototype.emitSettings = function(arr) {
-	this.emit("client::settings::set", arr);
-};
-
-Client.prototype.emitSettingsParam = function(socketid, key, value) {
-	this.emit("client::settings::param::set", {"socketid": socketid ? socketid : this.socketid, "key": key, "value": value});
-};
-
-Client.prototype.onSettingsParam = function(args) {
-	this.terminal.setSettingsParam(args.socketid == this.socketid ? null : args.socketid, args.key, args.value);
-};
-
 Client.prototype.emitSendTo = function(socketid, eventName, args) {
 	this.emit("sendto", {
 		"socketid":  socketid ? socketid : this.socketid,
 		"eventName": eventName,
 		"args": args
 	});
-};
-
-Client.prototype.emitNotify = function(socketid, text) {
-	this.emitSendTo(socketid, "notify", text);
-};
-
-Client.prototype.onNotify = function(text) {
-	this.terminal.notifier.show(text);
-};
-
-Client.prototype.emitId = function(socketid) {
-	this.emitSendTo(socketid, "id");
 };
 
 Client.prototype.emitClientSet = function() {
@@ -113,6 +87,24 @@ Client.prototype.onRegister = function(socketid) {
 	this.emitClientSet();
 };
 
-Client.prototype.onId = function() {
-	this.terminal.id();
+Client.prototype.emitId = function(socketid) {
+	this.emitSendTo(socketid, "id");
 };
+
+Client.prototype.emitNotify = function(socketid, text) {
+	this.emitSendTo(socketid, "notify", text);
+};
+
+//------------
+Client.prototype.emitSettings = function(arr) {
+	this.emit("client::settings::set", arr);
+};
+
+Client.prototype.emitSettingsParam = function(socketid, key, value) {
+	this.emit("client::settings::param::set", {"socketid": socketid ? socketid : this.socketid, "key": key, "value": value});
+};
+
+Client.prototype.onSettingsParam = function(args) {
+	this.terminal.setSettingsParam(args.socketid == this.terminal.client.socketid ? null : args.socketid, args.key, args.value);
+};
+

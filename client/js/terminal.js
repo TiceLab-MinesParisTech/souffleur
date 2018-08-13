@@ -49,39 +49,13 @@ Terminal.prototype.setCSS = function(href) {
 	document.head.appendChild(this.nodeCSS);
 };
 
-Terminal.prototype.setSettings = function(arr) {
-	this.settings.set(arr);
-}
 
-Terminal.prototype.applySize = function(value) {
-	this.modulePrompter.view.setSize(value);
-};
-
-Terminal.prototype.applyName = function(value) {
-};
-
-Terminal.prototype.applyFlip = function(value) {
+Terminal.prototype.setFlip = function(value) {
 	this.node.className = "terminal" + (value ? " flip" : "");
 };
 
-Terminal.prototype.applyToolbarVisibility = function(value) {
-	this.menubar.setVisibility(value);
-	this.actionbar.setVisibility(value);
-};
-
-Terminal.prototype.applyNotifierVisibility = function(value) {
-	this.notifier.setVisibility(value);
-}
-Terminal.prototype.applyDefaultTrack = function(value) {
-	this.modulePrompter.toolTracksList.set(value);
-};
-
-Terminal.prototype.applyColors = function(value) {
+Terminal.prototype.setColors = function(value) {
 	this.setCSS(value != "" ? "css/colors_" + value + ".css" : false);
-};
-
-Terminal.prototype.applyMask = function(value) {
-	this.modulePrompter.output.mask.set(value);
 };
 
 Terminal.prototype.setSettingsParam = function(socketid, key, value) {
@@ -90,10 +64,6 @@ Terminal.prototype.setSettingsParam = function(socketid, key, value) {
 		this.settings.notifyParam(key, value);
 	}
 	this.moduleBase.toolTerminals.showParam(socketid, key, value);
-};
-
-Terminal.prototype.id = function() {
-	this.notifier.show(Settings.params.name.render(this.settings.getParam("name")), true);
 };
 
 Terminal.prototype.getSize = function() {

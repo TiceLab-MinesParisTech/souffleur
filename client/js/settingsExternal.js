@@ -1,11 +1,12 @@
-var SettingsExternal = function(terminal, socketid, settings) {
+var SettingsExternal = function(terminal, socketid, values) {
 	this.terminal = terminal;
 	this.socketid = socketid;
-	this.settings = settings;
+	this.params = terminal.settings.params;
+	this.values = values;
 };
 
 SettingsExternal.prototype.getParam = function(key) {
-	return this.settings[key];
+	return this.values[key];
 };
 
 SettingsExternal.prototype.setParam = function(key, value) {
@@ -14,7 +15,7 @@ SettingsExternal.prototype.setParam = function(key, value) {
 };
 
 SettingsExternal.prototype.saveParam = function(key, value) {
-	this.settings[key] = value;
+	this.values[key] = value;
 };
 
 SettingsExternal.prototype.getKey = function() {

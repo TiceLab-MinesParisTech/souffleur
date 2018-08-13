@@ -334,18 +334,18 @@ nav.menubar > ul li:hover {
 	text-align: center;
 }
 
-.settingsEditor td {
+.toolTerminal td {
 	padding: 4px;
 }
 
-.settingsEditor th {
+.toolTerminal th {
 	text-align: right;
 	padding-right: 5px;
 	font-size: 80%;
 	text-transform: capitalize;
 }
 
-.settingsEditor th:after {
+.toolTerminal th:after {
 	content: " :";
 }
 
