@@ -139,11 +139,10 @@ nav.menubar > ul li:hover {
 
 .actionbar button {
 	display: block;
-	padding: 25px;
-	width: 80px;
-	height: 80px;
+	width: 70px;
+	height: 70px;
 	text-align: center;
-	border-radius: 40px;
+	border-radius: 35px;
 	border: 1px solid gray;
 	background-color: lightgray;
 }
@@ -367,7 +366,7 @@ nav.menubar > ul li:hover {
 	height: 100%;
 }
 
-.Mask {
+.mask {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -375,7 +374,7 @@ nav.menubar > ul li:hover {
 	bottom: 0;
 }
 
-.Mask > div {
+.mask > div {
 	position: absolute;
 	box-shadow: 0px 0px 10px 10px #000000;
 	background-color: black;
@@ -384,11 +383,11 @@ nav.menubar > ul li:hover {
 	right: 0;
 }
 
-.Mask > .bottom {
+.mask > .bottom {
 	bottom: 0;
 }
 
-.Mask > .top {
+.mask > .top {
 	top: 0;
 }
 

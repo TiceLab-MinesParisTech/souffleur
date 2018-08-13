@@ -1,6 +1,6 @@
 var Mask = function() {
 	this.node = document.createElement("div");
-	this.node.className = "Mask";
+	this.node.className = "mask";
 
 	this.top = document.createElement("div");
 	this.top.className = "top";
