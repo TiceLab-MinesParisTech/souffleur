@@ -37,7 +37,7 @@ ModuleBase.prototype.applyFlip = function(value) {
 };
 
 ModuleBase.prototype.applyToolbarVisibility = function(value) {
-	this.terminal.menubar.setVisibility(value);
+	this.terminal.toolbar.setVisibility(value);
 	this.terminal.actionbar.setVisibility(value);
 };
 

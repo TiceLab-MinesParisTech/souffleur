@@ -1,23 +1,29 @@
 var Terminal = function(ref) {
 	this.client = new Client(this);
 	this.settings = new Settings(this, ref);
-	this.notifier = new Notifier(this);
-	this.menubar = new Menubar(this);
-	this.actionbar = new Actionbar(this);
-	this.keyboard = new Keyboard(this);	
-	this.background = new TerminalBackground(this);
-	this.foreground = new TerminalForeground(this);
+
+	this.notifier = new Notifier();
+	this.menubar = new Menubar();
+	this.actionbar = new Actionbar();
+	this.toolbar = new Toolbar();	
+	this.keyboard = new Keyboard();	
+	this.background = new TerminalBackground();
+	this.foreground = new TerminalForeground();
 
 	this.node = document.createElement("div");
 	this.nodeCSS = document.createElement("link");
+	
+	this.init();
 
 	//modules
 	this.modulePrompter = new ModulePrompter(this);
 	this.moduleRecorders = new ModuleRecorders(this);
 	this.moduleDmx = new ModuleDmx(this);
 	this.moduleBase = new ModuleBase(this);
-	
-	this.init();
+
+	//start
+	this.settings.applyParams();
+	this.notifier.setEnabled(true);
 }
 
 Terminal.prototype.init = function() {
@@ -26,18 +32,16 @@ Terminal.prototype.init = function() {
 	
 	this.node.appendChild(this.background.node);
 	this.node.appendChild(this.actionbar.node);
-	this.node.appendChild(this.menubar.node);
+	this.node.appendChild(this.toolbar.node);
 	this.node.appendChild(this.foreground.node);
 
+	this.toolbar.add(this.menubar);
 	this.foreground.add(this.notifier);
-
-	this.settings.applyParams();
 
 	this.nodeCSS.setAttribute("rel", "stylesheet");
 	this.nodeCSS.setAttribute("type", "text/css");
 	
 	window.onresize = function(e) { self.onresize(e) };
-	this.notifier.setEnabled(true);
 }
 
 Terminal.prototype.setCSS = function(href) {

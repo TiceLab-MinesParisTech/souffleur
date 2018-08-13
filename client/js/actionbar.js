@@ -1,12 +1,10 @@
-var Actionbar = function(terminal) {
+var Actionbar = function() {
 	this.node = document.createElement("div");
-//	this.toolRecorder = new ToolRecorder(terminal);
 	this.init();
 };
 
 Actionbar.prototype.init = function() {
 	this.node.className = "actionbar";
-//	this.node.appendChild(this.toolRecorder.node);
 };
 
 Actionbar.prototype.addAction = function(action) {

@@ -44,6 +44,7 @@ ModulePrompter.prototype.init = function() {
 	this.terminal.settings.addParam(new SettingsParamString("defaultTrack", function(value) { self.applyDefaultTrack(value) }, "default track", "main", "<no default track>"));
 
 	this.output.setContent(this.view.node);
+	this.terminal.toolbar.add(this.toolTracksList);
 };
 
 

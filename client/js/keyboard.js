@@ -1,5 +1,4 @@
-var Keyboard = function(terminal) {
-	this.terminal = terminal;
+var Keyboard = function() {
 	this.mapping = {};
 	this.init();
 };
@@ -18,11 +17,6 @@ Keyboard.prototype.keyMapping = {
 	109: "-",
 	116: "F5",
 	186: ":"
-};
-
-Keyboard.prototype.actionMapping = {
-	"F5": {"name": "RecordStartStop"},
-	"Escape": {"name": "RecordStartStop"},
 };
 
 Keyboard.prototype.init = function() {
@@ -58,18 +52,5 @@ Keyboard.prototype.dispatchEvent = function(name) {
 	var event = new Event("shortcut:" + name);
 	document.dispatchEvent(event);
 	return false;
-};
-
-//--Actions
-Keyboard.prototype.actionRecordStop = function() {
-	this.terminal.emitRecorderStop();
-};
-
-Keyboard.prototype.actionRecordStart = function() {
-	this.terminal.emitRecorderStart();
-};
-
-Keyboard.prototype.actionRecordStartStop = function() {
-	this.terminal.actionbar.toolRecorder.startStop();
 };
 

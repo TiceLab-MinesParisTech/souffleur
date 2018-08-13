@@ -1,6 +1,4 @@
-var Menubar = function(terminal) {
-	this.terminal = terminal;
-	
+var Menubar = function() {
 	this.node = document.createElement("nav");
 	this.icon = new MenubarIcon(this);
 	this.items = new MenubarItems(this);

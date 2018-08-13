@@ -70,35 +70,46 @@ nav {
 	transition: opacity 0.1s ease-in-out;
 } 
 
-nav.menubar > button {
-	margin: 0;
-	padding: 15px;
-	border: 1px solid gray;
-	background-color: lightgray;
-}
-
-nav.menubar {
+nav.toolbar {
 	font-family: vernada, verdana, arial;
 	top: 0;
 	left: 0;
 	margin: 5px;
 	font-size: 14px;
 	position: absolute; 
-	padding: 2px;
+	padding: 0;
+	border: 1px solid gray;
+	background-color: lightgray;
+}
+
+nav.menubar {
+	display: inline-block;
+}
+
+nav.toolbar > select {
+	margin: 5px;
+}
+
+nav.menubar > button {
+	margin: 0;
+	padding: 15px;
+	border: none;
+	background-color: lightgray;
 }
 
 nav.menubar button.icon {
 }
 
 nav.menubar > ul {
+	left: -1px;
+	top: 40px;
+	position: absolute;
 	border-radius: 0 8px 8px 8px; 
 	background-color: lightgray;
 	border: 1px solid gray;
 	padding: 2px;
 	margin: 0;
 	list-style-type: none;
-	left: 20px;
-	top: -20px;
 }
 
 nav.menubar > ul li > div.title {
@@ -265,7 +276,7 @@ nav.menubar > ul li:hover {
 .toolFileList > ul {
 	width: 300px;
 	min-height: 10px;
-	padding: 5px	;
+	padding: 5px;
 	border: 1px solid gray;
 	margin: 0px 10px 10px 10px;
 	max-height: 600px;
@@ -578,11 +589,20 @@ div.toolDmx > nav {
 }
 
 @media (max-width: 480px) {
-	nav.menubar {
+	nav.toolbar {
+		margin: 0;
+		right: 0;
+		left: 0;
+		border-right: none;
+		border-left: none;
+		border-right: none;
+	}
+
+	nav.menubar > ul {
 		right: 0;
 		left: 0;
 		margin: 0;
-		padding: 0;
+		padding: 2px;
 	}
 
 	div.fader input {

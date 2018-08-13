@@ -1,6 +1,4 @@
-var Notifier = function(terminal) {
-	this.terminal = terminal;
-
+var Notifier = function() {
 	this.node = document.createElement("div");
 	this.timeout = null;
 	this.enabled = false;	
