@@ -489,29 +489,29 @@ nav.menubar > ul li:hover {
 	background-color: white;
 }
 
-.toolTerminalExternalUtils > div {
+.toolTerminalUtils {
+	text-align: right;
+}
+
+.toolTerminalUtils > div {
 	display: inline-block;
 	padding: 3px;
 }
 
-.toolTerminalExternalUtils div.resolution {
+.toolTerminalUtils div.resolution {
 	font-size: 80%;
 }
 
-.toolTerminalExternalUtils > div {
+.toolTerminalUtils > div {
 	cursor: pointer;
 }
 
-.toolTerminalExternalUtils div.id:before {
+.toolTerminalUtils div.id:before {
 	content: "🔍";
 }
 
-.toolTerminalExternalUtils > div:hover {
+.toolTerminalUtils > div:hover {
 	font-weight: bold;
-}
-
-.toolTerminalExternalUtils {
-	text-align: right;
 }
 
 .toolAbout {

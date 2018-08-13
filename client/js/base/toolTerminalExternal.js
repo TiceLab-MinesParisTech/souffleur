@@ -5,7 +5,10 @@ var ToolTerminalExternal = function(module, key, data) {
 
 	this.settings = new SettingsExternal(module.terminal, key, data.settings);
 	this.toolSettings = new ToolSettings(this.settings);
-	this.toolUtils = new ToolTerminalExternalUtils(this.module, data.size, key);
+
+	this.toolUtils = new ToolTerminalUtils();
+	this.toolUtils.add(new ToolTerminalUtilResize(this.module, data.size));
+	this.toolUtils.add(new ToolTerminalUtilId(this.module, key));
 
 	this.init();
 }
