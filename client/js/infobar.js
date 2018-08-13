@@ -10,6 +10,7 @@ Infobar.prototype.init = function() {
 
 	this.nodeTitle.appendChild(document.createTextNode(""));
 	this.node.appendChild(this.nodeTitle);
+	this.setVisibility(false);
 };
 
 Infobar.prototype.set = function(name, value) {
