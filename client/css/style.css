@@ -82,8 +82,12 @@ nav.toolbar {
 	background-color: lightgray;
 }
 
-nav.menubar {
+.toolbar > .tool {
 	display: inline-block;
+}
+
+div.infobar {
+	margin: 5px 10px;
 }
 
 nav.toolbar > select {

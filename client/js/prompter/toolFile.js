@@ -40,9 +40,8 @@ ToolFile.prototype.loadText = function(filename, text) {
 };
 
 ToolFile.prototype.updateTitle = function() {
-	var title = this.filename;
-	if (this.id) title = this.id;
-//	this.nodeButton.firstChild.nodeValue = title ? title : "File";
+	if (this.id) this.module.terminal.infobar.set("id", this.id);
+	this.module.terminal.infobar.set("filename", this.filename);
 };
 
 ToolFile.prototype.setFilename = function(value) {

@@ -12,7 +12,7 @@ Menubar.prototype.addTool = function(title, tool) {
 };
 
 Menubar.prototype.init = function() {
-	this.node.className = "menubar";
+	this.node.className = "tool menubar";
 	this.node.appendChild(this.icon.node);
 	this.node.appendChild(this.items.node);
 	

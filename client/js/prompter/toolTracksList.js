@@ -9,7 +9,7 @@ var ToolTracksList = function(terminal) {
 
 ToolTracksList.prototype.init = function() {
 	var self = this;
-	this.node.className = "toolTrack";
+	this.node.className = "tool toolTrack";
 	
 	this.node.onchange = function(e) { self.onchange(e); };
 	this.setTracks([]);

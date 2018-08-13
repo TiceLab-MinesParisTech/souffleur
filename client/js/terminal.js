@@ -5,6 +5,7 @@ var Terminal = function(ref) {
 	this.notifier = new Notifier();
 	this.menubar = new Menubar();
 	this.actionbar = new Actionbar();
+	this.infobar = new Infobar();
 	this.toolbar = new Toolbar();	
 	this.keyboard = new Keyboard();	
 	this.background = new TerminalBackground();
@@ -21,9 +22,7 @@ var Terminal = function(ref) {
 	this.moduleDmx = new ModuleDmx(this);
 	this.moduleBase = new ModuleBase(this);
 
-	//start
-	this.settings.applyParams();
-	this.notifier.setEnabled(true);
+	this.start();
 }
 
 Terminal.prototype.init = function() {
@@ -36,6 +35,7 @@ Terminal.prototype.init = function() {
 	this.node.appendChild(this.foreground.node);
 
 	this.toolbar.add(this.menubar);
+	this.toolbar.add(this.infobar);
 	this.foreground.add(this.notifier);
 
 	this.nodeCSS.setAttribute("rel", "stylesheet");
@@ -43,6 +43,11 @@ Terminal.prototype.init = function() {
 	
 	window.onresize = function(e) { self.onresize(e) };
 }
+
+Terminal.prototype.start = function() {
+	this.settings.applyParams();
+	this.notifier.setEnabled(true);
+};
 
 Terminal.prototype.setCSS = function(href) {
 	if (!href) {
