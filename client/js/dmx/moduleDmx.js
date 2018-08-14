@@ -8,7 +8,7 @@ var ModuleDmx = function(terminal) {
 ModuleDmx.prototype.init = function() {
 	var self = this;
 	
-	this.terminal.menubar.addTool("DMX", this.toolDmx);
+	this.terminal.menubar.addTool("Lighting", this.toolDmx);
 
 	this.on("dmx::faders::set", function(args) { self.onSetValue(args); });
 	this.on("dmx::faders::configure", function(args) { self.onConfigure(args); });

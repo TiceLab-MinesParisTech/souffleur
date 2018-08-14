@@ -124,7 +124,6 @@ ModulePrompter.prototype.emitLoadTracks = function(tracks) {
 
 ModulePrompter.prototype.loadTracks = function(arr) {
 	this.setView(null);
-	this.toolFile.setId("id" in arr.meta ? arr.meta.id : null);
 	this.toolFile.setFilename(arr.filename);
 	this.toolTracksList.setTracks(arr.tracks);
 	this.terminal.settings.applyParam("defaultTrack");

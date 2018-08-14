@@ -3,7 +3,6 @@ var ToolFile = function(module) {
 	
 	this.node = document.createElement("nav");
 
-	this.id = null;
 	this.filename = null;
 	
 	this.tabs = new ToolTabs();
@@ -39,26 +38,11 @@ ToolFile.prototype.loadText = function(filename, text) {
 	this.module.emitLoadTracks(file.get());
 };
 
-ToolFile.prototype.updateTitle = function() {
-	if (this.id) this.module.terminal.infobar.set("id", this.id);
-	this.module.terminal.infobar.set("filename", this.filename);
-};
-
 ToolFile.prototype.setFilename = function(value) {
 	this.filename = value;
-	this.updateTitle();
 };
 
 ToolFile.prototype.getFilename = function() {
 	return this.filename;
-};
-
-ToolFile.prototype.setId = function(value) {
-	this.id = value;
-	this.updateTitle();
-};
-
-ToolFile.prototype.getId = function() {
-	return this.id;
 };
 

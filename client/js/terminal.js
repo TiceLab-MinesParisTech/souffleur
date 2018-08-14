@@ -5,7 +5,6 @@ var Terminal = function(ref) {
 	this.notifier = new Notifier();
 	this.menubar = new Menubar();
 	this.actionbar = new Actionbar();
-	this.infobar = new Infobar();
 	this.toolbar = new Toolbar();	
 	this.keyboard = new Keyboard();	
 	this.background = new TerminalBackground();
@@ -35,7 +34,6 @@ Terminal.prototype.init = function() {
 	this.node.appendChild(this.foreground.node);
 
 	this.toolbar.add(this.menubar);
-	this.toolbar.add(this.infobar);
 	this.foreground.add(this.notifier);
 
 	this.nodeCSS.setAttribute("rel", "stylesheet");
