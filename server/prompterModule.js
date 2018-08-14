@@ -1,8 +1,36 @@
+var Player = function() {
+	this.date = null;
+	this.speed = 1;
+	this.position = 0;
+};
+
+Player.prototype.isPlaying = function() {
+	return this.date != null;
+};
+
+Player.prototype.getPositionFromDate = function(date) {
+	return this.position + Math.abs(date - this.date) * this.speed;
+};
+
+Player.prototype.getPosition = function() {
+	return this.isPlaying() ? this.getPositionFromDate(new Date()) : this.position;
+};
+
+Player.prototype.play = function(position, speed) {
+	this.date = new Date();
+	this.position = position;
+	this.speed = speed;
+};
+
+Player.prototype.stop = function(position) {
+	this.position = position ? position : this.getPosition();
+	this.date = null;
+};
+
 var PrompterModule = function(server) {
 	this.server = server;
 	this.tracks = null;
-	this.playing = false;
-	this.speed = 1;
+	this.player = new Player();
 	this.init();
 };
 
@@ -38,21 +66,25 @@ PrompterModule.prototype.bindEvents = function(socket) {
 
 PrompterModule.prototype.play = function(position, speed) {
 	console.log("play", position, speed);
+	position = Math.round(position);
+	speed = Math.round(speed * 100) / 100;
 	this.server.io.emit('play', {"position": position, "speed": speed});
-	this.playing = true;
+	this.player.play(position, speed);
+	this.speed = speed;
 };
 
 PrompterModule.prototype.stop = function(position) {
+	position = Math.round(position);
 	console.log("stop", position);
 	this.server.io.emit('stop', position);
-	this.playing = false;
+	this.player.stop(position);
 };
 
 PrompterModule.prototype.setSpeed = function(value) {
 	value = Math.round(value * 100) / 100;
 	console.log("speed::set", value);
 	this.server.io.emit('speed::set', value);
-	this.speed = value;
+	this.player.speed = value;
 };
 
 PrompterModule.prototype.onKeypress = function(event) {
@@ -69,23 +101,44 @@ PrompterModule.prototype.onKeypress = function(event) {
 	}
 };
 
+PrompterModule.prototype.kbdSetSpeed = function(value) {
+	if (this.player.isPlaying()) {
+		this.play(this.player.getPosition(), value);
+	}
+	this.setSpeed(value);
+};
+
+PrompterModule.prototype.kbdIncSpeed = function(value) {
+	this.kbdSetSpeed(this.player.speed + value);
+};
+
+PrompterModule.prototype.kbdSetPosition = function(value) {
+	this.stop(value > 1 ? value : 1);
+};
+
+PrompterModule.prototype.kbdIncPosition = function(value) {
+	this.kbdSetPosition(this.player.getPosition() + value);
+};
+
 PrompterModule.prototype.kbdPlayStop = function() {
-	if (this.playing) 
-		this.stop();
+	if (this.player.isPlaying()) 
+		this.stop(this.player.getPosition());
 	else
-		this.play(0, this.speed);	
+		this.play(this.player.getPosition(), this.player.speed);
 };
 
 PrompterModule.prototype.kbdInc = function() {
-	if (this.playing) {
-		this.setSpeed(this.speed + 0.1);
-	}
+	if (this.player.isPlaying())
+		this.kbdIncSpeed(+0.1);
+	else
+		this.kbdIncPosition(2000);
 };
 
 PrompterModule.prototype.kbdDec = function() {
-	if (this.playing) {
-		this.setSpeed(this.speed - 0.1);
-	}
+	if (this.player.isPlaying())
+		this.kbdIncSpeed(-0.1);
+	else
+		this.kbdIncPosition(-2000);
 };
 
 module.exports = PrompterModule;
