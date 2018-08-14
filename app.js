@@ -4,6 +4,7 @@ var fs = require('fs');
 const path = require('path');
 var Express = require('express');
 var Recorder = require("./server/recorder");
+var Keyboard = require("./server/keyboard");
 
 var Server = function() {
 	this.config = {
@@ -11,7 +12,8 @@ var Server = function() {
 		"port": 8080,
 		"user": null,
 		"group": null,
-		"host": "0.0.0.0"
+		"host": "0.0.0.0",
+		"keyboardDevice": null
 	};
 
 	this.tracks = null;
@@ -26,6 +28,7 @@ var Server = function() {
 	});
 
 	this.recorder = new Recorder();
+	this.keyboard = new Keyboard();
 
 	this.modules = [];
 
@@ -43,6 +46,7 @@ Server.prototype.help = function() {
 	console.log("\t-P<port>\tSet listening port. Default port is: " + this.config.port);
 	console.log("\t-H<host>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-F<filesdir>\tSet files directory. (default is: “" + this.config.filesdir + "”)");
+	console.log("\t-K<device>\tOpen keyboard device. (default is: “" + this.config.keyboardDevice + "”)");
 	console.log("\t+Hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +H:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
 };
 
@@ -54,6 +58,7 @@ Server.prototype.parseArgs = function(argv) {
 		if (arg.substr(0, 2) == "-U") this.config.user = arg.substr(2);
 		if (arg.substr(0, 2) == "-G") this.config.group = arg.substr(2);
 		if (arg.substr(0, 2) == "-F") this.config.filesdir = arg.substr(2);
+		if (arg.substr(0, 2) == "-K") this.config.keyboardDevice = arg.substr(2);
 		if (arg.substr(0, 11) == "+Hyperdeck:") {
 			var cols = arg.substr(11).split(":");
 			if (cols.length != 3) return false;
@@ -228,22 +233,26 @@ Server.prototype.onConnect = function(socket) {
 
 Server.prototype.start = function() {
 	var self = this;
+
+	if (this.config.keyboardDevice) this.keyboard.open(this.config.keyboardDevice);
+	
 	console.log("Starting server on port", this.config.port);
 	if (this.config.user) console.log("user:", this.config.user);
 	if (this.config.group) console.log("group:", this.config.group);
 
 	this.recorder.init();
 
-	this.server.listen(this.config.port, this.config.host, function(){
+	this.server.listen(this.config.port, this.config.host, function() {
 		if (self.config.group) process.setgid(self.config.group);
 		if (self.config.user) process.setuid(self.config.user);
 	});
+	
+	
 };
 
 var server = new Server();
-setTimeout(function() {
-	if (server.parseArgs(process.argv)) {
-		server.init();
-		server.start();
-	}
-}, 1000);
+if (server.parseArgs(process.argv)) {
+	server.init();
+	server.start();
+}
+

@@ -161,14 +161,14 @@ DmxModule.prototype.mapItems = function(items) {
 
 DmxModule.prototype.init = function() {
 	this.mapItems(this.conf.faders);
-	console.log("mapping DMX", this.mapping);
+	//console.log("mapping DMX", this.mapping);
 };
 
 DmxModule.prototype.bindEvents = function(socket) {
 	var self = this;
 
 	socket.on('dmx::faders::set', function(arr) {
-		console.log("dmx::faders::set", JSON.stringify(arr));
+		//console.log("dmx::faders::set", JSON.stringify(arr));
 		//self.server.io.emit('dmx::faders::set', arr);
 		socket.broadcast.emit('dmx::faders::set', arr);
 		self.setFader(arr.ref, arr.value);

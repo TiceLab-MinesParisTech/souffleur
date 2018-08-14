@@ -1,13 +1,14 @@
 var PrompterModule = function(server) {
 	this.server = server;
 	this.tracks = null;
+	this.playing = false;
 };
 
 PrompterModule.prototype.bindEvents = function(socket) {
 	var self = this;
+	
 	socket.on('speed::set', function(speed) {
-		console.log("speed::set", speed);
-		self.server.io.emit('speed::set', speed);
+		self.setSpeed(speed);
 	});
 
 	socket.on('tracks::load', function(tracks) {
@@ -17,22 +18,31 @@ PrompterModule.prototype.bindEvents = function(socket) {
 	});
 
 	socket.on('play', function(args) {
-		console.log("play", args.position + ", " + args.speed);
-		self.server.io.emit('play', args);
+		self.play(args.position, args.speed);
 	});
 
 	socket.on('stop', function(position) {
-		console.log("stop", JSON.stringify(position));
-		self.server.io.emit('stop', position);
+		self.stop(position);
 	});
 
-	//socket.on("connection", function() {
-		if (self.tracks) socket.emit("tracks::load", self.tracks);
-	//});
+	if (self.tracks) socket.emit("tracks::load", self.tracks);
 };
 
-//PrompterModule.prototype.connect = function(socket) {
-//	if (self.tracks) socket.emit("tracks::load", self.tracks);
-//};
+PrompterModule.prototype.play = function(position, speed) {
+	console.log("play", position, speed);
+	this.server.io.emit('play', {"position": position, "speed": speed});
+	this.playing = true;
+};
+
+PrompterModule.prototype.stop = function(position) {
+	console.log("stop", position);
+	this.server.io.emit('stop', position);
+	this.playing = false;
+};
+
+PrompterModule.prototype.setSpeed = function(value) {
+	console.log("speed::set", value);
+	this.server.io.emit('speed::set', value);
+};
 
 module.exports = PrompterModule;
