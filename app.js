@@ -5,6 +5,8 @@ const path = require('path');
 var Express = require('express');
 var Recorder = require("./server/recorder");
 var Keyboard = require("./server/keyboard");
+var PrompterModule = require("./server/prompterModule");
+var DmxModule = require("./server/dmxModule");
 
 var Server = function() {
 	this.config = {
@@ -31,11 +33,7 @@ var Server = function() {
 	this.keyboard = new Keyboard();
 
 	this.modules = [];
-
-	var PrompterModule = require("./server/prompterModule");
 	this.modules.push(new PrompterModule(this));
-
-	var DmxModule = require("./server/dmxModule");
 	this.modules.push(new DmxModule(this));
 };
 

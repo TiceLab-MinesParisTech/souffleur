@@ -30,7 +30,7 @@ Keyboard.prototype.onRead = function(err, read) {
 		var event = this.getInputEvent(this.buffer);
 		var keyboardEvent = this.getKeyboardEvent(event);
 		if (keyboardEvent) {
-			this.events.emit(keyboardEvent.type, keyboardEvent);
+			this.events.emit(keyboardEvent.value, keyboardEvent);
 		}
 	}
 	this.read();
