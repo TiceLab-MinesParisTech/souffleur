@@ -23,6 +23,7 @@ ModuleDmx.prototype.emit = function(name, args) {
 };
 
 ModuleDmx.prototype.emitSetValue = function(ref, value) {
+	console.log("emitSetValue", ref, value);
 	this.emit("dmx::faders::set", {"ref": ref, "value": value});
 };
 

@@ -5,21 +5,40 @@ var DmxModule = function(server) {
 	this.server = server;
 	this.mapping = {};
 	this.conf = {};
-	this.dmx = null;
+	this.device = null;
 };
 
 DmxModule.prototype.loadConfFile = function(filename) {
 	var data = fs.readFileSync(filename);  
 	this.conf = JSON.parse(data);  	
-	console.log(this.conf);
+};
+
+DmxModule.prototype.load = function(filename) {
+	this.loadConfFile(filename);
 	this.updateConf();
+	this.loadSettings();
+};
+
+DmxModule.prototype.loadSettings = function() {
+	var self = this;
+	this.server.settings.get("dmx", function(row) {
+		if (row.key in self.mapping) {
+			self.mapping[row.key].value = row.value;
+		}
+	});
+};
+
+DmxModule.prototype.saveFader = function(ref, value) {
+	console.log("save", ref, value);
+	var stmt = this.server.settings.db.prepare("UPDATE dmx SET value = ? WHERE key = ?;");
+	stmt.run([value, ref]);
 };
 
 DmxModule.prototype.updateConf = function() {
 	this.mapItems(this.conf.faders);
 
-	this.dmx = new Dmx();
-	this.universe = this.dmx.addUniverse("output", this.conf.driver, this.conf.device_id);
+	this.device = new Dmx();
+	this.universe = this.device.addUniverse("output", this.conf.driver, this.conf.device_id);
 };
 
 DmxModule.prototype.resolveChannel = function(channel) {
@@ -41,7 +60,8 @@ DmxModule.prototype.mapFader = function(item) {
 	this.mapping[item.ref] = {
 		"min": item.min ? item.min : 0,
 		"max": item.max ? item.max : 100,		
-		"channels": this.resolveChannels(item.channels)
+		"channels": this.resolveChannels(item.channels),
+		"value": 0
 	};
 };
 
@@ -67,14 +87,18 @@ DmxModule.prototype.bindEvents = function(socket) {
 	var self = this;
 
 	socket.on('dmx::faders::set', function(arr) {
-		//console.log("dmx::faders::set", JSON.stringify(arr));
-		//self.server.io.emit('dmx::faders::set', arr);
-		socket.broadcast.emit('dmx::faders::set', arr);
-		self.setFader(arr.ref, arr.value);
+		self.setFader(arr.ref, arr.value, socket);
 	});
 
+	this.join(socket);
+};
 
-	socket.emit("dmx::faders::configure", this.conf);
+DmxModule.prototype.join = function(socket) {
+	if (this.conf) socket.emit("dmx::faders::configure", this.conf);
+	for (ref in this.mapping) {
+		var value = this.mapping[ref].value;
+		this.emitFader(ref, value);
+	}
 };
 
 DmxModule.prototype.setChannels = function(channels, value) {
@@ -83,14 +107,25 @@ DmxModule.prototype.setChannels = function(channels, value) {
 		arr[channels[i]] = value;
 	}
 	this.universe.update(arr);
-	console.log(value);
 };
 
-DmxModule.prototype.setFader = function(ref, value) {
+DmxModule.prototype.emitFader = function(ref, value, socket) {
+	var args = {"ref": ref, "value": value};
+	if (socket) {
+		socket.broadcast.emit('dmx::faders::set', args);
+	} else {
+		this.server.io.emit('dmx::faders::set', args);
+	}
+};
+
+DmxModule.prototype.setFader = function(ref, value, socket) {
+	this.emitFader(ref, value, socket);
 	if (ref in this.mapping) {
 		var mapping =  this.mapping[ref];
-		var value = Math.floor((parseInt(value) - mapping.min) / (mapping.max - mapping.min) * 255);
-		this.setChannels(mapping.channels, value);
+		mapping.value = value;
+		var dmxValue = Math.floor((parseInt(value) - mapping.min) / (mapping.max - mapping.min) * 255);
+		this.setChannels(mapping.channels, dmxValue);
+		this.saveFader(ref, value);
 	}
 };
 

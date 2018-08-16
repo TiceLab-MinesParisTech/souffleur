@@ -76,7 +76,7 @@ Fader.prototype.onSetValue = function(value) {
 
 Fader.prototype.setValue = function(value) {
 	this.input.value = value;
-	this.onChangeValue(value);
+	this.showValue(value);
 };
 
 Fader.prototype.onChangeValue = function(value) {
