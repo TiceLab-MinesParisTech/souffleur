@@ -1,12 +1,12 @@
 #!/usr/bin/nodejs
 
-var fs = require('fs');
+const fs = require('fs');
 const path = require('path');
-var Express = require('express');
-var Recorder = require("./server/recorder");
-var Keyboard = require("./server/keyboard");
-var PrompterModule = require("./server/prompterModule");
-var DmxModule = require("./server/dmxModule");
+const Express = require('express');
+const Recorder = require("./server/recorder");
+const Keyboard = require("./server/keyboard");
+const PrompterModule = require("./server/prompterModule");
+const DmxModule = require("./server/dmxModule");
 
 var Server = function() {
 	this.config = {
@@ -15,7 +15,8 @@ var Server = function() {
 		"user": null,
 		"group": null,
 		"host": "0.0.0.0",
-		"keyboardDevice": null
+		"keyboardDevice": null,
+		"dmxConfFile": false
 	};
 
 	this.tracks = null;
@@ -31,10 +32,10 @@ var Server = function() {
 
 	this.recorder = new Recorder();
 	this.keyboard = new Keyboard();
+	this.modulePrompter = new PrompterModule(this);
+	this.moduleDmx = new DmxModule(this);
 
-	this.modules = [];
-	this.modules.push(new PrompterModule(this));
-	this.modules.push(new DmxModule(this));
+	this.modules = [this.modulePrompter, this.moduleDmx];
 };
 
 Server.prototype.help = function() {
@@ -45,6 +46,7 @@ Server.prototype.help = function() {
 	console.log("\t-H<host>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-F<filesdir>\tSet files directory. (default is: “" + this.config.filesdir + "”)");
 	console.log("\t-K<device>\tOpen keyboard device. (default is: “" + this.config.keyboardDevice + "”)");
+	console.log("\t-DMX<filename>\tSet the DMX configuration file. (default is: “" + this.config.dmxConfFile + "”)");
 	console.log("\t+Hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +H:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
 };
 
@@ -57,6 +59,7 @@ Server.prototype.parseArgs = function(argv) {
 		if (arg.substr(0, 2) == "-G") this.config.group = arg.substr(2);
 		if (arg.substr(0, 2) == "-F") this.config.filesdir = arg.substr(2);
 		if (arg.substr(0, 2) == "-K") this.config.keyboardDevice = arg.substr(2);
+		if (arg.substr(0, 4) == "-DMX") this.config.dmxConfFile = arg.substr(4);
 		if (arg.substr(0, 11) == "+Hyperdeck:") {
 			var cols = arg.substr(11).split(":");
 			if (cols.length != 3) return false;
@@ -240,12 +243,12 @@ Server.prototype.start = function() {
 
 	this.recorder.init();
 
+	if (this.config.dmxConfFile) this.moduleDmx.loadConfFile(this.config.dmxConfFile);
+
 	this.server.listen(this.config.port, this.config.host, function() {
 		if (self.config.group) process.setgid(self.config.group);
 		if (self.config.user) process.setuid(self.config.user);
 	});
-	
-	
 };
 
 var server = new Server();

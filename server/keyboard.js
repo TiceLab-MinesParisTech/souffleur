@@ -1,8 +1,9 @@
 //inspired by https://github.com/Bornholm/node-keyboard
-//See torvalds/linux/include/uapi/linux/input.h
+//See:
+//https://github.com/torvalds/linux/include/uapi/linux/input.h
+//https://github.com/torvalds/linux/include/uapi/linux/input-event-codes.h
 
 var fs = require('fs');
-var ref = require('ref');
 var EventEmitter = require('events').EventEmitter;
 
 function Keyboard() {
@@ -28,31 +29,41 @@ Keyboard.prototype.read = function() {
 Keyboard.prototype.onRead = function(err, read) {
 	if (read == 24) {
 		var event = this.getInputEvent(this.buffer);
-		var keyboardEvent = this.getKeyboardEvent(event);
-		if (keyboardEvent) {
-			this.events.emit(keyboardEvent.value, keyboardEvent);
-		}
+		if (event) this.onEvent(event);
 	}
 	this.read();
+};
+
+Keyboard.prototype.onEvent = function(event) {
+	switch (event.type) {
+		case "EV_KEY":
+			this.onKeyboardEvent(event);
+			break;
+	}
+};
+
+Keyboard.prototype.onKeyboardEvent = function(event) {
+	var kbdEvent = this.getKeyboardEvent(event);
+	this.events.emit(kbdEvent.value, kbdEvent);
 };
 
 Keyboard.prototype.getInputEvent = function(buffer) {
 	if (buffer.length != 24)
 		return false;
 		
-	var sec = buffer.readUInt64LE(0);
-	var usec = buffer.readUInt64LE(8);
+	var sec = buffer.readUInt32LE(0) + buffer.readUInt32LE(4) << 32;
+	var usec = buffer.readUInt32LE(8) + buffer.readUInt32LE(12) << 32;
 	var type = buffer.readUInt16LE(16);
 	var code = buffer.readUInt16LE(18);
 	var value = buffer.readUInt32LE(20);
 
 	var types = {
 		0x00: "EV_SYN",
-		0x1: "EV_KEY",
-		0x2: "EV_REL",
-		0x3: "EV_ABS",
-		0x4: "EV_MSC",
-		0x5: "EV_SW",
+		0x01: "EV_KEY",
+		0x02: "EV_REL",
+		0x03: "EV_ABS",
+		0x04: "EV_MSC",
+		0x05: "EV_SW",
 		0x11: "EV_LED",
 		0x12: "EV_SND",
 		0x14: "EV_REP",
@@ -71,9 +82,6 @@ Keyboard.prototype.getInputEvent = function(buffer) {
 };
 
 Keyboard.prototype.getKeyboardEvent = function(inputEvent) {
-	if (inputEvent.type != "EV_KEY")
-		return false;
-		
 	var values = {
 		0: "KEYUP",
 		1: "KEYPRESS",

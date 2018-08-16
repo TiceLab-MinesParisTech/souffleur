@@ -36,6 +36,7 @@ var PrompterModule = function(server) {
 
 PrompterModule.prototype.init = function() {
 	var self = this;
+	this.server.keyboard.on("KEYDOWN", function(e) { self.onKeypress(e); } )
 	this.server.keyboard.on("KEYPRESS", function(e) { self.onKeypress(e); } )
 };
 
@@ -60,8 +61,14 @@ PrompterModule.prototype.bindEvents = function(socket) {
 		self.stop(position);
 	});
 
-
-	if (self.tracks) socket.emit("tracks::load", self.tracks);
+	if (this.tracks) {
+		console.log("tracks.load");
+		socket.emit("tracks::load", this.tracks);
+		if (this.player.isPlaying())
+			socket.emit("play", {"position": this.player.getPosition(), "speed": this.player.speed});
+		else		
+			socket.emit("stop", this.player.getPosition());
+	}
 };
 
 PrompterModule.prototype.play = function(position, speed) {
@@ -74,8 +81,8 @@ PrompterModule.prototype.play = function(position, speed) {
 };
 
 PrompterModule.prototype.stop = function(position) {
-	position = Math.round(position);
 	console.log("stop", position);
+	position = position ? Math.round(position) : this.player.getPosition();
 	this.server.io.emit('stop', position);
 	this.player.stop(position);
 };
@@ -90,13 +97,13 @@ PrompterModule.prototype.setSpeed = function(value) {
 PrompterModule.prototype.onKeypress = function(event) {
 	switch (event.code) {
 		case "KEY_DOT":
-			this.kbdPlayStop();
+			this.kbdPlayStop(event);
 			break;
 		case "KEY_PAGEUP":
-			this.kbdDec();
+			this.kbdDec(event);
 			break;
 		case "KEY_PAGEDOWN":
-			this.kbdInc();
+			this.kbdInc(event);
 			break;
 	}
 };
@@ -127,18 +134,19 @@ PrompterModule.prototype.kbdPlayStop = function() {
 		this.play(this.player.getPosition(), this.player.speed);
 };
 
-PrompterModule.prototype.kbdInc = function() {
+PrompterModule.prototype.kbdInc = function(event) {
+	console.log(event.code);
 	if (this.player.isPlaying())
 		this.kbdIncSpeed(+0.1);
 	else
-		this.kbdIncPosition(2000);
+		this.kbdIncPosition(event.code == "PAGEDOWN" ? 5000 : 1000);
 };
 
-PrompterModule.prototype.kbdDec = function() {
+PrompterModule.prototype.kbdDec = function(event) {
 	if (this.player.isPlaying())
 		this.kbdIncSpeed(-0.1);
 	else
-		this.kbdIncPosition(-2000);
+		this.kbdIncPosition(event.code == "PAGEDOWN" ? -5000 : -1000);
 };
 
 module.exports = PrompterModule;
