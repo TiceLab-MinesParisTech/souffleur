@@ -58,7 +58,6 @@ Fader.prototype.init = function(title, min, max, step, marks, channels) {
 		span.appendChild(document.createTextNode(channels[i]));
 		this.channels.appendChild(span);
 	}
-	this.setValue(min);
 };
 
 Fader.prototype.emitSetValue = function(value) {
@@ -76,7 +75,7 @@ Fader.prototype.onSetValue = function(value) {
 
 Fader.prototype.setValue = function(value) {
 	this.input.value = value;
-	this.showValue(value);
+	this.onChangeValue(value);
 };
 
 Fader.prototype.onChangeValue = function(value) {

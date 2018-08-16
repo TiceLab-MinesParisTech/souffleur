@@ -15,30 +15,24 @@ DmxModule.prototype.loadConfFile = function(filename) {
 
 DmxModule.prototype.load = function(filename) {
 	this.loadConfFile(filename);
-	this.updateConf();
+
+	this.mapItems(this.conf.faders);
+
+	this.device = new Dmx();
+	this.universe = this.device.addUniverse("output", this.conf.driver, this.conf.device_id);
+
 	this.loadSettings();
 };
 
 DmxModule.prototype.loadSettings = function() {
 	var self = this;
-	this.server.settings.get("dmx", function(row) {
-		if (row.key in self.mapping) {
-			self.mapping[row.key].value = row.value;
-		}
+	this.server.settings.getAll("dmx", function(row) {
+		self.setFader(row.key, row.value);
 	});
 };
 
 DmxModule.prototype.saveFader = function(ref, value) {
-	console.log("save", ref, value);
-	var stmt = this.server.settings.db.prepare("UPDATE dmx SET value = ? WHERE key = ?;");
-	stmt.run([value, ref]);
-};
-
-DmxModule.prototype.updateConf = function() {
-	this.mapItems(this.conf.faders);
-
-	this.device = new Dmx();
-	this.universe = this.device.addUniverse("output", this.conf.driver, this.conf.device_id);
+	this.server.settings.set("dmx", ref, value);
 };
 
 DmxModule.prototype.resolveChannel = function(channel) {
