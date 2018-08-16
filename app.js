@@ -6,8 +6,8 @@ const Express = require('express');
 const Recorder = require("./server/recorder");
 const Keyboard = require("./server/keyboard");
 const Settings = require("./server/settings");
-const PrompterModule = require("./server/prompterModule");
-const DmxModule = require("./server/dmxModule");
+const ModulePrompter = require("./server/modulePrompter");
+const ModuleDmx = require("./server/moduleDmx");
 
 var Server = function() {
 	this.config = {
@@ -35,8 +35,8 @@ var Server = function() {
 	this.keyboard = new Keyboard();
 	this.settings = new Settings();
 
-	this.modulePrompter = new PrompterModule(this);
-	this.moduleDmx = new DmxModule(this);
+	this.modulePrompter = new ModulePrompter(this);
+	this.moduleDmx = new ModuleDmx(this);
 	this.modules = [this.modulePrompter, this.moduleDmx];
 };
 
@@ -232,7 +232,7 @@ Server.prototype.onConnect = function(socket) {
 	});
 
 	for (var i = 0; i < this.modules.length; i++) {
-		this.modules[i].bindEvents(socket);
+		this.modules[i].bind(socket);
 	};
 };
 

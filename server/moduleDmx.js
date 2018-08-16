@@ -1,19 +1,19 @@
 const fs = require('fs');
 const Dmx = require("dmx");
 
-var DmxModule = function(server) {
+var ModuleDmx = function(server) {
 	this.server = server;
 	this.mapping = {};
 	this.conf = {};
 	this.device = null;
 };
 
-DmxModule.prototype.loadConfFile = function(filename) {
+ModuleDmx.prototype.loadConfFile = function(filename) {
 	var data = fs.readFileSync(filename);  
 	this.conf = JSON.parse(data);  	
 };
 
-DmxModule.prototype.load = function(filename) {
+ModuleDmx.prototype.load = function(filename) {
 	this.loadConfFile(filename);
 
 	this.mapItems(this.conf.faders);
@@ -24,25 +24,25 @@ DmxModule.prototype.load = function(filename) {
 	this.loadSettings();
 };
 
-DmxModule.prototype.loadSettings = function() {
+ModuleDmx.prototype.loadSettings = function() {
 	var self = this;
 	this.server.settings.getAll("dmx", function(row) {
 		self.setFader(row.key, row.value);
 	});
 };
 
-DmxModule.prototype.saveFader = function(ref, value) {
+ModuleDmx.prototype.saveFader = function(ref, value) {
 	this.server.settings.set("dmx", ref, value);
 };
 
-DmxModule.prototype.resolveChannel = function(channel) {
+ModuleDmx.prototype.resolveChannel = function(channel) {
 	if (typeof channel == "string") {
 		return this.conf.channels[channel];
 	}
 	return channel;
 };
 
-DmxModule.prototype.resolveChannels = function(list) {
+ModuleDmx.prototype.resolveChannels = function(list) {
 	result = [];
 	for (var i = 0; i < list.length; i++) {
 		result.push(this.resolveChannel(list[i]));
@@ -50,7 +50,7 @@ DmxModule.prototype.resolveChannels = function(list) {
 	return result;
 };
 
-DmxModule.prototype.mapFader = function(item) {
+ModuleDmx.prototype.mapFader = function(item) {
 	this.mapping[item.ref] = {
 		"min": item.min ? item.min : 0,
 		"max": item.max ? item.max : 100,		
@@ -59,11 +59,11 @@ DmxModule.prototype.mapFader = function(item) {
 	};
 };
 
-DmxModule.prototype.mapGroup = function(item) {
+ModuleDmx.prototype.mapGroup = function(item) {
 	this.mapItems(item.faders);	
 };
 
-DmxModule.prototype.mapItem = function(item) {
+ModuleDmx.prototype.mapItem = function(item) {
 	if (item.type == "group") {
 		this.mapGroup(item);
 		return;
@@ -71,13 +71,13 @@ DmxModule.prototype.mapItem = function(item) {
 	this.mapFader(item);
 };
 
-DmxModule.prototype.mapItems = function(items) {
+ModuleDmx.prototype.mapItems = function(items) {
 	for (var i = 0; i < items.length; i++) {
 		this.mapItem(items[i]);
 	}
 };
 
-DmxModule.prototype.bindEvents = function(socket) {
+ModuleDmx.prototype.bind = function(socket) {
 	var self = this;
 
 	socket.on('dmx::faders::set', function(arr) {
@@ -87,7 +87,7 @@ DmxModule.prototype.bindEvents = function(socket) {
 	this.join(socket);
 };
 
-DmxModule.prototype.join = function(socket) {
+ModuleDmx.prototype.join = function(socket) {
 	if (this.conf) socket.emit("dmx::faders::configure", this.conf);
 	for (ref in this.mapping) {
 		var value = this.mapping[ref].value;
@@ -95,7 +95,7 @@ DmxModule.prototype.join = function(socket) {
 	}
 };
 
-DmxModule.prototype.setChannels = function(channels, value) {
+ModuleDmx.prototype.setChannels = function(channels, value) {
 	var arr = {};
 	for (var i = 0; i < channels.length; i++) {
 		arr[channels[i]] = value;
@@ -103,7 +103,7 @@ DmxModule.prototype.setChannels = function(channels, value) {
 	this.universe.update(arr);
 };
 
-DmxModule.prototype.emitFader = function(ref, value, socket) {
+ModuleDmx.prototype.emitFader = function(ref, value, socket) {
 	var args = {"ref": ref, "value": value};
 	if (socket) {
 		socket.broadcast.emit('dmx::faders::set', args);
@@ -112,7 +112,7 @@ DmxModule.prototype.emitFader = function(ref, value, socket) {
 	}
 };
 
-DmxModule.prototype.setFader = function(ref, value, socket) {
+ModuleDmx.prototype.setFader = function(ref, value, socket) {
 	this.emitFader(ref, value, socket);
 	if (ref in this.mapping) {
 		var mapping =  this.mapping[ref];
@@ -123,4 +123,4 @@ DmxModule.prototype.setFader = function(ref, value, socket) {
 	}
 };
 
-module.exports = DmxModule;
+module.exports = ModuleDmx;

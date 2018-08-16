@@ -27,20 +27,20 @@ Player.prototype.stop = function(position) {
 	this.date = null;
 };
 
-var PrompterModule = function(server) {
+var ModulePrompter = function(server) {
 	this.server = server;
 	this.tracks = null;
 	this.player = new Player();
 	this.init();
 };
 
-PrompterModule.prototype.init = function() {
+ModulePrompter.prototype.init = function() {
 	var self = this;
 	this.server.keyboard.on("KEYDOWN", function(e) { self.onKeypress(e); } )
 	this.server.keyboard.on("KEYPRESS", function(e) { self.onKeypress(e); } )
 };
 
-PrompterModule.prototype.bindEvents = function(socket) {
+ModulePrompter.prototype.bind = function(socket) {
 	var self = this;
 	
 	socket.on('speed::set', function(speed) {
@@ -71,7 +71,7 @@ PrompterModule.prototype.bindEvents = function(socket) {
 	}
 };
 
-PrompterModule.prototype.play = function(position, speed) {
+ModulePrompter.prototype.play = function(position, speed) {
 	console.log("play", position, speed);
 	position = Math.round(position);
 	speed = Math.round(speed * 100) / 100;
@@ -80,21 +80,21 @@ PrompterModule.prototype.play = function(position, speed) {
 	this.speed = speed;
 };
 
-PrompterModule.prototype.stop = function(position) {
+ModulePrompter.prototype.stop = function(position) {
 	console.log("stop", position);
 	position = position ? Math.round(position) : this.player.getPosition();
 	this.server.io.emit('stop', position);
 	this.player.stop(position);
 };
 
-PrompterModule.prototype.setSpeed = function(value) {
+ModulePrompter.prototype.setSpeed = function(value) {
 	value = Math.round(value * 100) / 100;
 	console.log("speed::set", value);
 	this.server.io.emit('speed::set', value);
 	this.player.speed = value;
 };
 
-PrompterModule.prototype.onKeypress = function(event) {
+ModulePrompter.prototype.onKeypress = function(event) {
 	switch (event.code) {
 		case "KEY_DOT":
 			this.kbdPlayStop(event);
@@ -108,33 +108,33 @@ PrompterModule.prototype.onKeypress = function(event) {
 	}
 };
 
-PrompterModule.prototype.kbdSetSpeed = function(value) {
+ModulePrompter.prototype.kbdSetSpeed = function(value) {
 	if (this.player.isPlaying()) {
 		this.play(this.player.getPosition(), value);
 	}
 	this.setSpeed(value);
 };
 
-PrompterModule.prototype.kbdIncSpeed = function(value) {
+ModulePrompter.prototype.kbdIncSpeed = function(value) {
 	this.kbdSetSpeed(this.player.speed + value);
 };
 
-PrompterModule.prototype.kbdSetPosition = function(value) {
+ModulePrompter.prototype.kbdSetPosition = function(value) {
 	this.stop(value > 1 ? value : 1);
 };
 
-PrompterModule.prototype.kbdIncPosition = function(value) {
+ModulePrompter.prototype.kbdIncPosition = function(value) {
 	this.kbdSetPosition(this.player.getPosition() + value);
 };
 
-PrompterModule.prototype.kbdPlayStop = function() {
+ModulePrompter.prototype.kbdPlayStop = function() {
 	if (this.player.isPlaying()) 
 		this.stop(this.player.getPosition());
 	else
 		this.play(this.player.getPosition(), this.player.speed);
 };
 
-PrompterModule.prototype.kbdInc = function(event) {
+ModulePrompter.prototype.kbdInc = function(event) {
 	console.log(event.code);
 	if (this.player.isPlaying())
 		this.kbdIncSpeed(+0.1);
@@ -142,11 +142,11 @@ PrompterModule.prototype.kbdInc = function(event) {
 		this.kbdIncPosition(event.code == "PAGEDOWN" ? 5000 : 1000);
 };
 
-PrompterModule.prototype.kbdDec = function(event) {
+ModulePrompter.prototype.kbdDec = function(event) {
 	if (this.player.isPlaying())
 		this.kbdIncSpeed(-0.1);
 	else
 		this.kbdIncPosition(event.code == "PAGEDOWN" ? -5000 : -1000);
 };
 
-module.exports = PrompterModule;
+module.exports = ModulePrompter;
