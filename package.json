@@ -6,7 +6,8 @@
 		"express": "~4.11.2",
 		"hyperdeck": "~1.0.0",
 		"ref": "^1.3.5",
-		"socket.io": "~2.0.3"
+		"socket.io": "~2.0.3",
+		"sqlite3": "^4.0.2"
 	},
 	"repository": "github:TiceLab-MinesParisTech/souffleur",
 	"description": "A innovative Open Source teleprompter solution based on Web technologies",

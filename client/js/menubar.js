@@ -8,7 +8,9 @@ var Menubar = function() {
 };
 
 Menubar.prototype.addTool = function(title, tool) {
-	this.items.addItem(new MenubarItem(this, title, tool));
+	var item = new MenubarItem(this, title, tool);
+	this.items.addItem(item);
+	return item;
 };
 
 Menubar.prototype.init = function() {
@@ -104,6 +106,10 @@ MenubarItem.prototype.setCurrent = function(value) {
 	this.isCurrent = value;
 	if ("show" in this.tool) this.tool.show();
 	this.node.className = value ? "current" : "";
+};
+
+MenubarItem.prototype.setVisibility = function(value) {
+	this.node.style.display = value ? "" : "none";
 };
 
 var MenubarIcon = function(menubar) {

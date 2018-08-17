@@ -3,6 +3,7 @@ var ToolDmx = function(module) {
 	this.faders = new Faders(module);
 	
 	this.node = document.createElement("div");
+	this.saveNode = document.createElement("button");
 	this.init();
 };
 
@@ -20,8 +21,16 @@ ToolDmx.prototype.init = function() {
 	
 	this.node.className = "toolDmx";
 	this.node.appendChild(this.faders.node);
+
+	this.saveNode.appendChild(document.createTextNode("Save as default"));
+	this.saveNode.className = "save";
+	this.saveNode.onclick = function() { self.save(); return false; };
+	this.node.appendChild(this.saveNode);
 	
 //	this.setEnabled(false);
 };
 
+ToolDmx.prototype.save = function() {
+	this.module.emitSave("default");
+};
 

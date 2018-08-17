@@ -24,6 +24,7 @@ Keyboard.prototype.init = function() {
 	document.onkeydown = function(e) { 
 		var tagName = e.target.tagName;
 		var reserved = {
+			"BUTTON": true,
 			"INPUT": true,
 			"TEXTAREA": true
 		};

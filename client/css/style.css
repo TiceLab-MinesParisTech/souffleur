@@ -592,6 +592,11 @@ div.toolDmx > nav {
 	overflow: auto;
 }
 
+div.toolDmx button.save {
+	float: right;
+	margin: 3px;
+}
+
 @media (max-width: 480px) {
 	nav.toolbar {
 		margin: 0;

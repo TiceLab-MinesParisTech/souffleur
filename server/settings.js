@@ -8,13 +8,27 @@ Settings.prototype.open = function(path) {
 	this.db = new SQlite3.Database(path);
 };
 
-Settings.prototype.getAll = function(table, cb) {
-	this.db.each("SELECT * FROM " + table + ";", function(err, row) {
+Settings.prototype.useTable = function(table, cb) {
+	this.db.run("CREATE TABLE IF NOT EXISTS " + table + " (key STRING PRIMARY KEY, value STRING);", cb);
+};
+
+Settings.prototype.all = function(table, cb) {
+	this.db.all("SELECT * FROM " + table + ";", function(err, row) {
 		if (err) {
 			console.log(err);
 			return;
 		}
-		cb(row);
+		cb(row.value);
+	});
+};
+
+Settings.prototype.get = function(table, key, cb) {
+	this.db.get("SELECT * FROM " + table + " WHERE key = ? LIMIT 1;", key, function(err, row) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		cb(row ? row.value : false);
 	});
 };
 

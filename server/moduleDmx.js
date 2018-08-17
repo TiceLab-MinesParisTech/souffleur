@@ -3,7 +3,7 @@ const Dmx = require("dmx");
 
 var ModuleDmx = function(server) {
 	this.server = server;
-	this.mapping = {};
+	this.controls = {};
 	this.conf = {};
 	this.device = null;
 };
@@ -14,6 +14,8 @@ ModuleDmx.prototype.loadConfFile = function(filename) {
 };
 
 ModuleDmx.prototype.load = function(filename) {
+	var self = this;
+	
 	this.loadConfFile(filename);
 
 	this.mapItems(this.conf.faders);
@@ -21,18 +23,33 @@ ModuleDmx.prototype.load = function(filename) {
 	this.device = new Dmx();
 	this.universe = this.device.addUniverse("output", this.conf.driver, this.conf.device_id);
 
-	this.loadSettings();
-};
-
-ModuleDmx.prototype.loadSettings = function() {
-	var self = this;
-	this.server.settings.getAll("dmx", function(row) {
-		self.setFader(row.key, row.value);
+	this.server.settings.useTable("dmx", function() {
+		self.loadSettingsProfile("default");
 	});
 };
 
-ModuleDmx.prototype.saveFader = function(ref, value) {
-	this.server.settings.set("dmx", ref, value);
+ModuleDmx.prototype.loadProfile = function(arr) {
+	for (ref in arr) {
+		this.setControl(ref, arr[ref]);
+	}
+};
+
+ModuleDmx.prototype.loadSettingsProfile = function(name) {
+	var self = this;
+	this.server.settings.get("dmx", name, function(value) {
+		if (value) {
+			console.log("value", value);
+			self.loadProfile(JSON.parse(value));
+		}
+	});
+};
+
+ModuleDmx.prototype.saveSettingsProfile = function(name) {
+	var settings = {};
+	for (ref in this.controls) {
+		settings[ref] = this.controls[ref].value;
+	}
+	this.server.settings.set("dmx", name, JSON.stringify(settings));
 };
 
 ModuleDmx.prototype.resolveChannel = function(channel) {
@@ -50,12 +67,12 @@ ModuleDmx.prototype.resolveChannels = function(list) {
 	return result;
 };
 
-ModuleDmx.prototype.mapFader = function(item) {
-	this.mapping[item.ref] = {
+ModuleDmx.prototype.mapControl = function(item) {
+	this.controls[item.ref] = {
 		"min": item.min ? item.min : 0,
 		"max": item.max ? item.max : 100,		
 		"channels": this.resolveChannels(item.channels),
-		"value": 0
+		"value": item.min ? item.min : 0
 	};
 };
 
@@ -68,7 +85,7 @@ ModuleDmx.prototype.mapItem = function(item) {
 		this.mapGroup(item);
 		return;
 	}
-	this.mapFader(item);
+	this.mapControl(item);
 };
 
 ModuleDmx.prototype.mapItems = function(items) {
@@ -80,22 +97,26 @@ ModuleDmx.prototype.mapItems = function(items) {
 ModuleDmx.prototype.bind = function(socket) {
 	var self = this;
 
-	socket.on('dmx::faders::set', function(arr) {
-		self.setFader(arr.ref, arr.value, socket);
+	socket.on('dmx::controls::set', function(arr) {
+		self.setControl(arr.ref, parseInt(arr.value), socket);
+	});
+
+	socket.on('dmx::save', function(name) {
+		self.saveSettingsProfile(name ? name : "default");
 	});
 
 	this.join(socket);
 };
 
 ModuleDmx.prototype.join = function(socket) {
-	if (this.conf) socket.emit("dmx::faders::configure", this.conf);
-	for (ref in this.mapping) {
-		var value = this.mapping[ref].value;
-		this.emitFader(ref, value);
+	if (this.conf) socket.emit("dmx::controls::configure", this.conf);
+	for (ref in this.controls) {
+		var value = this.controls[ref].value;
+		this.emitControl(ref, value);
 	}
 };
 
-ModuleDmx.prototype.setChannels = function(channels, value) {
+ModuleDmx.prototype.setDmxChannels = function(channels, value) {
 	var arr = {};
 	for (var i = 0; i < channels.length; i++) {
 		arr[channels[i]] = value;
@@ -103,23 +124,25 @@ ModuleDmx.prototype.setChannels = function(channels, value) {
 	this.universe.update(arr);
 };
 
-ModuleDmx.prototype.emitFader = function(ref, value, socket) {
-	var args = {"ref": ref, "value": value};
-	if (socket) {
-		socket.broadcast.emit('dmx::faders::set', args);
+ModuleDmx.prototype.emitFrom = function(name, args, from) {
+	if (from) {
+		from.broadcast.emit(name, args);
 	} else {
-		this.server.io.emit('dmx::faders::set', args);
+		this.server.io.emit(name, args);
 	}
 };
 
-ModuleDmx.prototype.setFader = function(ref, value, socket) {
-	this.emitFader(ref, value, socket);
-	if (ref in this.mapping) {
-		var mapping =  this.mapping[ref];
-		mapping.value = value;
-		var dmxValue = Math.floor((parseInt(value) - mapping.min) / (mapping.max - mapping.min) * 255);
-		this.setChannels(mapping.channels, dmxValue);
-		this.saveFader(ref, value);
+ModuleDmx.prototype.emitControl = function(ref, value, from) {
+	this.emitFrom('dmx::controls::set', {"ref": ref, "value": value});
+};
+
+ModuleDmx.prototype.setControl = function(ref, value, socket) {
+	this.emitControl(ref, value, socket);
+	if (ref in this.controls) {
+		var control =  this.controls[ref];
+		control.value = value;
+		var dmxValue = Math.floor((parseInt(value) - control.min) / (control.max - control.min) * 255);
+		this.setDmxChannels(control.channels, dmxValue);
 	}
 };
 
