@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Dmx = require("dmx");
+const Dmx = require("../simple-dmx/simple-dmx");
 
 var ModuleDmx = function(server) {
 	this.server = server;
@@ -20,8 +20,8 @@ ModuleDmx.prototype.load = function(filename) {
 
 	this.mapItems(this.conf.faders);
 
-	this.device = new Dmx();
-	this.universe = this.device.addUniverse("output", this.conf.driver, this.conf.device_id);
+	this.device = new (Dmx(this.conf.driver))(this.conf.device_id);
+	this.device.open();
 
 	this.server.settings.useTable("dmx", function() {
 		self.loadSettingsProfile("default");
@@ -121,7 +121,8 @@ ModuleDmx.prototype.setDmxChannels = function(channels, value) {
 	for (var i = 0; i < channels.length; i++) {
 		arr[channels[i]] = value;
 	}
-	this.universe.update(arr);
+	console.log(channels);
+	this.device.setChannels(arr);
 };
 
 ModuleDmx.prototype.emitFrom = function(name, args, from) {
