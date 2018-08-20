@@ -10,7 +10,7 @@ APP=/usr/share/souffleur/app.js
 filesdir=/var/souffleur
 user=souffleur
 group=souffleur
-
+dmx_conf=/etc/dmx.json
 
 # Include conf if available
 if [ -f /etc/souffleur.conf ] ; then
@@ -18,29 +18,45 @@ if [ -f /etc/souffleur.conf ] ; then
 fi
 
 CMD=""
+
+if [ -n  "$app" ]
+then
+	APP=$app
+fi
+
 if [ -n "$host" ]
 then
-	CMD="$CMD -H$host"
+	CMD="$CMD -H:$host"
 fi
 
 if [ -n "$port" ]
 then
-	CMD="$CMD -P$port"
+	CMD="$CMD -P:$port"
 fi
 
 if [ -n "$filesdir" ]
 then
-	CMD="$CMD -F$filesdir"
+	CMD="$CMD -F:$filesdir"
 fi
 
 if [ -n "$user" ]
 then
-	CMD="$CMD -U$user"
+	CMD="$CMD -U:$user"
 fi
 
 if [ -n "$group" ]
 then
-	CMD="$CMD -G$group"
+	CMD="$CMD -G:$group"
+fi
+
+if [ -n "$settings" ]
+then
+	CMD="$CMD -S:$settings"
+fi
+
+if [ -f /etc/dmx.json  ]
+then
+	CMD="$CMD -dmx:${dmx_conf}"
 fi
 
 for i in {1..999}
