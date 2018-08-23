@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Dmx = require("../simple-dmx/simple-dmx");
+const Dmx = require("./simple-dmx/simple-dmx");
 
 var ModuleDmx = function(server) {
 	this.server = server;
@@ -22,10 +22,17 @@ ModuleDmx.prototype.load = function(filename) {
 
 	this.device = new (Dmx(this.conf.driver))(this.conf.device_id);
 	this.device.open();
+	this.device.on("open", function() { self.emitConnected(true); } );
+	this.device.on("close", function() { self.emitConnected(false); } );
 
 	this.server.settings.useTable("dmx", function() {
 		self.loadSettingsProfile("default");
 	});
+};
+
+ModuleDmx.prototype.emitConnected = function(value) {
+	console.log("dmx::connected", value);
+	this.server.io.emit("dmx::connected", value);
 };
 
 ModuleDmx.prototype.loadProfile = function(arr) {
@@ -105,10 +112,15 @@ ModuleDmx.prototype.bind = function(socket) {
 		self.saveSettingsProfile(name ? name : "default");
 	});
 
+	socket.on('dmx::connect', function() {
+		self.onConnect();
+	});
+
 	this.join(socket);
 };
 
 ModuleDmx.prototype.join = function(socket) {
+	this.emitConnected(this.device.isOpen());
 	if (this.conf) socket.emit("dmx::controls::configure", this.conf);
 	for (ref in this.controls) {
 		var value = this.controls[ref].value;
@@ -123,6 +135,13 @@ ModuleDmx.prototype.setDmxChannels = function(channels, value) {
 	}
 	console.log(channels);
 	this.device.setChannels(arr);
+};
+
+ModuleDmx.prototype.onConnect = function() {
+	var self = this;
+	this.device.open(function(err) {
+		if (err) self.emitConnected(false);
+	});
 };
 
 ModuleDmx.prototype.emitFrom = function(name, args, from) {

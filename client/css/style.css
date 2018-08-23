@@ -597,6 +597,15 @@ div.toolDmx button.save {
 	margin: 3px;
 }
 
+div.toolConnectable > div.toolConnect {
+	text-align: center;
+	padding: 30px 20px;
+}
+
+div.toolConnectable > div.toolConnect > button {
+	margin-top: 10px;
+}
+
 @media (max-width: 480px) {
 	nav.toolbar {
 		margin: 0;
