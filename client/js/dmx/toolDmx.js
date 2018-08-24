@@ -72,7 +72,10 @@ ToolConnect.prototype.init = function() {
 	var self = this;
 
 	this.node.className = "toolConnect";
-	this.node.appendChild(document.createTextNode("Device not connected"));
+	
+	var p = document.createElement("p");
+	p.appendChild(document.createTextNode("Device not connected"));
+	this.node.appendChild(p);
 
 	this.nodeButton.appendChild(document.createTextNode("Connect"));
 	this.nodeButton.onclick = function() { self.toolConnectable.emit("connect")};

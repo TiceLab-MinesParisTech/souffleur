@@ -128,7 +128,8 @@ nav.menubar > ul li.current > div.title {
 nav.menubar > ul li > div.tool {
 	background-color: #eee;
 	max-height: 0;
-	max-width: 250px;
+	max-width: 300px;
+	min-width: 250px;
 	overflow: hidden;
 }
 
@@ -530,7 +531,6 @@ nav.menubar > ul li:hover {
 
 .toolAbout {
 	font-size: 90%;
-	min-width: 200px;
 	text-align: center;
 	padding: 20px;
 }
