@@ -113,6 +113,9 @@ ModuleDmx.prototype.mapItems = function(items) {
 ModuleDmx.prototype.bind = function(socket) {
 	var self = this;
 
+	if (!this.device)
+		return;
+
 	socket.on('dmx::controls::set', function(arr) {
 		self.setControl(arr.ref, parseInt(arr.value), socket);
 	});
