@@ -3,18 +3,40 @@
 //https://github.com/torvalds/linux/include/uapi/linux/input.h
 //https://github.com/torvalds/linux/include/uapi/linux/input-event-codes.h
 
-var fs = require('fs');
-var EventEmitter = require('events').EventEmitter;
+const fs = require('fs');
+const EventEmitter = require('events').EventEmitter;
 
 function Keyboard() {
+	this.device = null;
 	this.fd = null;
 	this.events = new EventEmitter();
 	this.buffer = new Buffer(24);
 }
 
-Keyboard.prototype.open = function(device) {
-	this.fd = fs.openSync(device, 'r');
+Keyboard.prototype.retryOpen = function(device, period) {
+	var self = this;
+	console.log("Retry open in", period, "ms");
+	setTimeout(function() {
+		self.open(device);
+	}, period); 
+};
+
+Keyboard.prototype.onOpen = function(err, fd) {
+	if (err) {
+		console.log("could not open device:", this.device);
+		this.retryOpen(this.device, 5000);
+		return;
+	}
+
+	console.log("device opened:", this.device);
+	this.fd = fd;
 	this.read();
+};
+
+Keyboard.prototype.open = function(device) {
+	var self = this;
+	this.device = device;
+	fs.open(device, 'r', function(err, fd) { self.onOpen(err, fd); });
 };
 
 Keyboard.prototype.on = function(name, cb) {
@@ -27,6 +49,14 @@ Keyboard.prototype.read = function() {
 };
 
 Keyboard.prototype.onRead = function(err, read) {
+	if (err) {
+		if (err.code == "ENODEV") {
+			this.fd = null;
+			this.retryOpen(this.device, 5000);
+		}
+		return;
+	}
+	
 	if (read == 24) {
 		var event = this.getInputEvent(this.buffer);
 		if (event) this.onEvent(event);
@@ -218,9 +248,13 @@ Keyboard.prototype.getKeyboardEvent = function(inputEvent) {
 	};
 };
 
-Keyboard.prototype.close = function(callback) {
-	fs.closeSync(this.fd);
+Keyboard.prototype.onClose = function(err) {
 	this.fd = null;
+};
+
+Keyboard.prototype.close = function(callback) {
+	var self = this;
+	fs.close(function(err) { self.onClose(err) });
 };
 
 module.exports = Keyboard;

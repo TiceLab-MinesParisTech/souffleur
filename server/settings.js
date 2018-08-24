@@ -8,6 +8,10 @@ Settings.prototype.open = function(path) {
 	this.db = new SQlite3.Database(path);
 };
 
+Settings.prototype.isOpen = function() {
+	return this.db != null;
+};
+
 Settings.prototype.useTable = function(table, cb) {
 	this.db.run("CREATE TABLE IF NOT EXISTS " + table + " (key STRING PRIMARY KEY, value STRING);", cb);
 };

@@ -25,9 +25,11 @@ ModuleDmx.prototype.load = function(filename) {
 	this.device.on("open", function() { self.emitConnected(true); } );
 	this.device.on("close", function() { self.emitConnected(false); } );
 
-	this.server.settings.useTable("dmx", function() {
-		self.loadSettingsProfile("default");
-	});
+	if (this.server.settings.isOpen()) {
+		this.server.settings.useTable("dmx", function() {
+			self.loadSettingsProfile("default");
+		});
+	}
 };
 
 ModuleDmx.prototype.emitConnected = function(value) {
@@ -43,6 +45,10 @@ ModuleDmx.prototype.loadProfile = function(arr) {
 
 ModuleDmx.prototype.loadSettingsProfile = function(name) {
 	var self = this;
+
+	if (!this.server.settings.isOpen())
+		return;
+		
 	this.server.settings.get("dmx", name, function(value) {
 		if (value) {
 			console.log("value", value);
@@ -52,6 +58,9 @@ ModuleDmx.prototype.loadSettingsProfile = function(name) {
 };
 
 ModuleDmx.prototype.saveSettingsProfile = function(name) {
+	if (!this.server.settings.isOpen())
+		return;
+
 	var settings = {};
 	for (ref in this.controls) {
 		settings[ref] = this.controls[ref].value;
