@@ -248,7 +248,7 @@ Server.prototype.start = function() {
 
 	this.recorder.init();
 
-	if (this.config.settings) this.settings.open(this.config.settings);
+	//if (this.config.settings) this.settings.open(this.config.settings);
 	//if (this.config.dmxConf) {
 	//	console.log("log dmx conf file:", this.config.dmxConf);
 	//	this.moduleDmx.load(this.config.dmxConf);
