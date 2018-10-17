@@ -5,9 +5,9 @@ const path = require('path');
 const Express = require('express');
 const Recorder = require("./server/recorder");
 const Keyboard = require("./server/keyboard");
-const Settings = require("./server/settings");
+//const Settings = require("./server/settings");
 const ModulePrompter = require("./server/modulePrompter");
-const ModuleDmx = require("./server/moduleDmx");
+//const ModuleDmx = require("./server/moduleDmx");
 
 var Server = function() {
 	this.config = {
@@ -33,11 +33,12 @@ var Server = function() {
 
 	this.recorder = new Recorder();
 	this.keyboard = new Keyboard();
-	this.settings = new Settings();
+//	this.settings = new Settings();
 
 	this.modulePrompter = new ModulePrompter(this);
-	this.moduleDmx = new ModuleDmx(this);
-	this.modules = [this.modulePrompter, this.moduleDmx];
+//	this.moduleDmx = new ModuleDmx(this);
+//	this.modules = [this.modulePrompter, this.moduleDmx];
+	this.modules = [this.modulePrompter];
 };
 
 Server.prototype.help = function() {
@@ -258,7 +259,7 @@ Server.prototype.start = function() {
 		if (self.config.group) process.setgid(self.config.group);
 		if (self.config.user) process.setuid(self.config.user);
 
-		if (self.config.dmxConf) self.moduleDmx.load(self.config.dmxConf);
+		//if (self.config.dmxConf) self.moduleDmx.load(self.config.dmxConf);
 	});
 };
 
