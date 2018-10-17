@@ -248,7 +248,10 @@ Server.prototype.start = function() {
 	this.recorder.init();
 
 	if (this.config.settings) this.settings.open(this.config.settings);
-	//if (this.config.dmxConf) this.moduleDmx.load(this.config.dmxConf);
+	//if (this.config.dmxConf) {
+	//	console.log("log dmx conf file:", this.config.dmxConf);
+	//	this.moduleDmx.load(this.config.dmxConf);
+	//}
 
 	this.server.listen(this.config.port, this.config.host, function() {
 		if (self.config.user && self.config.group) process.initgroups(self.config.user, self.config.group);

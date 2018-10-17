@@ -22,8 +22,9 @@ ModuleDmx.prototype.load = function(filename) {
 
 	this.device = new (Dmx(this.conf.driver))(this.conf.device_id);
 	this.device.open();
-	this.device.on("open", function() { self.emitConnected(true); } );
-	this.device.on("close", function() { self.emitConnected(false); } );
+	
+//	this.device.on("open", function() { self.emitConnected(true); } );
+//	this.device.on("close", function() { self.emitConnected(false); } );
 
 	if (this.server.settings.isOpen()) {
 		this.server.settings.useTable("dmx", function() {
