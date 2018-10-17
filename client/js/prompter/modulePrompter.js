@@ -25,6 +25,7 @@ ModulePrompter.prototype.init = function() {
 	this.terminal.menubar.addTool("File", this.toolFile);
 
 	this.terminal.keyboard.on("Space", function() { self.kbdPlayStop(); });
+	this.terminal.keyboard.on(":", function() { self.kbdPlayStop(); });
 	this.terminal.keyboard.on("ArrowUp", function() { self.kbdPrevious(); });
 	this.terminal.keyboard.on("ArrowDown", function() { self.kbdNext(); });
 	this.terminal.keyboard.on("ArrowRight", function() { self.kbdIncSpeed(); });
