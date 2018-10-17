@@ -47,7 +47,7 @@ Server.prototype.help = function() {
 	console.log("\t-P:<port>\tSet listening port. Default port is: " + this.config.port);
 	console.log("\t-H:<host>\tSet listening host. Default host is: " + this.config.host);
 	console.log("\t-F:<filesdir>\tSet files directory. (default is: “" + this.config.filesdir + "”)");
-	console.log("\t-K:<device>\tOpen keyboard device. (default is: “" + this.config.keyboardDevice + "”)");
+	console.log("\t-kbd:<device>\tOpen keyboard device. (default is: “" + this.config.keyboardDevice + "”)");
 	console.log("\t-S:<filename>\tSet the settings file. (default is: “" + this.config.settings + "”)");
 	console.log("\t-dmx:<filename>\tSet the DMX configuration file. (default is: “" + this.config.dmxConf + "”)");
 	console.log("\t+hyperdeck:<host>:<name>:<source>\tAdd HyperDeck. Ex: +H:192.168.153.50:HyperDeck\\ Mini\\ 1:Cam1");
@@ -61,8 +61,8 @@ Server.prototype.parseArgs = function(argv) {
 		if (arg.substr(0, 3) == "-U:") this.config.user = arg.substr(3);
 		if (arg.substr(0, 3) == "-G:") this.config.group = arg.substr(3);
 		if (arg.substr(0, 3) == "-F:") this.config.filesdir = arg.substr(3);
-		if (arg.substr(0, 3) == "-K:") this.config.keyboardDevice = arg.substr(3);
-		if (arg.substr(0, 3) == "-S:") this.config.settings = arg.substr(3);
+		if (arg.substr(0, 5) == "-kbd:") this.config.keyboardDevice = arg.substr(5);
+		if (arg.substr(0, 10) == "-settings:") this.config.settings = arg.substr(10);
 		if (arg.substr(0, 5) == "-dmx:") this.config.dmxConf = arg.substr(5);
 		if (arg.substr(0, 11) == "+hyperdeck:") {
 			var cols = arg.substr(11).split(":");
