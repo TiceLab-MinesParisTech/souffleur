@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Dmx = require("../simple-dmx/simple-dmx");
+const Dmx = require("./simple-dmx/simple-dmx");
 
 var ModuleDmx = function(server) {
 	this.server = server;
