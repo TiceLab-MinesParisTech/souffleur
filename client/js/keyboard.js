@@ -33,24 +33,29 @@ Keyboard.prototype.init = function() {
 };
 
 Keyboard.prototype.onkeydown = function(e) {
-	//console.log(e.key, e.keyCode, e.which);
+	console.log(e.key, e.keyCode, e.which);
+	//console.log(this.keyMapping);
 
 	var key = e.keyCode in this.keyMapping ? this.keyMapping[e.keyCode] : e.key;
 	if (!key) return true;
 
+	console.log(key);
 	return this.dispatchEvent(key);
 };
 
 Keyboard.prototype.on = function(name, cb) {
+	console.log("event:", name);
 	this.mapping[name] = true;
 	document.addEventListener("shortcut:" + name, cb);
 };
 
 Keyboard.prototype.dispatchEvent = function(name) {
+	
 	if (!(name in this.mapping))
 		return true;	
 
 	var event = new Event("shortcut:" + name);
+	console.log(event);
 	document.dispatchEvent(event);
 	return false;
 };
